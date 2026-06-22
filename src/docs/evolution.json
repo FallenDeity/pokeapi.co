@@ -113,6 +113,19 @@
         "name": "EvolutionDetail",
         "fields": [
           {
+            "name": "version_group_id",
+            "description": "The version group in which the evolution was introduced.",
+            "type": {
+              "type": "NamedAPIResource",
+              "of": "VersionGroup"
+            }
+          },
+          {
+            "name": "is_default",
+            "description": "Whether the evolution is considered as the expected evolution in a main series game. Each unique Pokémon variety of a line capable of evolution should have exactly one 'default' evolution. For example, the Meowth species has three default evolutions as there are three distinct varieties it can evolve into: Persian, Alolan Persian, and Perrserker.",
+            "type": "boolean"
+          },
+          {
             "name": "item",
             "description": "The item required to cause evolution this into Pokémon species.",
             "type": {
@@ -250,6 +263,14 @@
           {
             "name": "base_form",
             "description": "The required form for which this evolution can occur.",
+            "type": {
+              "type": "NamedAPIResource",
+              "of": "Pokemon"
+            }
+          },
+          {
+            "name": "evolved_form",
+            "description": "The form to which this evolution occurs.",
             "type": {
               "type": "NamedAPIResource",
               "of": "Pokemon"
