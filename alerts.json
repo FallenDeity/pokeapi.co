@@ -6,7 +6,7 @@
     },
     {
         "level": "important",
-        "active": true,
+        "active": false,
         "message": "Starting June 18th a new GraphQL specification is rolling out, v1beta2. Read more at [GraphQL v1beta2](/docs/graphql#v1beta2). The former v1beta version is sun-setting and scheduled to be removed."
     },
     {
