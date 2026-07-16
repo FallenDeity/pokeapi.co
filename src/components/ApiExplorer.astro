@@ -543,14 +543,16 @@ const endpoints = [
     display: none;
   }
 
-  /* VS-Code style bracket collapse indicators - absolutely positioned to not shift text */
+  /* Arrow sits to the left of the opening bracket, top-aligned */
   .raw-fold-summary::before {
     content: '▼';
     position: absolute;
-    left: -14px;
+    left: calc(var(--indent-level) * 4ch - 2.2ch);
+    width: 1.2ch;
+    text-align: center;
     top: 0;
-    font-size: 0.62rem;
-    opacity: 0.4;
+    font-size: 0.55rem;
+    opacity: 0.35;
     transition: transform 0.1s ease;
     line-height: 1.65;
   }
@@ -827,8 +829,8 @@ const endpoints = [
     if (level === undefined) level = 0
     if (commaHtml === undefined) commaHtml = ''
     if (state === undefined) state = { line: 0 }
-    var indent = "  ".repeat(level)
-    var nextIndent = "  ".repeat(level + 1)
+    var indent = "    ".repeat(level)
+    var nextIndent = "    ".repeat(level + 1)
 
     if (data === null) {
       return '<span class="json-null">null</span>' + commaHtml
@@ -857,7 +859,7 @@ const endpoints = [
 
       var html = ''
       state.line++
-      html += '<details class="raw-fold" open>'
+      html += '<details class="raw-fold" style="--indent-level: ' + level + ';" open>'
       
       var prefix = indent
       if (key) {
