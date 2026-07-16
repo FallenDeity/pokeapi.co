@@ -1,0 +1,189 @@
+---
+---
+
+<div class="theme-toggle-wrapper" title="Toggle theme">
+  <label class="theme-slider-label" aria-label="Toggle dark/light theme">
+    <!-- Sun Icon -->
+    <span class="theme-icon sun-icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+    </span>
+
+    <button
+      id="theme-toggle-btn"
+      class="theme-slider-track"
+      role="switch"
+      aria-checked="true"
+      aria-label="Toggle dark/light mode"
+    >
+      <span class="theme-slider-thumb"></span>
+    </button>
+
+    <!-- Moon Icon -->
+    <span class="theme-icon moon-icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </span>
+  </label>
+</div>
+
+<style>
+  .theme-toggle-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .theme-slider-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* The track IS the button */
+  .theme-slider-track {
+    position: relative;
+    display: inline-flex;
+    width: 44px;
+    height: 24px;
+    border-radius: 999px;
+    border: 1.5px solid var(--sl-color-gray-4);
+    cursor: pointer;
+    padding: 0;
+    /* default (dark mode) state */
+    background: linear-gradient(135deg, #1a1f2e 0%, #252840 100%);
+    border-color: rgba(59, 130, 246, 0.35);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5), 0 0 10px rgba(59, 130, 246, 0.12);
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  /* light mode track */
+  :root[data-theme="light"] .theme-slider-track {
+    background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%);
+    border-color: #f59e0b;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 0 10px rgba(251,191,36,0.3);
+  }
+
+  .theme-slider-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    pointer-events: none;
+    /* dark mode thumb: accent-blue */
+    background: linear-gradient(135deg, #60a5fa, #2563eb);
+    box-shadow: 0 1px 6px rgba(37,99,235,0.55);
+    /* start in dark (right) position */
+    transform: translateX(20px);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                background 0.3s ease,
+                box-shadow 0.3s ease;
+  }
+
+  /* light mode thumb: sun yellow */
+  :root[data-theme="light"] .theme-slider-thumb {
+    transform: translateX(0px);
+    background: linear-gradient(135deg, #fff7ed, #fef3c7);
+    box-shadow: 0 1px 6px rgba(245,158,11,0.5);
+  }
+
+  /* Suppress transition during instant page-load sync */
+  .theme-slider-track.no-transition,
+  .theme-slider-track.no-transition .theme-slider-thumb {
+    transition: none !important;
+  }
+
+  .theme-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Dark mode: moon lit, sun dim */
+  :root:not([data-theme="light"]) .sun-icon {
+    color: var(--sl-color-gray-3);
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+  :root:not([data-theme="light"]) .moon-icon {
+    color: var(--sl-color-accent);
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  /* Light mode: sun lit, moon dim */
+  :root[data-theme="light"] .sun-icon {
+    color: #f59e0b;
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  :root[data-theme="light"] .moon-icon {
+    color: var(--sl-color-gray-3);
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+
+  .theme-slider-track:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  function applyThemeToToggle(track: HTMLElement, isLight: boolean, animate: boolean) {
+    if (!animate) {
+      track.classList.add('no-transition');
+      // Force reflow so the class takes effect before removal
+      void track.offsetWidth;
+    }
+
+    track.setAttribute('aria-checked', isLight ? 'false' : 'true');
+
+    if (!animate) {
+      requestAnimationFrame(() => {
+        track.classList.remove('no-transition');
+      });
+    }
+  }
+
+  function initThemeToggle() {
+    const track = document.getElementById('theme-toggle-btn') as HTMLElement | null;
+    if (!track) return;
+
+    const isLight = document.documentElement.dataset.theme === 'light';
+    // Sync without animation on init (avoids the flash animation on navigation)
+    applyThemeToToggle(track, isLight, false);
+
+    // Remove any old listener by cloning the node
+    const fresh = track.cloneNode(true) as HTMLElement;
+    track.parentNode!.replaceChild(fresh, track);
+
+    fresh.addEventListener('click', () => {
+      const currentlyLight = document.documentElement.dataset.theme === 'light';
+      const newTheme = currentlyLight ? 'dark' : 'light';
+      document.documentElement.dataset.theme = newTheme;
+      try { localStorage.setItem('starlight-theme', newTheme); } catch {}
+      applyThemeToToggle(fresh, newTheme === 'light', true);
+    });
+
+    // Watch for external theme changes (system, other tabs)
+    const observer = new MutationObserver(() => {
+      const light = document.documentElement.dataset.theme === 'light';
+      applyThemeToToggle(fresh, light, false);
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
+
+  initThemeToggle();
+  document.addEventListener('astro:after-swap', initThemeToggle);
+</script>

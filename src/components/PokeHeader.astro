@@ -3,7 +3,7 @@ import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro'
 import Search from '@astrojs/starlight/components/Search.astro'
 import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro'
 import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro'
-import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro'
+import ThemeToggle from './ThemeToggle.astro'
 
 import PokeNav from './PokeNav.astro'
 
@@ -28,7 +28,7 @@ import PokeNav from './PokeNav.astro'
     <div class="sl-flex social-icons">
       <SocialIcons />
     </div>
-    <ThemeSelect />
+    <ThemeToggle />
     <LanguageSelect />
   </div>
 </div>
@@ -93,3 +93,72 @@ import PokeNav from './PokeNav.astro'
     }
   }
 </style>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" class="back-to-top" aria-label="Back to top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m18 15-6-6-6 6"/>
+  </svg>
+</button>
+
+<style is:global>
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 8px; /* Matching our modern button styles */
+    background-color: var(--sl-color-gray-6);
+    border: 1px solid var(--sl-color-gray-5);
+    color: var(--sl-color-white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 99999 !important; /* Raised above everything including sidebars */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .back-to-top:hover {
+    background-color: var(--sl-color-gray-5);
+    border-color: var(--sl-color-accent);
+    color: var(--sl-color-accent-high);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
+  }
+
+  .back-to-top:active {
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('back-to-top');
+  if (btn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    });
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+</script>

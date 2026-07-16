@@ -6,32 +6,84 @@ const v2 = baseUrl + 'v2/'
 const graphql = baseUrl + 'graphql/'
 ---
 
-<nav>
-  <ul
-    class="
-      flex gap-6 pr-4
-      [&_a]:text-(--sl-color-white)
-      [&_a]:hover:text-(--sl-color-accent-high)
-      [&_a]:hover:font-bold
-      [&_a]:hover:underline
-      [&_a]:font-semibold
-      [&_span]:opacity-50
-      [&_span]:cursor-default
-      [&_span]:select-none
-      list-none
-    "
-  >
-    <li>
-      {thisUrl !== baseUrl ? <a href={baseUrl}>Home </a> : <span>Home</span>}
+<nav class="poke-nav">
+  <ul class="nav-list">
+    <li class="nav-item">
+      {thisUrl !== about
+        ? <a href={about} class="nav-link">About</a>
+        : <span class="nav-link nav-link--active">About</span>}
     </li>
-    <li>
-      {thisUrl !== about ? <a href={about}>About</a> : <span>About</span>}
+    <li class="nav-item">
+      {thisUrl !== v2
+        ? <a href={v2} class="nav-link">API v2</a>
+        : <span class="nav-link nav-link--active">API v2</span>}
     </li>
-    <li>
-      {thisUrl !== v2 ? <a href={v2}>API v2</a> : <span>API v2</span>}
-    </li>
-    <li>
-      {thisUrl !== graphql ? <a href={graphql}>GraphQL v1Beta</a> : <span>GraphQL v1Beta</span>}
+    <li class="nav-item">
+      {thisUrl !== graphql
+        ? <a href={graphql} class="nav-link">GraphQL v1Beta</a>
+        : <span class="nav-link nav-link--active">GraphQL v1Beta</span>}
     </li>
   </ul>
 </nav>
+
+<style>
+  .poke-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-list {
+    display: flex;
+    gap: 0.125rem;
+    list-style: none;
+    margin: 0;
+    padding: 0 1rem 0 0;
+  }
+
+  .nav-link {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-decoration: none !important;
+    color: var(--sl-color-gray-2);
+    transition: color 0.18s ease, background 0.18s ease;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  a.nav-link:hover {
+    color: var(--sl-color-white);
+    background: var(--sl-color-gray-5);
+    text-decoration: none !important;
+  }
+
+  a.nav-link:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+    color: var(--sl-color-white);
+  }
+
+  /* Active page: bright white text + accent underline */
+  .nav-link--active {
+    color: var(--sl-color-white);
+    background: transparent;
+    cursor: default;
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+  }
+
+  .nav-link--active::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0.7rem;
+    right: 0.7rem;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--sl-color-accent);
+  }
+</style>

@@ -1,82 +1,101 @@
-function kokiInit(jsonString, container, kokiTitle = 'koki', openDetails = true) {
-  parsedData = JSON.parse(jsonString)
-  jsonString = JSON.stringify(parsedData, null, 2)
+/**
+ * kokiInit — renders a JSON tree into `container`.
+ * @param {string}  jsonString   JSON string to render
+ * @param {Element} container    Target DOM element (will be cleared)
+ * @param {string}  [kokiTitle]  Optional header ('' = no header)
+ * @param {boolean} [openDetails] Open shallow nodes by default
+ */
+function kokiInit(jsonString, container, kokiTitle, openDetails) {
+  if (kokiTitle   === undefined) kokiTitle   = ''
+  if (openDetails === undefined) openDetails = true
+
+  var parsedData
+  try {
+    parsedData = JSON.parse(jsonString)
+  } catch (e) {
+    container.innerHTML = '<p style="color:#f87171;padding:16px 20px">Invalid JSON</p>'
+    return
+  }
+
   container.classList.add('arbol-root')
   container.innerHTML = ''
 
-  const details = document.createElement('details')
-  details.open = true
+  // Optional title header
+  if (kokiTitle) {
+    var header = document.createElement('div')
+    header.className = 'koki-tree-header'
+    header.style.cssText = 'padding:10px 14px;font-size:0.85rem;font-weight:600;opacity:.7;border-bottom:1px solid var(--sl-color-gray-5,#353841)'
+    header.textContent = kokiTitle
+    container.appendChild(header)
+  }
 
-  const summary = document.createElement('summary')
-  summary.innerHTML = `<header><h2>${kokiTitle}</h2></header>`
-
-  const dataElem = document.createElement('data')
-  dataElem.value = jsonString
-
-  const ul = document.createElement('ul')
-
-  const code = document.createElement('code')
-  code.innerHTML = jsonString
-
-  const pre = document.createElement('pre')
-
-  pre.appendChild(code)
-
-  const fragment = kokiArbol(parsedData, '', false, openDetails)
-
-  ul.appendChild(fragment)
-  details.innerHTML = `<label><input type="checkbox"></label>`
-  details.append(summary, pre, dataElem)
-  dataElem.appendChild(ul)
-  container.append(details)
+  var ul = document.createElement('ul')
+  ul.appendChild(kokiArbol(parsedData, '', false, openDetails, 0))
+  container.appendChild(ul)
 }
 
-function kokiArbol(data, keyName = null, parentArr = false, openDetails = true, level = 0) {
-  const fragment = document.createDocumentFragment()
-  const li = document.createElement('li')
+function kokiArbol(data, keyName, parentArr, openDetails, level) {
+  if (keyName    === undefined) keyName    = ''
+  if (parentArr  === undefined) parentArr  = false
+  if (openDetails === undefined) openDetails = true
+  if (level       === undefined) level       = 0
+
+  var fragment = document.createDocumentFragment()
+  var li       = document.createElement('li')
   fragment.appendChild(li)
 
   if (typeof data === 'object' && data !== null) {
-    const isArray = Array.isArray(data)
-    const type = isArray ? 'array' : 'object'
-    const length = isArray ? data.length : Object.keys(data).length
-    const entries = isArray ? data.entries() : Object.entries(data)
-    openDetails = (level === 0 && openDetails) || (openDetails && level < 2 && length < 17) ? true : false
+    var isArray  = Array.isArray(data)
+    var type     = isArray ? 'array' : 'object'
+    var length   = isArray ? data.length : Object.keys(data).length
+    var entries  = isArray ? data.entries() : Object.entries(data)
 
-    li.className = `arbol-type-${type}`
+    // Auto-close deep or large nodes
+    var nodeOpen = (level === 0 && openDetails) ||
+                   (openDetails && level < 2 && length < 17)
 
-    const arrObjSize = length === 0 ? '<small style="color: gray">empty</small>' : `<small>${length} ${isArray ? 'items' : 'keys'}</small>`
-    const arrObjInnerHtml = `${(level === 0 || parentArr) ? '' : '<var>' + keyName + '</var> '}(${type}) ${arrObjSize}`
+    li.className = 'arbol-type-' + type
+
+    var sizeHtml = length === 0
+      ? '<small style="opacity:.5">empty</small>'
+      : '<small>' + length + ' ' + (isArray ? 'items' : 'keys') + '</small>'
+
+    var labelHtml = (level === 0 || parentArr)
+      ? ''
+      : '<var>' + escNode(keyName) + '</var> '
+
+    var summaryHtml = labelHtml + '(' + type + ') ' + sizeHtml
 
     if (length >= 1) {
-      const details = document.createElement('details')
+      var details = document.createElement('details')
       details.className = 'arrobj'
-      details.open = openDetails
+      details.open = nodeOpen
 
-      const summary = document.createElement('summary')
-
-      summary.innerHTML = arrObjInnerHtml
-
+      var summary = document.createElement('summary')
+      summary.innerHTML = summaryHtml
       details.appendChild(summary)
-      li.appendChild(details)
 
-      const ul = document.createElement('ul')
-      for (const [key, value] of entries) {
+      var ul = document.createElement('ul')
+      var entry
+      for (entry of entries) {
+        var key   = entry[0]
+        var value = entry[1]
         if (typeof value === 'object' && value !== null) {
-          const fragment = kokiArbol(value, key, isArray, openDetails, level + 1)
-          ul.appendChild(fragment)
+          ul.appendChild(kokiArbol(value, key, isArray, openDetails, level + 1))
         } else {
-          const liEntry = document.createElement('li')
-          const format = kokiGetType(value)
-
-          liEntry.className = `arbol-type-${format}`
-          liEntry.innerHTML = `${isArray ? '' : '<var>' + key + '</var> '}<code class="arbol-value ${format}">${value}</code> (${format})`
+          var liEntry = document.createElement('li')
+          var fmt     = kokiGetType(value)
+          liEntry.className = 'arbol-type-' + fmt
+          liEntry.innerHTML = (isArray ? '' : '<var>' + escNode(key) + '</var> ') +
+            '<code class="arbol-value ' + fmt + '">' + escNode(String(value)) + '</code>' +
+            ' <small style="opacity:.4">(' + fmt + ')</small>'
           ul.appendChild(liEntry)
         }
       }
       details.appendChild(ul)
+      li.appendChild(details)
     } else {
-      li.innerHTML = arrObjInnerHtml
+      li.innerHTML = summaryHtml
     }
   } else {
     li.innerHTML = JSON.stringify(data)
@@ -85,8 +104,16 @@ function kokiArbol(data, keyName = null, parentArr = false, openDetails = true, 
   return fragment
 }
 
+function escNode(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
 function kokiGetType(value) {
-  if (value === null) return 'null'
+  if (value === null)      return 'null'
   if (value === undefined) return 'undefined'
   return typeof value
 }

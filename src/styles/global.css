@@ -4,33 +4,196 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 
-/* Dark mode colors. */
+/* ── Dark mode palette ─── */
 :root {
-  --sl-color-accent-low: #40130b;
-  --sl-color-accent: #bf2600;
-  --sl-color-accent-high: #f3b8ab;
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #eceef2;
-  --sl-color-gray-2: #c0c2c7;
-  --sl-color-gray-3: #888b96;
-  --sl-color-gray-4: #545861;
-  --sl-color-gray-5: #353841;
-  --sl-color-gray-6: #24272f;
-  --sl-color-black: #17181c;
+  --pokemon-blue:         #3b82f6;
+  --pokemon-yellow:       #ffcb05;
+
+  --sl-color-accent-low:  #1e3a8a;
+  --sl-color-accent:      var(--pokemon-blue);
+  --sl-color-accent-high: #bfdbfe;
+  --sl-color-white:       #ffffff;
+  --sl-color-gray-1:      #cbd5e1;
+  --sl-color-gray-2:      #94a3b8;
+  --sl-color-gray-3:      #64748b;
+  --sl-color-gray-4:      #334155;
+  --sl-color-gray-5:      #1e293b;
+  --sl-color-gray-6:      #0f172a;
+  --sl-color-black:       #0b0f19; /* Deep midnight navy */
+
+  --sl-color-hero-tagline-highlight: var(--pokemon-yellow);
 }
 
-/* Light mode colors. */
+/* ── Light mode palette ─── */
 :root[data-theme="light"] {
-  --sl-color-accent-low: #f8cbc0;
-  --sl-color-accent: #c32700;
-  --sl-color-accent-high: #5d1406;
-  --sl-color-white: #17181c;
-  --sl-color-gray-1: #24272f;
-  --sl-color-gray-2: #353841;
-  --sl-color-gray-3: #545861;
-  --sl-color-gray-4: #888b96;
-  --sl-color-gray-5: #c0c2c7;
-  --sl-color-gray-6: #eceef2;
-  --sl-color-gray-7: #f5f6f8;
-  --sl-color-black: #ffffff;
+  --pokemon-blue:         #2563eb;
+  --pokemon-yellow:       #ffcb05;
+
+  --sl-color-accent-low:  #dbeafe;
+  --sl-color-accent:      var(--pokemon-blue);
+  --sl-color-accent-high: #1e3a8a;
+  --sl-color-white:       #0f172a;
+  --sl-color-gray-1:      #1e293b;
+  --sl-color-gray-2:      #334155;
+  --sl-color-gray-3:      #64748b;
+  --sl-color-gray-4:      #94a3b8;
+  --sl-color-gray-5:      #cbd5e1;
+  --sl-color-gray-6:      #f1f5f9;
+  --sl-color-gray-7:      #f8fafc;
+  --sl-color-black:       #ffffff;
+
+  --sl-color-hero-tagline-highlight: var(--pokemon-blue);
+}
+
+/* ── Kill underlines on nav links ─── */
+header a, header a:hover, header a:focus,
+nav a, nav a:hover {
+  text-decoration: none !important;
+}
+
+/* ── Social icons consistent with nav ─── */
+.social-icons a {
+  color: var(--sl-color-gray-2) !important;
+  transition: color 0.18s ease !important;
+}
+.social-icons a:hover {
+  color: var(--sl-color-white) !important;
+}
+
+/* ── Kill the Starlight pre border inside our widgets ─── */
+.not-content pre,
+.api-explorer-root pre {
+  border: none !important;
+}
+
+/* ── Kill Starlight content gap inside .not-content ─── */
+.not-content > *,
+.not-content * + * {
+  /* Handled per-component where needed */
+}
+
+/* ── Modern Hero Action Buttons ─── */
+.hero .actions {
+  display: flex !important;
+  gap: 12px !important;
+  margin-top: 1.5rem !important;
+}
+
+.hero .actions .sl-link-button {
+  border-radius: 8px !important; /* Modern rounded corners */
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+/* Primary Button Override */
+.hero .actions .sl-link-button.primary {
+  background: var(--sl-color-accent) !important;
+  border-color: var(--sl-color-accent) !important;
+  color: #ffffff !important; /* Premium white text */
+}
+
+.hero .actions .sl-link-button.primary:hover {
+  transform: translateY(-2px) !important;
+  background: color-mix(in srgb, var(--sl-color-accent) 85%, #ffffff 15%) !important;
+  border-color: color-mix(in srgb, var(--sl-color-accent) 85%, #ffffff 15%) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35) !important; /* Glowing blue shadow */
+}
+
+.hero .actions .sl-link-button.primary:active {
+  transform: translateY(0) !important;
+}
+
+/* Secondary Button Override */
+.hero .actions .sl-link-button.secondary {
+  background: var(--sl-color-gray-6) !important;
+  border-color: var(--sl-color-gray-5) !important;
+  color: var(--sl-color-white) !important;
+}
+
+.hero .actions .sl-link-button.secondary:hover {
+  transform: translateY(-2px) !important;
+  background: var(--sl-color-gray-5) !important;
+  border-color: var(--sl-color-gray-4) !important;
+  color: var(--sl-color-white) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.hero .actions .sl-link-button.secondary:active {
+  transform: translateY(0) !important;
+}
+
+/* Make sure icons inside buttons align correctly and look modern */
+.hero .actions .sl-link-button svg {
+  width: 16px !important;
+  height: 16px !important;
+  transition: transform 0.2s ease !important;
+}
+
+.hero .actions .sl-link-button:hover svg {
+  transform: scale(1.1) !important;
+}
+
+/* ── Modern Layout Adjustment (Wider Main Pane, Closer Right Sidebar) ─── */
+@media (min-width: 72rem) {
+  :root {
+    --sl-content-width: 58rem !important;
+  }
+}
+@media (min-width: 85rem) {
+  :root {
+    --sl-content-width: 68rem !important;
+  }
+}
+
+/* ── Fixed-width columns for 3-column tables (Name, Description, Type) ─── */
+.sl-markdown-content table:has(th:nth-child(3):last-child) {
+  table-layout: fixed !important;
+  width: 100% !important;
+}
+.sl-markdown-content table:has(th:nth-child(3):last-child) th:nth-child(1),
+.sl-markdown-content table:has(th:nth-child(3):last-child) td:nth-child(1) {
+  width: 20% !important;
+}
+.sl-markdown-content table:has(th:nth-child(3):last-child) th:nth-child(2),
+.sl-markdown-content table:has(th:nth-child(3):last-child) td:nth-child(2) {
+  width: 45% !important;
+}
+.sl-markdown-content table:has(th:nth-child(3):last-child) th:nth-child(3),
+.sl-markdown-content table:has(th:nth-child(3):last-child) td:nth-child(3) {
+  width: 35% !important;
+}
+.sl-markdown-content table:has(th:nth-child(3):last-child) td {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+/* ── OpenAPI Cleanups (Hide Authentication and hardcoded api.example.org) ─── */
+/* Hide Authorizations section on operation pages */
+section:has(.sl-heading-wrapper > #authorizations) {
+  display: none !important;
+}
+
+/* Hide Authentication section and definitions on overview page */
+.sl-heading-wrapper:has(> #authentication),
+.sl-heading-wrapper:has(> #authentication) ~ section {
+  display: none !important;
+}
+
+/* Hide Caret and disable clicks on operation server dropdowns */
+.operation-description-urls summary .caret {
+  display: none !important;
+}
+.operation-description-urls summary {
+  cursor: default !important;
+  pointer-events: none !important;
+}
+.operation-description-urls ul {
+  display: none !important;
 }

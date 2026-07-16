@@ -31,6 +31,23 @@ export default defineConfig({
             base: `/v2/openapi`,
             label: 'OpenAPI',
             schema: 'https://raw.githubusercontent.com/PokeAPI/pokeapi/master/openapi.yml',
+            sidebar: {
+              tags: {
+                sort: 'alphabetical',
+              },
+            },
+            snippets: {
+              operation: {
+                clients: {
+                  go: ['nethttp'],
+                  java: ['okhttp', 'nethttp'],
+                  javascript: ['fetch', 'axios'],
+                  rust: ['reqwest'],
+                  shell: ['curl', 'wget'],
+                },
+                default: { target: 'javascript', client: 'fetch' },
+              },
+            },
           },
         ]),
       ],
