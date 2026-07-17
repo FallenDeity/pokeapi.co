@@ -68,13 +68,13 @@ const validTypes = [
               {
                 model.fields.map((field, index) => (
                   <tr class="border-b border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/30">
-                    <td>
+                    <td class="text-xs sm:text-sm">
                       <strong><code>{field.name}</code></strong>
                     </td>
-                    <td class="text-sm">
+                    <td class="text-xs sm:text-sm">
                       {field.description}
                     </td>
-                    <td>
+                    <td class="text-xs sm:text-sm">
                       {
                         validTypes.includes(field.type) ? (
                           <span class={`type-badge type-badge--${field.type}`}>

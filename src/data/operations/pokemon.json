@@ -49,9 +49,9 @@
             ],
             "flavor_text_entries": [
                 {
-                    "flavor_text": "è‡­ãã¦ã€€ç›¸æ‰‹ãŒ\nã²ã‚‹ã‚€ã€€ã“ã¨ãŒã‚ã‚‹ã€‚",
+                    "flavor_text": "臭くて　相手が\nひるむ　ことがある。",
                     "language": {
-                        "name": "ja-kanji",
+                        "name": "ja",
                         "url": "$BASE_URL/v2/language/11/"
                     },
                     "version_group": {

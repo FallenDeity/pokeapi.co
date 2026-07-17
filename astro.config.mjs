@@ -35,8 +35,15 @@ export default defineConfig({
       title: 'PokéAPI',
       favicon: './src/assets/pokeapi_192_square.png',
       tableOfContents: {
-        maxHeadingLevel: 2,
+        maxHeadingLevel: 4,
       },
+      routeMiddleware: './src/routeData.ts',
+      head: [
+        {
+          tag: 'script',
+          attrs: { src: '/js/continuous-scroll.js', defer: true },
+        },
+      ],
       components: {
         Footer: './src/components/PokeFooter.astro',
         Header: './src/components/PokeHeader.astro',

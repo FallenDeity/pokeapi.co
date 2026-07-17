@@ -186,6 +186,10 @@ nav a, nav a:hover {
   }
 }
 
+.sl-markdown-content :not(h1, h2, h3, h4, h5, h6, .sl-heading-wrapper) + :is(.sl-heading-wrapper) {
+  margin-top: 0.75em;
+}
+
 .sl-markdown-content table:has(th:nth-child(3):last-child) {
   table-layout: fixed !important;
   width: 100% !important;
@@ -202,6 +206,15 @@ nav a, nav a:hover {
 .sl-markdown-content table:has(th:nth-child(3):last-child) td:nth-child(3) {
   width: 35% !important;
 }
+
+@media (max-width: 50rem) {
+  .sl-markdown-content table:has(th:nth-child(3):last-child) th,
+  .sl-markdown-content table:has(th:nth-child(3):last-child) td {
+    padding-left: 0.4rem !important;
+    padding-right: 0.4rem !important;
+  }
+}
+
 .sl-markdown-content table:has(th:nth-child(3):last-child) td {
   overflow-wrap: break-word !important;
   word-break: break-word !important;
@@ -234,9 +247,7 @@ nav a, nav a:hover {
   margin-top: 0.5rem !important;
 }
 
-div.sl-heading-wrapper.level-h3 {
-  display: none !important;
-}
+
 
 .sl-openapi-section-pre-panel {
   display: none !important;
@@ -258,13 +269,7 @@ div.sl-heading-wrapper.level-h3 {
 }
 
 .sl-heading-wrapper.level-h3 .sl-openapi-heading {
-  font-size: 0.85rem !important;
-  font-weight: 600 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
-  color: var(--sl-color-gray-3) !important;
-  margin-top: 1rem !important;
-  margin-bottom: 0.2rem !important;
+  display: none !important;
 }
 
 .sl-openapi-section-panel {
@@ -418,9 +423,14 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
 
 .sl-openapi-key-description .sl-openapi-markdown p {
   margin-block: 0.2rem 0 !important;
-  font-size: 0.82rem !important;
+  font-size: var(--sl-text-sm) !important;
   color: var(--sl-color-gray-2) !important;
   line-height: 1.45 !important;
+}
+@media (max-width: 50rem) {
+  .sl-openapi-key-description .sl-openapi-markdown p {
+    font-size: var(--sl-text-xs) !important;
+  }
 }
 
 .sl-openapi-tags {
@@ -437,9 +447,17 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   background-color: color-mix(in srgb, var(--sl-color-gray-6) 20%, transparent) !important;
   padding: 0 0.9rem !important;
   margin-block: 0.6rem 1rem !important;
-  grid-template-columns: fit-content(12rem) minmax(0, 1fr) !important;
-  column-gap: 2rem !important;
+  grid-template-columns: fit-content(18rem) minmax(0, 1fr) !important;
+  column-gap: 3.5rem !important;
   row-gap: 0 !important;
+}
+
+@media (max-width: 50rem) {
+  .sl-openapi-keys {
+    grid-template-columns: fit-content(8rem) minmax(0, 1fr) !important;
+    column-gap: 0.8rem !important;
+    padding: 0 0.5rem !important;
+  }
 }
 
 :root[data-theme="dark"] .sl-openapi-keys {
@@ -459,6 +477,25 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
 
 .sl-openapi-key:last-of-type {
   border-bottom: none !important;
+}
+
+.sl-openapi-key:has(> .sl-openapi-key-description > details[open]) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.3rem !important;
+}
+
+.sl-openapi-key:has(> .sl-openapi-key-description > details[open]) > .sl-openapi-key-description {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.3rem !important;
+}
+
+.sl-openapi-key-description > details[open] {
+  width: 100% !important;
 }
 
 .sl-openapi-key-description details:not(:first-child) {
@@ -493,9 +530,14 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
 
 .sl-openapi-key-name strong {
   font-family: var(--__sl-font-mono) !important;
-  font-size: 0.9rem !important;
+  font-size: var(--sl-text-sm) !important;
   color: var(--sl-color-white) !important;
   letter-spacing: -0.01em !important;
+}
+@media (max-width: 50rem) {
+  .sl-openapi-key-name strong {
+    font-size: var(--sl-text-xs) !important;
+  }
 }
 
 .sl-openapi-key-required {
@@ -520,6 +562,22 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   border-color: rgba(239, 68, 68, 0.1) !important;
 }
 
+.sl-openapi-key-additional {
+  display: inline-block !important;
+  margin-left: 0.6rem !important;
+  padding: 0.05rem 0.35rem !important;
+  border-radius: 3px !important;
+  font-family: var(--__sl-font-mono) !important;
+  font-size: 0.58rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+  background-color: color-mix(in srgb, var(--sl-color-gray-6) 60%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--sl-color-gray-5) 40%, transparent) !important;
+  color: var(--sl-color-gray-3) !important;
+  width: fit-content !important;
+}
+
 .sl-openapi-tag {
   border-radius: 3px !important;
   background-color: color-mix(in srgb, var(--sl-color-gray-6) 60%, transparent) !important;
@@ -533,6 +591,13 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
 
 .sl-openapi-examples {
   margin-top: 3rem !important;
+}
+
+.sl-openapi-example div.expressive-code pre > code {
+  text-wrap: nowrap !important;
+  white-space: pre !important;
+  word-break: normal !important;
+  word-wrap: normal !important;
 }
 
 .type-badge {
@@ -901,6 +966,10 @@ sl-openapi-snippet-picker label.sl-openapi-snippet-picker {
   margin-block: 0.5rem 1.25rem !important;
 }
 
+.sl-openapi-examples-heading {
+  padding-bottom: 1rem !important;
+}
+
 .sl-openapi-example .expressive-code {
   margin: 0 !important;
 }
@@ -1051,3 +1120,28 @@ sl-openapi-snippet-picker label.sl-openapi-snippet-picker {
     margin-inline: auto !important;
   }
 }
+
+starlight-toc ul ul {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.2s ease, 
+              visibility 0.2s ease;
+}
+starlight-toc li:has(a[aria-current="true"]) > ul {
+  max-height: 500px; /* Safe limit for heading lists */
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --- Page Transition Animation --- */
+main {
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out !important;
+}
+main.page-transition-fade {
+  opacity: 0 !important;
+  transform: translateY(10px) !important;
+}
+

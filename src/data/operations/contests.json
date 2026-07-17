@@ -131,7 +131,25 @@
                         "description": "The flavor text of this contest effect listed in different languages.",
                         "type": {
                              "type": "list",
-                             "of": "FlavorText"
+                             "of": "ContestEffectFlavorText"
+                         }
+                    }
+                ]
+            },
+            {
+                "name": "ContestEffectFlavorText",
+                "fields": [
+                    {
+                        "name": "flavor_text",
+                        "description": "The localized flavor text for an API resource in a specific language.",
+                        "type": "string"
+                    },
+                    {
+                        "name": "language",
+                        "description": "The language this name is in.",
+                        "type": {
+                             "type": "NamedAPIResource",
+                             "of": "Language"
                          }
                     }
                 ]
@@ -176,7 +194,7 @@
                         "description": "The flavor text of this super contest effect listed in different languages.",
                         "type": {
                              "type": "list",
-                             "of": "FlavorText"
+                             "of": "SuperContestEffectFlavorText"
                          }
                     },
                     {
@@ -188,6 +206,24 @@
                                  "type": "NamedAPIResource",
                                  "of": "Move"
                              }
+                         }
+                    }
+                ]
+            },
+            {
+                "name": "SuperContestEffectFlavorText",
+                "fields": [
+                    {
+                        "name": "flavor_text",
+                        "description": "The localized flavor text for an API resource in a specific language.",
+                        "type": "string"
+                    },
+                    {
+                        "name": "language",
+                        "description": "The language this name is in.",
+                        "type": {
+                             "type": "NamedAPIResource",
+                             "of": "Language"
                          }
                     }
                 ]
