@@ -12,7 +12,6 @@
     </span>
 
     <button
-      id="theme-toggle-btn"
       class="theme-slider-track"
       role="switch"
       aria-checked="true"
@@ -143,44 +142,41 @@
   function applyThemeToToggle(track: HTMLElement, isLight: boolean, animate: boolean) {
     if (!animate) {
       track.classList.add('no-transition');
-      // Force reflow so the class takes effect before removal
-      void track.offsetWidth;
+      void track.offsetWidth; // force reflow
     }
-
     track.setAttribute('aria-checked', isLight ? 'false' : 'true');
-
     if (!animate) {
-      requestAnimationFrame(() => {
-        track.classList.remove('no-transition');
-      });
+      requestAnimationFrame(() => track.classList.remove('no-transition'));
     }
   }
 
-  function initThemeToggle() {
-    const track = document.getElementById('theme-toggle-btn') as HTMLElement | null;
-    if (!track) return;
-
+  function syncAllTracks(animate: boolean) {
     const isLight = document.documentElement.dataset.theme === 'light';
-    // Sync without animation on init (avoids the flash animation on navigation)
-    applyThemeToToggle(track, isLight, false);
+    document.querySelectorAll<HTMLElement>('.theme-slider-track').forEach(t =>
+      applyThemeToToggle(t, isLight, animate)
+    );
+  }
 
-    // Remove any old listener by cloning the node
-    const fresh = track.cloneNode(true) as HTMLElement;
-    track.parentNode!.replaceChild(fresh, track);
+  function initThemeToggle() {
+    // Wire up every instance (desktop header + mobile menu drawer)
+    document.querySelectorAll<HTMLElement>('.theme-slider-track').forEach(track => {
+      // Sync state without animation on init
+      applyThemeToToggle(track, document.documentElement.dataset.theme === 'light', false);
 
-    fresh.addEventListener('click', () => {
-      const currentlyLight = document.documentElement.dataset.theme === 'light';
-      const newTheme = currentlyLight ? 'dark' : 'light';
-      document.documentElement.dataset.theme = newTheme;
-      try { localStorage.setItem('starlight-theme', newTheme); } catch {}
-      applyThemeToToggle(fresh, newTheme === 'light', true);
+      // Remove stale listeners by replacing with a clone
+      const fresh = track.cloneNode(true) as HTMLElement;
+      track.parentNode!.replaceChild(fresh, track);
+
+      fresh.addEventListener('click', () => {
+        const newTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = newTheme;
+        try { localStorage.setItem('starlight-theme', newTheme); } catch {}
+        // MutationObserver below will sync all tracks automatically
+      });
     });
 
-    // Watch for external theme changes (system, other tabs)
-    const observer = new MutationObserver(() => {
-      const light = document.documentElement.dataset.theme === 'light';
-      applyThemeToToggle(fresh, light, false);
-    });
+    // One shared observer syncs ALL track instances on any theme change
+    const observer = new MutationObserver(() => syncAllTracks(true));
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   }
 

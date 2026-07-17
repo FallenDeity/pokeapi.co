@@ -2,32 +2,29 @@ import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
 import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi'
 import tailwindcss from '@tailwindcss/vite'
-import { bundle } from '@readme/openapi-parser';
-import { parse, stringify } from 'yaml';
-import * as fs from 'fs';
+import { parse, stringify } from 'yaml'
+import { bundle } from '@readme/openapi-parser'
+import { mkdir, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 
+async function processOpenAPISchema(schemaUrl) {
+  const schema = await bundle(schemaUrl);
 
-const fetchOpenAPISchema = async () => {
-  const document = await bundle('https://raw.githubusercontent.com/PokeAPI/pokeapi/master/openapi.yml');
-
-  const schema = parse(stringify(document));
-
-  if (schema.paths) {
-    for (const path of Object.keys(schema.paths)) {
-      for (const method of Object.keys(schema.paths[path])) {
-        delete schema.paths[path][method]?.security;
+  for (const operations of Object.values(schema.paths ?? {})) {
+    for (const operation of Object.values(operations)) {
+      if (operation && typeof operation === "object") {
+        delete operation.security;
       }
     }
   }
 
-  delete schema.components?.securitySchemes;
+  const publicDir = resolve("./public");
+  await mkdir(publicDir, { recursive: true });
+  await writeFile(resolve(publicDir, "openapi.yml"), stringify(schema), "utf-8");
 
-  // save in public openapi.yml
-  fs.writeFileSync('./public/openapi.yml', stringify(schema));
-};
+  return './public/openapi.yml';
+}
 
-
-// await fetchOpenAPISchema();
 
 export default defineConfig({
   site: 'https://pokeapi.co',
@@ -44,6 +41,7 @@ export default defineConfig({
         Footer: './src/components/PokeFooter.astro',
         Header: './src/components/PokeHeader.astro',
         SocialIcons: './src/components/SocialIcons.astro',
+        ThemeSelect: './src/components/ThemeToggle.astro',
       },
       customCss: [
         './src/styles/global.css',
@@ -61,7 +59,7 @@ export default defineConfig({
           {
             base: `/v2/openapi`,
             label: 'OpenAPI',
-            schema: 'https://raw.githubusercontent.com/FallenDeity/pokeapi/refs/heads/openapi-security/openapi.yml',
+            schema: await processOpenAPISchema('https://raw.githubusercontent.com/PokeAPI/pokeapi/refs/heads/master/openapi.yml'),
             sidebar: {
               tags: {
                 sort: 'alphabetical',

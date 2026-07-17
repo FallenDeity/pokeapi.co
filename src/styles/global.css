@@ -5,40 +5,55 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 :root {
-  --pokemon-blue:         #3b82f6;
-  --pokemon-yellow:       #ffcb05;
+  --pokemon-blue-low:    #1e40af;
+  --pokemon-blue:        #3b82f6;
+  --pokemon-blue-high:   #bfdbfe;
 
-  --sl-color-accent-low:  #1e3a8a;
+  --pokemon-yellow-low:  #fef9c3;
+  --pokemon-yellow:      #eab308;
+  --pokemon-yellow-high: #ca8a04;
+
+  --sl-color-accent-low:  var(--pokemon-blue-low);
   --sl-color-accent:      var(--pokemon-blue);
-  --sl-color-accent-high: #bfdbfe;
-  --sl-color-white:       #ffffff;
-  --sl-color-gray-1:      #cbd5e1;
-  --sl-color-gray-2:      #94a3b8;
-  --sl-color-gray-3:      #64748b;
-  --sl-color-gray-4:      #334155;
-  --sl-color-gray-5:      #1e293b;
-  --sl-color-gray-6:      #0f172a;
-  --sl-color-black:       #0b0f19;
+  --sl-color-accent-high: var(--pokemon-blue-high);
+
+  --sl-color-white:  #ffffff;
+  --sl-color-gray-1: #cbd5e1;
+  --sl-color-gray-2: #94a3b8;
+  --sl-color-gray-3: #64748b;
+  --sl-color-gray-4: #334155;
+  --sl-color-gray-5: #1e293b;
+  --sl-color-gray-6: #0f172a;
+  --sl-color-black:  #0b0f19;
+
+  --sl-color-bg-sidebar:    color-mix(in srgb, var(--sl-color-gray-6) 40%, transparent);
+  --sl-color-hairline:      color-mix(in srgb, var(--sl-color-gray-4) 30%, transparent);
+  --sl-color-hairline-shade: var(--sl-color-hairline);
 
   --sl-color-hero-tagline-highlight: var(--pokemon-yellow);
+
+  --ec-frm-inlBtnBg: var(--sl-color-accent);
 }
 
 :root[data-theme="light"] {
-  --pokemon-blue:         #2563eb;
-  --pokemon-yellow:       #ffcb05;
+  --pokemon-yellow:      #ca8a04;
+  --pokemon-yellow-high: #a16207;
 
-  --sl-color-accent-low:  #dbeafe;
-  --sl-color-accent:      var(--pokemon-blue);
-  --sl-color-accent-high: #1e3a8a;
-  --sl-color-white:       #0f172a;
-  --sl-color-gray-1:      #1e293b;
-  --sl-color-gray-2:      #334155;
-  --sl-color-gray-3:      #64748b;
-  --sl-color-gray-4:      #94a3b8;
-  --sl-color-gray-5:      #cbd5e1;
-  --sl-color-gray-6:      #f1f5f9;
-  --sl-color-gray-7:      #f8fafc;
-  --sl-color-black:       #ffffff;
+  --sl-color-accent-low:  var(--pokemon-yellow-low);
+  --sl-color-accent:      var(--pokemon-yellow);
+  --sl-color-accent-high: var(--pokemon-yellow-high);
+
+  --sl-color-white:  #0f172a;
+  --sl-color-gray-1: #1e293b;
+  --sl-color-gray-2: #334155;
+  --sl-color-gray-3: #64748b;
+  --sl-color-gray-4: #94a3b8;
+  --sl-color-gray-5: #cbd5e1;
+  --sl-color-gray-6: #f1f5f9;
+  --sl-color-gray-7: #f8fafc;
+  --sl-color-black:  #ffffff;
+
+  --sl-color-bg-sidebar: color-mix(in srgb, var(--sl-color-gray-6) 20%, transparent);
 
   --sl-color-hero-tagline-highlight: var(--pokemon-blue);
 }
@@ -48,15 +63,52 @@ nav a, nav a:hover {
   text-decoration: none !important;
 }
 
+.hero {
+    display: grid;
+    grid-template-columns: 100%;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+@media (min-width: 50rem) {
+  .hero {
+    grid-template-columns: 7fr 4fr;
+    gap: 3%;
+    padding-block: clamp(2.5rem, calc(1rem + 10vmin), 10rem);
+  }
+  .hero .hero-html.sl-flex {
+    order: 2;
+    width: auto !important;
+    justify-content: flex-end !important;
+  }
+  .hero .stack {
+    text-align: start;
+  }
+  .hero .copy {
+    align-items: flex-start;
+  }
+  .hero .actions {
+    justify-content: flex-start !important;
+  }
+}
+
+.hero .hero-html.sl-flex {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.hero .hero-html img {
+    margin: 0 auto !important;
+    display: block !important;
+    max-width: 100% !important;
+    height: auto !important;
+}
 
 .not-content pre,
 .api-explorer-root pre {
   border: none !important;
-}
-
-.not-content > *,
-.not-content * + * {
-  /* Handled per-component where needed */
 }
 
 .hero .actions {
@@ -171,7 +223,6 @@ nav a, nav a:hover {
   display: none !important;
 }
 
-/* Compact section spacing */
 .sl-openapi-section {
   margin-block: 2rem 0 !important;
 }
@@ -191,12 +242,10 @@ div.sl-heading-wrapper.level-h3 {
   display: none !important;
 }
 
-/* Hide the ugly hover url icons */
 .sl-anchor-link {
   display: none !important;
 }
 
-/* Section headings — tighten vertical rhythm */
 .sl-openapi-heading {
   margin-block: 0.6rem 0 !important;
   font-size: 1rem !important;
@@ -218,7 +267,6 @@ div.sl-heading-wrapper.level-h3 {
   margin-bottom: 0.2rem !important;
 }
 
-/* Section panel — remove chunky default padding/borders */
 .sl-openapi-section-panel {
   margin-block: 0 !important;
   padding: 0 !important;
@@ -226,36 +274,6 @@ div.sl-heading-wrapper.level-h3 {
   background: transparent !important;
 }
 
-/* Authorization box — strip the heavy block styling */
-.sl-openapi-security-schemes {
-  list-style: none !important;
-  padding: 0 !important;
-  margin: 0.35rem 0 0 0 !important;
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 0.4rem !important;
-}
-
-.sl-openapi-security-scheme {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 0.3rem !important;
-  padding: 0.2rem 0.5rem !important;
-  border-radius: 4px !important;
-  border: 1px solid color-mix(in srgb, var(--sl-color-gray-4) 35%, transparent) !important;
-  background: color-mix(in srgb, var(--sl-color-gray-6) 50%, transparent) !important;
-  font-size: 0.8rem !important;
-  font-weight: 500 !important;
-  color: var(--sl-color-gray-2) !important;
-}
-
-.sl-openapi-security-scheme svg {
-  width: 12px !important;
-  height: 12px !important;
-  opacity: 0.6 !important;
-}
-
-/* Coherent unified Operation card styling */
 .sl-openapi-operation-description {
   border: 1px solid color-mix(in srgb, var(--sl-color-gray-4) 30%, transparent) !important;
   border-radius: 8px !important;
@@ -282,7 +300,6 @@ div.sl-heading-wrapper.level-h3 {
   border-bottom: 1px solid color-mix(in srgb, var(--sl-color-gray-3) 30%, transparent) !important;
 }
 
-/* Method badge and Path style */
 .sl-openapi-operation-method {
   display: flex !important;
   align-items: center !important;
@@ -310,7 +327,6 @@ div.sl-heading-wrapper.level-h3 {
   font-weight: 500 !important;
 }
 
-/* Select language dropdown styling */
 sl-openapi-snippet-picker {
   display: flex !important;
   align-items: center !important;
@@ -360,7 +376,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   height: 12px !important;
 }
 
-/* Unify code snippet blocks */
 .sl-openapi-snippets {
   border: none !important;
   border-radius: 0 !important;
@@ -383,7 +398,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   background-color: transparent !important;
 }
 
-/* Media-type picker select styling (hidden since application/json is standard and redundant) */
 .not-content.sl-openapi-content-picker-select {
   display: none !important;
 }
@@ -397,13 +411,11 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   padding-left: 0 !important;
 }
 
-/* Response schema root details — compact */
 .sl-openapi-schema-object-root > summary {
   padding-block: 0.25rem !important;
   font-size: 0.8rem !important;
 }
 
-/* Markdown description paragraphs inside params/responses */
 .sl-openapi-key-description .sl-openapi-markdown p {
   margin-block: 0.2rem 0 !important;
   font-size: 0.82rem !important;
@@ -411,7 +423,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   line-height: 1.45 !important;
 }
 
-/* Tags row */
 .sl-openapi-tags {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -426,6 +437,7 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   background-color: color-mix(in srgb, var(--sl-color-gray-6) 20%, transparent) !important;
   padding: 0 0.9rem !important;
   margin-block: 0.6rem 1rem !important;
+  grid-template-columns: fit-content(12rem) minmax(0, 1fr) !important;
   column-gap: 2rem !important;
   row-gap: 0 !important;
 }
@@ -449,10 +461,17 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   border-bottom: none !important;
 }
 
+.sl-openapi-key-description details:not(:first-child) {
+  margin-block-start: 0 !important;
+}
+
 .sl-openapi-key-name {
   margin: 0 !important;
   padding: 0 !important;
   min-height: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
 }
 
 .sl-openapi-key-description {
@@ -468,6 +487,8 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
 .sl-openapi-key-description > div {
   display: inline-flex !important;
   align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 0.4rem 0.6rem !important;
 }
 
 .sl-openapi-key-name strong {
@@ -543,7 +564,21 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   flex-shrink: 0 !important;
 }
 
-/* Integer Badge */
+.type-badge--schema {
+  background-color: rgba(244, 63, 94, 0.08) !important;
+  color: #fb7185 !important;
+  border-color: rgba(244, 63, 94, 0.2) !important;
+}
+:root[data-theme="light"] .type-badge--schema {
+  background-color: rgba(225, 29, 72, 0.08) !important;
+  color: #e11d48 !important;
+  border-color: rgba(225, 29, 72, 0.15) !important;
+}
+.type-badge-icon--schema {
+  mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWZpbGUtdGV4dC1pY29uIGx1Y2lkZS1maWxlLXRleHQiPjxwYXRoIGQ9Ik02IDIyYTIgMiAwIDAgMS0yLTJWNGEyIDIgMCAwIDEgMi0yaDhhMi40IDIuNCAwIDAgMSAxLjcwNC43MDZsMy41ODggMy41ODhBMi40IDIuNCAwIDAgMSAyMCA4djEyYTIgMiAwIDAgMS0yIDJ6Ii8+PHBhdGggZD0iTTE0IDJ2NWExIDEgMCAwIDAgMSAxaDUiLz48cGF0aCBkPSJNMTAgOUg4Ii8+PHBhdGggZD0iTTE2IDEzSDgiLz48cGF0aCBkPSJNMTYgMTdIOCIvPjwvc3ZnPg==") !important;
+  -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWZpbGUtdGV4dC1pY29uIGx1Y2lkZS1maWxlLXRleHQiPjxwYXRoIGQ9Ik02IDIyYTIgMiAwIDAgMS0yLTJWNGEyIDIgMCAwIDEgMi0yaDhhMi40IDIuNCAwIDAgMSAxLjcwNC43MDZsMy41ODggMy41ODhBMi40IDIuNCAwIDAgMSAyMCA4djEyYTIgMiAwIDAgMS0yIDJ6Ii8+PHBhdGggZD0iTTE0IDJ2NWExIDEgMCAwIDAgMSAxaDUiLz48cGF0aCBkPSJNMTAgOUg4Ii8+PHBhdGggZD0iTTE2IDEzSDgiLz48cGF0aCBkPSJNMTYgMTdIOCIvPjwvc3ZnPg==") !important;
+}
+
 .type-badge--integer {
   background-color: rgba(59, 130, 246, 0.08) !important;
   color: #60a5fa !important;
@@ -559,7 +594,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.003 7.754a.75.75 0 0 1 .75-.75h5.232a.75.75 0 0 1 .53 1.28l-2.776 2.777c.55.097 1.057.253 1.492.483.905.477 1.504 1.284 1.504 2.418 0 .966-.471 1.75-1.172 2.27-.687.511-1.587.77-2.521.77-1.367 0-2.274-.528-2.667-.756a.75.75 0 0 1 .755-1.297c.331.193.953.553 1.912.553.673 0 1.243-.188 1.627-.473.37-.275.566-.635.566-1.067 0-.5-.219-.836-.703-1.091-.538-.284-1.375-.443-2.471-.443a.75.75 0 0 1-.53-1.28l2.643-2.644h-3.421a.75.75 0 0 1-.75-.75ZM7.88 15.215a1.4 1.4 0 0 0-1.446.83.75.75 0 0 1-1.37-.61 2.899 2.899 0 0 1 2.986-1.71c.589.06 1.139.323 1.557.743.434.446.685 1.058.685 1.778 0 1.641-1.254 2.437-2.12 2.986-.538.341-1.18.694-1.495 1.273H9.75a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1-.75-.75c0-1.799 1.337-2.63 2.243-3.21 1.032-.659 1.55-1.031 1.55-1.8 0-.355-.116-.584-.26-.732a1.071 1.071 0 0 0-.652-.298Zm.234-13.121a.75.75 0 0 1 .386.656V9h1.252a.75.75 0 0 1 0 1.5H5.75a.75.75 0 0 1 0-1.5H7V4.103l-.853.533a.749.749 0 1 1-.795-1.272l2-1.25a.749.749 0 0 1 .762-.02Z'/%3E%3C/svg%3E") !important;
 }
 
-/* String Badge */
 .type-badge--string {
   background-color: rgba(16, 185, 129, 0.08) !important;
   color: #34d399 !important;
@@ -575,7 +609,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16'/%3E%3Cpath d='M22 9v7'/%3E%3Cpath d='M3.304 13h6.392'/%3E%3Ccircle cx='18.5' cy='12.5' r='3.5'/%3E%3C/svg%3E") !important;
 }
 
-/* Boolean Badge */
 .type-badge--boolean {
   background-color: rgba(245, 158, 11, 0.08) !important;
   color: #fbbf24 !important;
@@ -591,7 +624,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Crect x='14' y='14' width='4' height='6' rx='2'/%3E%3Crect x='6' y='4' width='4' height='6' rx='2'/%3E%3Cpath d='M6 20h4'/%3E%3Cpath d='M14 10h4'/%3E%3Cpath d='M6 14h2v6'/%3E%3Cpath d='M14 4h2v6'/%3E%3C/svg%3E") !important;
 }
 
-/* Object Badge */
 .type-badge--object {
   background-color: rgba(139, 92, 246, 0.08) !important;
   color: #a78bfa !important;
@@ -607,7 +639,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1'/%3E%3Cpath d='M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1'/%3E%3C/svg%3E") !important;
 }
 
-/* Array/List Badge */
 .type-badge--array, .type-badge--list {
   background-color: rgba(99, 102, 241, 0.08) !important;
   color: #818cf8 !important;
@@ -623,7 +654,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='M16 3h3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-3'/%3E%3Cpath d='M8 21H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h3'/%3E%3C/svg%3E") !important;
 }
 
-/* Nested parameters and details elements redesign */
 .sl-openapi-key-description details.sl-openapi-schema-object-root {
   width: 100% !important;
   margin-top: 0.5rem !important;
@@ -634,7 +664,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   border-inline-start: none !important;
 }
 
-/* High contrast nested key containers inside expanded details card */
 .sl-openapi-key-description details.sl-openapi-schema-object-root .sl-openapi-keys {
   border: none !important;
   background-color: transparent !important;
@@ -660,7 +689,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   display: none !important;
 }
 
-/* Custom chevron toggle icon for summary */
 .sl-openapi-key-description details.sl-openapi-schema-object-root summary::before {
   content: "" !important;
   display: inline-block !important;
@@ -683,7 +711,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   color: var(--sl-color-white) !important;
 }
 
-/* Custom language selector dropdown (Shadcn style) */
 .custom-select-dropdown {
   position: relative !important;
   display: inline-block !important;
@@ -722,7 +749,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   transition: transform 0.15s ease !important;
 }
 
-/* Float custom menu dropdown popover */
 .custom-select-menu {
   display: none !important;
   position: absolute !important;
@@ -743,7 +769,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   display: block !important;
 }
 
-/* optgroup header labels styling */
 .custom-select-group-title {
   padding: 0.3rem 0.5rem 0.15rem 0.5rem !important;
   font-size: 0.62rem !important;
@@ -753,7 +778,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   letter-spacing: 0.05em !important;
 }
 
-/* custom dropdown option button item list */
 .custom-select-item {
   display: block !important;
   width: 100% !important;
@@ -780,7 +804,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   color: var(--sl-color-white) !important;
 }
 
-/* Grid Headers style */
 .sl-openapi-key-header {
   display: grid !important;
   grid-column: 1 / -1 !important;
@@ -815,7 +838,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   color: var(--sl-color-gray-3) !important;
 }
 
-/* Ensure type badge elements inside description have exact line-height alignment */
 .sl-openapi-key-description > div,
 .sl-openapi-key-description .sl-openapi-type,
 .sl-openapi-key-description .sl-openapi-tags {
@@ -829,9 +851,9 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   display: inline-flex !important;
   align-items: center !important;
   margin: 0 !important;
+  white-space: nowrap !important;
 }
 
-/* Allow custom dropdown selector popover to display fully outside operations description header */
 .sl-openapi-operation-description,
 .sl-openapi-operation-description-header,
 .sl-openapi-snippets,
@@ -839,12 +861,10 @@ sl-openapi-snippet-picker {
   overflow: visible !important;
 }
 
-/* Hide native selector label completely to prevent double menus */
 sl-openapi-snippet-picker label.sl-openapi-snippet-picker {
   display: none !important;
 }
 
-/* Center the navigation link content and icon vertically */
 .sl-openapi-overview-navigation-link {
   display: flex !important;
   align-items: center !important;
@@ -877,9 +897,157 @@ sl-openapi-snippet-picker label.sl-openapi-snippet-picker {
   align-self: center !important;
 }
 
-/* Permanently hide the Authorizations item in the TOC sidebar since PokéAPI has no authentication */
-a[href="#authorizations"],
-li:has(a[href="#authorizations"]) {
-  display: none !important;
+.sl-openapi-example {
+  margin-block: 0.5rem 1.25rem !important;
 }
 
+.sl-openapi-example .expressive-code {
+  margin: 0 !important;
+}
+
+.sl-openapi-example .expressive-code figure {
+  margin: 0 !important;
+  border: 1px solid color-mix(in srgb, var(--sl-color-gray-5) 40%, transparent) !important;
+  border-radius: 8px !important;
+  background-color: color-mix(in srgb, var(--sl-color-gray-6) 20%, transparent) !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme="dark"] .sl-openapi-example .expressive-code figure {
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background-color: rgba(13, 17, 23, 0.75) !important;
+  box-shadow: none !important;
+}
+
+.sl-openapi-example .expressive-code pre {
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+.sl-openapi-example .expressive-code figcaption.header {
+  border: none !important;
+}
+
+.sidebar-content a[aria-current="page"] {
+  background-color: color-mix(in srgb, var(--sl-color-accent) 22%, transparent) !important;
+  color: var(--sl-color-accent-high) !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+
+:root[data-theme="light"] .sidebar-content a[aria-current="page"] {
+  background-color: color-mix(in srgb, var(--sl-color-accent) 12%, transparent) !important;
+  color: var(--sl-color-accent-high) !important;
+}
+
+.sidebar-content ul ul summary {
+  color: var(--sl-color-gray-2) !important;
+  font-weight: 500 !important;
+}
+
+.sidebar-content ul ul summary:hover,
+.sidebar-content ul ul li span,
+.sidebar-content ul ul details[open] > summary {
+  color: color-mix(in srgb, var(--sl-color-white) 85%, transparent) !important;
+}
+
+.sidebar-content details > ul > li > a > span {
+  font-weight: 600;
+}
+
+.sidebar-content details details > ul > li > a > span {
+  font-weight: 400;
+}
+
+.sl-markdown-content a:not(.not-content a) {
+  color: var(--sl-color-accent) !important;
+  text-decoration: none !important;
+  border-bottom: 1.5px solid transparent !important;
+  transition: color 0.15s ease, border-color 0.15s ease !important;
+  padding-bottom: 1px !important;
+  font-weight: 500 !important;
+}
+
+.sl-markdown-content a:not(.not-content a):hover {
+  color: var(--sl-color-accent-high) !important;
+  border-bottom-color: var(--sl-color-accent-high) !important;
+}
+
+.sl-markdown-content .type-badge a,
+.sl-markdown-content .type-badge a.type-link {
+  color: inherit !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  font-weight: inherit !important;
+  padding: 0 !important;
+  transition: opacity 0.15s ease !important;
+}
+
+.sl-markdown-content .type-badge a:hover,
+.sl-markdown-content .type-badge a.type-link:hover {
+  color: inherit !important;
+  text-decoration: underline !important;
+  border-bottom: none !important;
+  opacity: 0.8 !important;
+}
+
+.sl-markdown-content a.type-link:not(.not-content a) {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.sl-markdown-content a.type-link:not(.not-content a):hover {
+  border-bottom: none !important;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sl-color-gray-5) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--sl-color-gray-5);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--sl-color-accent);
+}
+
+@media (max-width: 600px) {
+  .hero img,
+  .hero [class*="w-["] {
+    max-width: 80vw !important;
+    width: 80vw !important;
+    height: auto !important;
+    display: block !important;
+    margin-inline: auto !important;
+  }
+}
+
+@media (min-width: 50rem) {
+  html[data-has-hero] {
+    --sl-content-inline-start: 0rem !important;
+    --sl-content-width: 68rem !important;
+  }
+  html[data-has-hero] .sidebar {
+    display: none !important;
+  }
+  html[data-has-hero] .main-pane {
+    margin-inline: auto !important;
+  }
+}

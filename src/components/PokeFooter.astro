@@ -232,6 +232,12 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     padding: 3.5rem 2rem 2rem;
   }
 
+  @media (max-width: 600px) {
+    .footer-content {
+      padding: 2rem 1.25rem 1.25rem;
+    }
+  }
+
   /* ─── Top Section ──────────────────────────────────────────── */
   .footer-top {
     display: grid;
@@ -244,6 +250,13 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     .footer-top {
       grid-template-columns: 1fr;
       gap: 2rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-top {
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
     }
   }
 
@@ -773,32 +786,28 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     types.forEach(el => {
       if (el.dataset.themed) return;
       el.dataset.themed = "true";
-      const txt = el.textContent.trim().toLowerCase();
+      let txt = el.textContent.trim().toLowerCase();
+      let nullable = false;
+
+      if (txt === 'array<object>') {
+        txt = 'array';
+      }
+
+      if (txt.includes('null')) {
+        txt = txt.split('|')[0].trim();
+        nullable = true;
+      }
 
       if (validTypes.includes(txt)) {
         el.innerHTML = `
           <span class="type-badge type-badge--${txt}">
             <span class="type-badge-icon type-badge-icon--${txt}"></span>
-            <span>${txt}</span>
+            <span>${txt}${nullable ? '?' : ''}</span>
           </span>
         `;
         el.style.color = "inherit";
         el.style.fontWeight = "inherit";
         el.style.marginInlineEnd = "0";
-      }
-    });
-
-    // Hide authorizations section if they are None
-    document.querySelectorAll('.sl-openapi-security-scheme').forEach(el => {
-      if (el.textContent.trim().toLowerCase() === 'none') {
-        const section = el.closest('.sl-openapi-section');
-        if (section) {
-          section.style.display = 'none';
-          let prev = section.previousElementSibling;
-          if (prev && prev.classList.contains('sl-heading-wrapper')) {
-            prev.style.display = 'none';
-          }
-        }
       }
     });
 

@@ -52,7 +52,7 @@ Have ideas for new features? We're on Slack! Sign up [right here](https://join.s
 
 PokéAPI V1 was created by [Paul Hallett](https://github.com/phalt) as a weekend project but it quickly became more than a weekend's worth of work. In December of 2014 Paul deprecated V1 in favor of working on V2.
 
-This is where[Zane Adickes](https://github.com/zaneadix)jumped in. Zane thought the original project was a fantastic idea and wanted to help it grow. With direction from Paul, Zane created the V2 API using an exact mirror of[Veekun's](https://github.com/eevee) data relatedto the main series of games.
+This is where [Zane Adickes](https://github.com/zaneadix) jumped in. Zane thought the original project was a fantastic idea and wanted to help it grow. With direction from Paul, Zane created the V2 API using an exact mirror of[Veekun's](https://github.com/eevee) data relatedto the main series of games.
 
 During summer 2018, Paul decided to hand over the project to the community. This is where Tim Malone, Mark Tse, Sargun Vohra, Charles Marttinen, Alessandro Pezzé, Alberto Oliveira da Silva, and Lucio Merotta came together and started planning how to change the infrastructure in order to improve performance and cut down on hosting costs. An important step was to convert the API to serve static JSON files, which was made possible by Sargun and his excellent [PokeAPI/ditto](https://github.com/PokeAPI/ditto) tool. The frontend website was also re-built by Charles at the same time. The whole process was completed in October 2018.
 
@@ -78,7 +78,7 @@ Newer data is scraped from different resources which are considered to be trustf
 
 ### What's the technology stack?
 
-Up until November 2018, the API and website were built together in a single[Python](https://python.org) project using the [Django framework](https://djangoproject.com) and paired with a [PostgreSQL](https://www.postgresql.org) database to store the data. [Django REST Framework](http://www.django-rest-framework.org/) was used to expose the data through a RESTful API. The entire stack was deployed at [DigitalOcean](https://www.digitalocean.com/), initially paid by Paul and then sponsored directly by DigitalOcean itself.
+Up until November 2018, the API and website were built together in a single [Python](https://python.org) project using the [Django framework](https://djangoproject.com) and paired with a [PostgreSQL](https://www.postgresql.org) database to store the data. [Django REST Framework](http://www.django-rest-framework.org/) was used to expose the data through a RESTful API. The entire stack was deployed at [DigitalOcean](https://www.digitalocean.com/), initially paid by Paul and then sponsored directly by DigitalOcean itself.
 
 In October 2018, the API was converted to serve static JSON files in a fully backwards compatible manner. This allowed PokéAPI to move its hosting to a cheap static hosting solution ([Firebase](https://firebase.google.com/) Hosting + [Cloudflare](https://www.cloudflare.com/) Caching), which increased performance and stability by a drastic margin.
 

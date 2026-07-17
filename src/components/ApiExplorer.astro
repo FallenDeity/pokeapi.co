@@ -135,6 +135,16 @@ const endpoints = [
     border-radius: 8px 0 0 8px;
   }
 
+  /* Show full URL on wide screens, short on mobile */
+  .explorer-base-url-full  { display: inline; }
+  .explorer-base-url-short { display: none; }
+
+  @media (max-width: 600px) {
+    .explorer-base-url-full  { display: none; }
+    .explorer-base-url-short { display: inline; }
+    .explorer-base-url { padding: 0 8px 0 10px; }
+  }
+
 /* ── Custom dropdown ───────────────────────────────────── */
   .explorer-select-wrap {
     position: relative;
@@ -689,7 +699,10 @@ const endpoints = [
 
     <!-- ── Request Bar ── -->
     <div class="explorer-request-bar" role="group" aria-label="API request builder">
-      <span class="explorer-base-url" aria-label="Base URL">https://pokeapi.co/api/v2/</span>
+      <span class="explorer-base-url" aria-label="Base URL">
+        <span class="explorer-base-url-full">https://pokeapi.co/api/v2/</span>
+        <span class="explorer-base-url-short">/v2/</span>
+      </span>
 
       {endpoint ? (
         <span class="explorer-endpoint-label">{endpoint}</span>
@@ -1207,17 +1220,3 @@ const endpoints = [
   document.addEventListener('astro:after-swap', main)
 })()
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

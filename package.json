@@ -14,16 +14,17 @@
   },
   "private": true,
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "start": "astro dev",
     "build": "astro build --site https://pokeapi.co/",
     "build:ghpages": "astro build --site https://pokeapi.github.io --base pokeapi.co/",
-    "preview": "astro preview",
+    "preview": "astro preview --host",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.41.3",
     "@astrojs/starlight-tailwind": "^5.0.0",
+    "@expressive-code/plugin-line-numbers": "^0.44.0",
     "@tailwindcss/vite": "^4.0.3",
     "astro": "^7.0.9",
     "marked": "^18.0.6",
