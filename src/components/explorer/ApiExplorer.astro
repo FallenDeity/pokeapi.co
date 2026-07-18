@@ -199,7 +199,7 @@ import "./api-explorer.css";
           /* Custom dropdown â€” the panel will be positioned via JS using fixed positioning */
           <div class="explorer-select-wrap relative flex shrink-0 items-stretch border-r-[1.5px] border-(--sl-color-gray-5)">
             <button
-              class="explorer-select-trigger relative flex max-w-[240px] min-w-[140px] cursor-pointer items-center gap-1.5 overflow-hidden border-none bg-(--sl-color-black) pr-7 pl-3 text-left font-mono text-[0.82rem] font-medium text-ellipsis whitespace-nowrap text-(--sl-color-white) transition-colors duration-150 ease-in-out outline-none"
+              class="explorer-select-trigger relative flex max-w-60 min-w-35 cursor-pointer items-center gap-1.5 overflow-hidden border-none bg-(--sl-color-black) pr-7 pl-3 text-left font-mono text-[0.82rem] font-medium text-ellipsis whitespace-nowrap text-(--sl-color-white) transition-colors duration-150 ease-in-out outline-none"
               aria-haspopup="listbox"
               aria-expanded="false"
               aria-label="Select endpoint"
@@ -208,13 +208,13 @@ import "./api-explorer.css";
               <span class="explorer-select-label">pokemon</span>
             </button>
             <div
-              class="explorer-dropdown-panel fixed z-[99999] max-h-[360px] min-w-[240px] scrollbar-thin scrollbar-thumb-(--sl-color-gray-5) scrollbar-track-transparent overflow-y-auto rounded-lg border-[1.5px] border-(--sl-color-gray-5) bg-(--sl-color-gray-6) py-1 shadow-[0_12px_40px_rgba(0,0,0,0.45),0_4px_12px_rgba(0,0,0,0.3)]"
+              class="explorer-dropdown-panel fixed z-99999 max-h-90 min-w-60 scrollbar-thin scrollbar-thumb-(--sl-color-gray-5) scrollbar-track-transparent overflow-y-auto rounded-lg border-[1.5px] border-(--sl-color-gray-5) bg-(--sl-color-gray-6) py-1 shadow-[0_12px_40px_rgba(0,0,0,0.45),0_4px_12px_rgba(0,0,0,0.3)]"
               role="listbox"
               aria-label="API Endpoints"
             >
               {endpoints.map(({group, icon, options}) => (
                 <>
-                  <span class="dropdown-group-label box-border inline-flex w-full items-center gap-[6px] border-t border-(--sl-color-gray-5) px-3 pt-2 pb-[3px] text-[0.68rem] font-bold tracking-[0.08em] text-(--sl-color-gray-3) uppercase select-none first:border-none first:pt-2">
+                  <span class="dropdown-group-label box-border inline-flex w-full items-center gap-1.5 border-t border-(--sl-color-gray-5) px-3 pt-2 pb-0.75 text-[0.68rem] font-bold tracking-[0.08em] text-(--sl-color-gray-3) uppercase select-none first:border-none first:pt-2">
                     <img
                       src={endpointImages[`../../assets/endpoint-categories/${icon}`]?.default.src}
                       alt=""
@@ -246,7 +246,7 @@ import "./api-explorer.css";
       >
 
       <input
-        class="explorer-param-input min-w-[60px] flex-1 border-none bg-(--sl-color-black) px-3 py-[11px] font-mono text-[0.85rem] text-(--sl-color-white) outline-none placeholder:text-(--sl-color-gray-3) placeholder:opacity-100"
+        class="explorer-param-input min-w-15 flex-1 border-none bg-(--sl-color-black) px-3 py-2.75 font-mono text-[0.85rem] text-(--sl-color-white) outline-none placeholder:text-(--sl-color-gray-3) placeholder:opacity-100"
         type="text"
         placeholder="name or id"
         value={defaultParam}
@@ -256,7 +256,7 @@ import "./api-explorer.css";
       />
 
       <button
-        class="explorer-send-btn flex shrink-0 cursor-pointer items-center gap-[7px] rounded-r-[8px] border-none bg-(--sl-color-accent) px-5 text-[0.85rem] font-semibold tracking-wide whitespace-nowrap text-white transition-colors duration-180 ease-in-out hover:bg-[color-mix(in_srgb,var(--sl-color-accent)_75%,#fff_25%)] active:scale-98 disabled:cursor-not-allowed disabled:opacity-50"
+        class="explorer-send-btn flex shrink-0 cursor-pointer items-center gap-1.75 rounded-r-lg border-none bg-(--sl-color-accent) px-5 text-[0.85rem] font-semibold tracking-wide whitespace-nowrap text-white transition-colors duration-180 ease-in-out hover:bg-[color-mix(in_srgb,var(--sl-color-accent)_75%,#fff_25%)] active:scale-98 disabled:cursor-not-allowed disabled:opacity-50"
         type="button"
         aria-label="Send API request"
       >
@@ -267,7 +267,7 @@ import "./api-explorer.css";
           stroke-width="2.2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="h-[13px] w-[13px] shrink-0"
+          class="h-3.25 w-3.25 shrink-0"
           aria-hidden="true"
         >
           <line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -314,7 +314,7 @@ import "./api-explorer.css";
         aria-label="Response view"
       >
         <div
-          class="koki-tab-group inline-flex items-center rounded-lg border-[1.5px] border-(--sl-color-gray-5) bg-(--sl-color-black) p-[3px]"
+          class="koki-tab-group inline-flex items-center rounded-lg border-[1.5px] border-(--sl-color-gray-5) bg-(--sl-color-black) p-0.75"
         >
           <button
             class="koki-tab-btn active tab-raw inline-flex h-6 cursor-pointer items-center gap-1.5 rounded-md border-none bg-transparent px-3 py-0.75 text-[0.74rem] leading-none font-semibold tracking-wide whitespace-nowrap text-(--sl-color-gray-3) transition-all duration-150 ease-in-out hover:text-(--sl-color-white) [&.active]:bg-(--sl-color-gray-5) [&.active]:text-(--sl-color-white) [&.active]:shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
@@ -332,7 +332,7 @@ import "./api-explorer.css";
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="tab-icon h-[13px] w-[13px] shrink-0"
+              class="tab-icon h-3.25 w-3.25 shrink-0"
               aria-hidden="true"
               ><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"></path><path
                 d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"></path></svg
@@ -355,7 +355,7 @@ import "./api-explorer.css";
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="tab-icon h-[13px] w-[13px] shrink-0"
+              class="tab-icon h-3.25 w-3.25 shrink-0"
               aria-hidden="true"
               ><path d="M8 5h13"></path><path d="M13 12h8"></path><path d="M13 19h8"></path><path
                 d="M3 10a2 2 0 0 0 2 2h3"></path><path d="M3 5v12a2 2 0 0 0 2 2h3"></path></svg
@@ -364,7 +364,7 @@ import "./api-explorer.css";
           </button>
         </div>
         <button
-          class="koki-copy-btn ml-auto inline-flex h-[30px] w-[30px] shrink-0 cursor-pointer items-center justify-center rounded-md border-[1.5px] border-(--sl-color-gray-5) bg-transparent p-0 text-(--sl-color-gray-3) transition-all duration-150 ease-in-out hover:border-(--sl-color-accent) hover:bg-(--sl-color-gray-5) hover:text-(--sl-color-white) [&.copied]:border-[#34d399] [&.copied]:text-[#34d399]"
+          class="koki-copy-btn ml-auto inline-flex h-7.5 w-7.5 shrink-0 cursor-pointer items-center justify-center rounded-md border-[1.5px] border-(--sl-color-gray-5) bg-transparent p-0 text-(--sl-color-gray-3) transition-all duration-150 ease-in-out hover:border-(--sl-color-accent) hover:bg-(--sl-color-gray-5) hover:text-(--sl-color-white) [&.copied]:border-[#34d399] [&.copied]:text-[#34d399]"
           aria-label="Copy JSON to clipboard"
           type="button"
         >
@@ -376,7 +376,7 @@ import "./api-explorer.css";
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="h-[14px] w-[14px] shrink-0"
+            class="h-3.5 w-3.5 shrink-0"
             aria-hidden="true"
             ><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path
               d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg
