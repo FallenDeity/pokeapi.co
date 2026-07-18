@@ -30,10 +30,10 @@
 
       if (mainElement) {
         const stylesheets = Array.from(doc.querySelectorAll('link[rel="stylesheet"]'))
-          .map(el => el.getAttribute("href"))
+          .map((el) => el.getAttribute("href"))
           .filter(Boolean);
         const inlineStyles = Array.from(doc.querySelectorAll("head style"))
-          .map(el => el.textContent)
+          .map((el) => el.textContent)
           .filter(Boolean);
         pageCache.set(url, {
           htmlText,
@@ -55,11 +55,11 @@
     if (pageData.stylesheets) {
       const currentStylesheets = new Set(
         Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
-          .map(el => el.getAttribute("href"))
+          .map((el) => el.getAttribute("href"))
           .filter(Boolean)
       );
 
-      pageData.stylesheets.forEach(href => {
+      pageData.stylesheets.forEach((href) => {
         if (!currentStylesheets.has(href)) {
           const newLink = document.createElement("link");
           newLink.rel = "stylesheet";
@@ -71,10 +71,10 @@
 
     if (pageData.inlineStyles) {
       const currentInlineStyles = new Set(
-        Array.from(document.querySelectorAll("head style")).map(el => el.textContent)
+        Array.from(document.querySelectorAll("head style")).map((el) => el.textContent)
       );
 
-      pageData.inlineStyles.forEach(content => {
+      pageData.inlineStyles.forEach((content) => {
         if (!currentInlineStyles.has(content)) {
           const newStyle = document.createElement("style");
           newStyle.textContent = content;
@@ -106,7 +106,7 @@
     }
 
     currentMainEl.classList.add("page-transition-fade");
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, 200));
 
     syncStyles(pageData);
 
@@ -141,7 +141,7 @@
   }
 
   function syncSidebar(url) {
-    document.querySelectorAll('.sidebar-content a[aria-current="page"]').forEach(el => {
+    document.querySelectorAll('.sidebar-content a[aria-current="page"]').forEach((el) => {
       el.removeAttribute("aria-current");
     });
     const newActive = document.querySelector(`.sidebar-content a[href="${url}"], .sidebar-content a[href="${url}/"]`);
@@ -162,7 +162,7 @@
   }
 
   function reinitializeScripts(container) {
-    container.querySelectorAll("script").forEach(oldScript => {
+    container.querySelectorAll("script").forEach((oldScript) => {
       const newScript = document.createElement("script");
       for (const attr of oldScript.attributes) {
         newScript.setAttribute(attr.name, attr.value);

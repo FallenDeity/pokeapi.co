@@ -2,7 +2,7 @@
   const API = "https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json";
   const PROBE = "https://pokeapi.co/api/v2/";
 
-  const shieldColor = s => {
+  const shieldColor = (s) => {
     if (!s) return "lightgrey";
     if (s === "operational") return "brightgreen";
     if (s.includes("degraded") || s.includes("partial")) return "yellow";
@@ -10,14 +10,14 @@
     return "lightgrey";
   };
 
-  const globalDotClass = i => {
+  const globalDotClass = (i) => {
     if (i === "none") return "dot-operational";
     if (i === "minor" || i === "major") return "dot-degraded";
     if (i === "critical") return "dot-outage";
     return "";
   };
 
-  const latencyColor = ms => {
+  const latencyColor = (ms) => {
     if (ms < 80) return "brightgreen";
     if (ms < 200) return "green";
     if (ms < 500) return "yellow";

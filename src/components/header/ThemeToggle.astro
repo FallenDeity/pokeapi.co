@@ -1,4 +1,4 @@
----
+﻿---
 
 ---
 
@@ -156,11 +156,13 @@
 
   function syncAllTracks(animate: boolean) {
     const isLight = document.documentElement.dataset.theme === "light";
-    document.querySelectorAll<HTMLElement>(".theme-slider-track").forEach(t => applyThemeToToggle(t, isLight, animate));
+    document
+      .querySelectorAll<HTMLElement>(".theme-slider-track")
+      .forEach((t) => applyThemeToToggle(t, isLight, animate));
   }
 
   function initThemeToggle() {
-    document.querySelectorAll<HTMLElement>(".theme-slider-track").forEach(track => {
+    document.querySelectorAll<HTMLElement>(".theme-slider-track").forEach((track) => {
       applyThemeToToggle(track, document.documentElement.dataset.theme === "light", false);
 
       const fresh = track.cloneNode(true) as HTMLElement;
