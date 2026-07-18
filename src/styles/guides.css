@@ -1,0 +1,411 @@
+/* Shadcn & Next.js inspired styles for PokéAPI Doc Components */
+
+/* Link Card Overrides */
+.sl-link-card {
+  position: relative !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: rgba(15, 23, 42, 0.35) !important;
+  border-radius: 12px !important;
+  padding: 1.5rem !important;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Bulletproof text decoration strip for link card contents */
+:root .sl-markdown-content .sl-link-card a,
+:root .sl-markdown-content a.sl-link-card {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  border-bottom: none !important;
+}
+
+:root[data-theme="light"] .sl-link-card {
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+.sl-link-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: var(--sl-color-accent) !important;
+  background: rgba(59, 130, 246, 0.08) !important; /* Beautiful subtle accent blue background on hover */
+  box-shadow: 0 12px 24px -10px rgba(59, 130, 246, 0.4), 0 0 0 1px var(--sl-color-accent) !important;
+}
+
+:root[data-theme="light"] .sl-link-card:hover {
+  background: rgba(59, 130, 246, 0.04) !important;
+  box-shadow: 0 12px 24px -10px rgba(59, 130, 246, 0.15), 0 0 0 1px var(--sl-color-accent) !important;
+}
+
+.sl-link-card .title {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  color: var(--sl-color-white) !important;
+  transition: color 0.2s ease !important;
+}
+
+/* Ensure title color does not change on hover */
+.sl-link-card:hover .title,
+.sl-markdown-content a.sl-link-card:hover .title {
+  color: var(--sl-color-white) !important;
+}
+
+.sl-link-card .title svg {
+  color: var(--sl-color-gray-3) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.sl-link-card:hover .title svg {
+  transform: translateX(4px) !important;
+  color: var(--sl-color-accent) !important;
+}
+
+.sl-link-card .description {
+  font-size: 0.875rem !important;
+  color: var(--sl-color-gray-2) !important;
+  line-height: 1.55 !important;
+  margin-top: 0.5rem !important;
+}
+
+/* Card Grid Layout Adjustments */
+.card-grid {
+  gap: 1.5rem !important;
+}
+
+/* Info Cards (non-link) Overrides */
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: rgba(15, 23, 42, 0.15) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+}
+
+:root[data-theme="light"] .card {
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  background: rgba(15, 23, 42, 0.25) !important;
+}
+
+:root[data-theme="light"] .card:hover {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Steps Component Overrides */
+.sl-steps {
+  border-inline-start: 1px solid rgba(59, 130, 246, 0.15) !important;
+  padding-inline-start: 1.5rem !important;
+}
+
+.sl-steps > li {
+  margin-top: 1.5rem !important;
+}
+
+.sl-steps > li::before {
+  border-radius: 20% !important;
+  background-color: var(--sl-color-accent-low) !important;
+  color: var(--sl-color-accent-high) !important;
+  border: 2px solid color-mix(in srgb, var(--sl-color-accent) 70%, transparent) !important;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.2) !important;
+  font-size: 0.85rem !important;
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-inline-start: -2.4rem !important;
+}
+
+.starlight-aside, .aside, [class*="starlight-aside"] {
+  border-radius: 8px !important;
+  border: 2px solid color-mix(in srgb, var(--aside-color) 40%, transparent) !important;
+  padding: 0 !important;
+  background-color: color-mix(in srgb, var(--aside-color) 4%, transparent) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden !important;
+}
+
+.starlight-aside {
+  margin: 1.5rem 0 !important;
+}
+
+.starlight-aside__content {
+  margin: 0.5rem 0 !important;
+}
+
+:root[data-theme="light"] .starlight-aside, 
+:root[data-theme="light"] .aside, 
+:root[data-theme="light"] [class*="starlight-aside"] {
+  background-color: color-mix(in srgb, var(--aside-color) 3.5%, transparent) !important;
+  box-shadow: none !important;
+}
+
+.starlight-aside__title, .aside__title, [class*="aside__title"] {
+  color: var(--sl-color-white) !important;
+  background-color: color-mix(in srgb, var(--aside-color) 5%, transparent) !important;
+  border: none !important;
+  border-radius: 8px 8px 0 0 !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.95rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  text-transform: capitalize !important;
+}
+
+:root[data-theme="light"] .starlight-aside__title, 
+:root[data-theme="light"] .aside__title, 
+:root[data-theme="light"] [class*="aside__title"] {
+  color: var(--sl-color-white) !important;
+  background-color: color-mix(in srgb, var(--aside-color) 9%, transparent) !important;
+}
+
+.starlight-aside__title svg, .aside__title svg, [class*="aside__title"] svg {
+  color: var(--aside-color) !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  display: inline-block !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+}
+
+.starlight-aside__content, .aside__content, [class*="aside__content"] {
+  padding: 0.8rem 1rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.6 !important;
+  color: var(--sl-color-gray-1) !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.starlight-aside__content > *, .aside__content > *, [class*="aside__content"] > * {
+  margin-block: 0.4rem !important;
+}
+
+.starlight-aside__content > :first-child, .aside__content > :first-child, [class*="aside__content"] > :first-child {
+  margin-top: 0 !important;
+}
+
+.starlight-aside__content > :last-child, .aside__content > :last-child, [class*="aside__content"] > :last-child {
+  margin-bottom: 0 !important;
+}
+
+:root[data-theme="light"] .starlight-aside__content, 
+:root[data-theme="light"] .aside__content, 
+:root[data-theme="light"] [class*="aside__content"] {
+  color: var(--sl-color-gray-1) !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/* Color Variables - exact MkDocs Material admonition palette */
+.aside--note, [class*="aside--note"] {
+  --aside-color: #447feb !important; /* MkDocs note blue */
+}
+
+.aside--tip, [class*="aside--tip"] {
+  --aside-color: #00e676 !important; /* MkDocs tip/success green */
+}
+
+.aside--caution, [class*="aside--caution"] {
+  --aside-color: #ff9100 !important; /* MkDocs warning orange */
+}
+
+.aside--danger, [class*="aside--danger"] {
+  --aside-color: #ff5252 !important; /* MkDocs failure red */
+}
+
+/* Tab Control Overrides */
+starlight-tabs [role="tablist"] {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  margin-bottom: 1rem !important;
+}
+
+:root[data-theme="light"] starlight-tabs [role="tablist"] {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+starlight-tabs [role="tab"] {
+  font-weight: 500 !important;
+  padding-bottom: 0.5rem !important;
+  border-bottom: 2px solid transparent !important;
+  color: var(--sl-color-gray-2) !important;
+  transition: all 0.2s ease !important;
+}
+
+starlight-tabs [role="tab"][aria-selected="true"] {
+  color: var(--sl-color-white) !important;
+  border-bottom-color: var(--sl-color-accent) !important;
+}
+
+.frame {
+  border: 1px solid color-mix(in srgb, var(--sl-color-hairline) 90%, transparent) !important;
+  border-radius: 4px !important;
+}
+
+.frame .header {
+  border: none !important;
+}
+
+/* Keyboard Shortcut Styling */
+kbd {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 4px !important;
+  padding: 0.15rem 0.35rem !important;
+  font-family: var(--sl-font-mono) !important;
+  font-size: 0.775em !important;
+  color: var(--sl-color-white) !important;
+}
+
+:root[data-theme="light"] kbd {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  color: var(--sl-color-white) !important;
+}
+
+/* Nested kbd styling (e.g. Starlight search shortcut) */
+kbd:has(kbd) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+
+:root[data-theme="light"] kbd:has(kbd) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+
+kbd kbd {
+  margin: 0 !important;
+  position: relative !important;
+}
+
+kbd kbd + kbd {
+  margin-inline-start: 1.25rem !important; /* Create gap for the "+" */
+}
+
+kbd kbd + kbd::before {
+  content: "+" !important;
+  position: absolute !important;
+  left: -0.85rem !important; /* Position in the center of the gap */
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: var(--sl-color-gray-3) !important;
+  font-size: 0.7rem !important;
+  font-weight: 400 !important;
+  pointer-events: none !important;
+}
+
+:root[data-theme="light"] kbd kbd + kbd::before {
+  color: var(--sl-color-gray-4) !important;
+}
+
+/* Custom Badges (themed like OpenAPI Type Badges) */
+.sl-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 0.1rem 0.45rem !important;
+  border-radius: 4px !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  border: 1px solid !important;
+  gap: 0.25rem !important;
+  line-height: 1.4 !important;
+  vertical-align: middle !important;
+  width: fit-content !important;
+  margin-right: 0.25rem !important;
+}
+
+/* Default / Accent badge */
+.sl-badge.default {
+  background-color: rgba(99, 102, 241, 0.08) !important;
+  color: #818cf8 !important;
+  border-color: rgba(99, 102, 241, 0.2) !important;
+}
+:root[data-theme="light"] .sl-badge.default {
+  background-color: rgba(79, 70, 229, 0.08) !important;
+  color: #4f46e5 !important;
+  border-color: rgba(79, 70, 229, 0.15) !important;
+}
+
+/* Note badge (Blue) */
+.sl-badge.note {
+  background-color: rgba(59, 130, 246, 0.08) !important;
+  color: #60a5fa !important;
+  border-color: rgba(59, 130, 246, 0.2) !important;
+}
+:root[data-theme="light"] .sl-badge.note {
+  background-color: rgba(37, 99, 235, 0.08) !important;
+  color: #1d4ed8 !important;
+  border-color: rgba(37, 99, 235, 0.15) !important;
+}
+
+/* Success badge (Green) */
+.sl-badge.success {
+  background-color: rgba(16, 185, 129, 0.08) !important;
+  color: #34d399 !important;
+  border-color: rgba(16, 185, 129, 0.2) !important;
+}
+:root[data-theme="light"] .sl-badge.success {
+  background-color: rgba(5, 150, 105, 0.08) !important;
+  color: #047857 !important;
+  border-color: rgba(5, 150, 105, 0.15) !important;
+}
+
+/* Caution badge (Orange) */
+.sl-badge.caution {
+  background-color: rgba(245, 158, 11, 0.08) !important;
+  color: #fbbf24 !important;
+  border-color: rgba(245, 158, 11, 0.2) !important;
+}
+:root[data-theme="light"] .sl-badge.caution {
+  background-color: rgba(217, 119, 6, 0.08) !important;
+  color: #b45309 !important;
+  border-color: rgba(217, 119, 6, 0.15) !important;
+}
+
+/* Danger badge (Red) */
+.sl-badge.danger {
+  background-color: rgba(244, 63, 94, 0.08) !important;
+  color: #fb7185 !important;
+  border-color: rgba(244, 63, 94, 0.2) !important;
+}
+:root[data-theme="light"] .sl-badge.danger {
+  background-color: rgba(225, 29, 72, 0.08) !important;
+  color: #e11d48 !important;
+  border-color: rgba(225, 29, 72, 0.15) !important;
+}
+
+/* Tip badge (Purple) */
+.sl-badge.tip {
+  background-color: rgba(139, 92, 246, 0.08) !important;
+  color: #a78bfa !important;
+  border-color: rgba(139, 92, 246, 0.2) !important;
+}
+:root[data-theme="light"] .sl-badge.tip {
+  background-color: rgba(109, 40, 217, 0.08) !important;
+  color: #6d28d9 !important;
+  border-color: rgba(109, 40, 217, 0.15) !important;
+}

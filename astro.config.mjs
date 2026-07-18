@@ -52,6 +52,7 @@ export default defineConfig({
       },
       customCss: [
         './src/styles/global.css',
+        './src/styles/guides.css',
       ],
       logo: {
         src: './src/assets/pokeapi_256.png',
@@ -106,6 +107,23 @@ export default defineConfig({
           label: 'GraphQL',
           link: 'graphql',
           badge: 'v1beta',
+        },
+        {
+          label: 'How-To Guides',
+          items: [
+            {
+              label: 'Introduction',
+              link: 'how-tos',
+            },
+            {
+              label: 'Writing Guides',
+              link: 'how-tos/writing-guides',
+            },
+            {
+              label: 'Pokedex Promise v2',
+              link: 'how-tos/pokedex-promise-v2',
+            },
+          ],
         },
       ],
     }),
