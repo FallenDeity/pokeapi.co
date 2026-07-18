@@ -10,5 +10,6 @@
         "prettier-plugin-astro",
         "prettier-plugin-tailwindcss",
         "prettier-plugin-tailwindcss-canonical-classes"
-    ]
+    ],
+    "tailwindcssCanonicalStylesheet": "./src/styles/global.css"
 }
