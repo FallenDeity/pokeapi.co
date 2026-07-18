@@ -1,4 +1,3 @@
-/* Custom Keyframe Animations */
 @keyframes indicator-bounce {
   0%,
   100% {
@@ -45,7 +44,6 @@
   }
 }
 
-/* Background Blobs */
 .footer-bg {
   position: absolute;
   inset: 0;
@@ -89,7 +87,6 @@
   animation-delay: -8s;
 }
 
-/* Social Buttons */
 .github-pill {
   background: #24292e;
   color: #c9d1d9;
@@ -110,7 +107,6 @@
   box-shadow: 0 4px 12px rgba(224, 30, 90, 0.2);
 }
 
-/* Status Header Colors */
 .status-header-dot.dot-operational {
   background: #22c55e;
   box-shadow: 0 0 6px #22c55e80;
@@ -124,7 +120,6 @@
   box-shadow: 0 0 6px #ef444480;
 }
 
-/* Dynamic Statuspage Component Badges (Injected via JS) */
 .status-badges {
   display: flex;
   flex-wrap: wrap;
@@ -227,7 +222,6 @@
   white-space: nowrap;
 }
 
-/* Light Theme Overrides */
 [data-theme="light"] .footer-status {
   background: color-mix(in srgb, var(--sl-color-gray-6) 80%, transparent);
   border-color: var(--sl-color-gray-5);
