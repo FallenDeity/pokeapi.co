@@ -183,7 +183,7 @@
     const isScrollable = scrollHeight > clientHeight + 150;
     if (!isScrollable) return;
 
-    const reachedBottom = scrollTop + clientHeight >= scrollHeight - 50;
+    const reachedBottom = scrollTop + clientHeight >= scrollHeight - 8;
     if (reachedBottom) {
       const nextLink = document.querySelector('main .pagination-links a[rel="next"]');
       if (nextLink) {

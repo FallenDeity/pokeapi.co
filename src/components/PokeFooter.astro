@@ -61,10 +61,10 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
         <div class="footer-nav-col">
           <h3 class="nav-col-title">Documentation</h3>
           <ul class="nav-col-list">
-            <li><a href="/about/">About</a></li>
-            <li><a href="/v2/">API v2</a></li>
-            <li><a href="/v2/openapi/">OpenAPI</a></li>
-            <li><a href="/graphql/">GraphQL v1Beta</a></li>
+            <li><a href={`${import.meta.env.BASE_URL}about/`}>About</a></li>
+            <li><a href={`${import.meta.env.BASE_URL}v2/`}>API v2</a></li>
+            <li><a href={`${import.meta.env.BASE_URL}v2/openapi/`}>OpenAPI</a></li>
+            <li><a href={`${import.meta.env.BASE_URL}graphql/`}>GraphQL v1Beta</a></li>
           </ul>
         </div>
 
@@ -159,9 +159,91 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
   </div>
 </footer>
 
+<div class="scroll-next-indicator" id="scroll-next-indicator" style="display: none;">
+  <div class="scroll-next-content">
+    <div class="scroll-indicator-arrow">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
+    </div>
+    <div class="scroll-indicator-badge">
+      <span class="scroll-indicator-text">Keep scrolling to load the next guide</span>
+    </div>
+  </div>
+</div>
+
 <style>
   .pagination-wrapper {
     padding: 3rem 0 1rem;
+  }
+
+  .scroll-next-indicator {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    padding: 2rem 0.5rem 5.5rem;
+    box-sizing: border-box;
+  }
+
+  .scroll-next-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .scroll-indicator-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--sl-color-gray-6) 40%, transparent);
+    border: 2px solid var(--sl-color-accent);
+    color: var(--sl-color-accent);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--sl-color-accent) 20%, transparent);
+    animation: indicator-bounce 2s infinite ease-in-out;
+  }
+
+  .scroll-indicator-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--sl-color-gray-6) 65%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--sl-color-gray-5);
+    padding: 0.5rem 0.95rem;
+    border-radius: 9999px;
+    box-shadow: var(--sl-shadow-md);
+    margin-top: 0.4rem;
+  }
+
+  .scroll-indicator-text {
+    font-size: 0.78rem;
+    color: var(--sl-color-gray-3);
+    font-family: var(--__sl-font), system-ui, sans-serif;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+
+  .scroll-indicator-text :global(strong) {
+    color: var(--sl-color-accent-high);
+    font-weight: 600;
+  }
+
+  @keyframes indicator-bounce {
+    0%, 100% {
+      transform: translateY(0);
+      box-shadow: 0 0 6px color-mix(in srgb, var(--sl-color-accent) 20%, transparent);
+    }
+    50% {
+      transform: translateY(4px);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--sl-color-accent) 45%, transparent);
+    }
   }
 
   
@@ -773,7 +855,26 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     } catch (_) {  }
   };
 
+  const updateScrollIndicator = () => {
+    const nextLink = document.querySelector('main .pagination-links a[rel="next"]');
+    const indicator = document.getElementById('scroll-next-indicator');
+    if (!indicator) return;
+
+    if (nextLink) {
+      const titleSpan = nextLink.querySelector('.link-title');
+      const nextTitle = titleSpan ? titleSpan.textContent.trim() : nextLink.textContent.trim().replace(/^Next\s*/i, '');
+      const textEl = indicator.querySelector('.scroll-indicator-text');
+      if (textEl) {
+        textEl.innerHTML = `Keep scrolling to read <strong>${nextTitle}</strong>`;
+      }
+      indicator.style.display = 'flex';
+    } else {
+      indicator.style.display = 'none';
+    }
+  };
+
   const initFooterStatus = async () => {
+    updateScrollIndicator();
     await Promise.all([fetchStatus(), renderLatency()]);
   };
 
