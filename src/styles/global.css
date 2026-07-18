@@ -1079,6 +1079,15 @@ sl-openapi-snippet-picker label.sl-openapi-snippet-picker {
   border-bottom: none !important;
 }
 
+.sl-markdown-content blockquote:not(:where(.not-content *)) {
+  border-inline-start: 4px solid var(--sl-color-gray-5);
+  padding-inline-start: 1rem;
+  background-color: color-mix(in srgb, var(--sl-color-gray-5) 30%, transparent);
+  border-radius: 6px;
+  margin-block: 1rem;
+  padding-block: 0.5rem;
+}
+
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--sl-color-gray-5) transparent;

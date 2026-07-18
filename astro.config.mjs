@@ -43,6 +43,7 @@ export default defineConfig({
         Header: './src/components/PokeHeader.astro',
         SocialIcons: './src/components/SocialIcons.astro',
         ThemeSelect: './src/components/ThemeToggle.astro',
+        MarkdownContent: './src/components/PokeMarkdownContent.astro',
       },
       customCss: [
         './src/styles/global.css',

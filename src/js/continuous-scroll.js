@@ -29,10 +29,52 @@
       const title = doc.title;
 
       if (mainElement) {
-        pageCache.set(url, { htmlText, mainElement, tocElement, title });
+        const stylesheets = Array.from(doc.querySelectorAll('link[rel="stylesheet"]'))
+          .map(el => el.getAttribute('href'))
+          .filter(Boolean);
+        const inlineStyles = Array.from(doc.querySelectorAll('head style'))
+          .map(el => el.textContent)
+          .filter(Boolean);
+        pageCache.set(url, { htmlText, mainElement, tocElement, title, stylesheets, inlineStyles });
       }
     } catch (e) {
       console.warn('Failed to pre-fetch page:', url, e);
+    }
+  }
+
+  function syncStyles(pageData) {
+    if (!pageData) return;
+
+    if (pageData.stylesheets) {
+      const currentStylesheets = new Set(
+        Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+          .map(el => el.getAttribute('href'))
+          .filter(Boolean)
+      );
+
+      pageData.stylesheets.forEach(href => {
+        if (!currentStylesheets.has(href)) {
+          const newLink = document.createElement('link');
+          newLink.rel = 'stylesheet';
+          newLink.href = href;
+          document.head.appendChild(newLink);
+        }
+      });
+    }
+
+    if (pageData.inlineStyles) {
+      const currentInlineStyles = new Set(
+        Array.from(document.querySelectorAll('head style'))
+          .map(el => el.textContent)
+      );
+
+      pageData.inlineStyles.forEach(content => {
+        if (!currentInlineStyles.has(content)) {
+          const newStyle = document.createElement('style');
+          newStyle.textContent = content;
+          document.head.appendChild(newStyle);
+        }
+      });
     }
   }
 
@@ -59,6 +101,8 @@
 
     currentMainEl.classList.add('page-transition-fade');
     await new Promise(resolve => setTimeout(resolve, 200));
+
+    syncStyles(pageData);
 
     currentMainEl.innerHTML = pageData.mainElement.innerHTML;
     for (const attr of pageData.mainElement.attributes) {
