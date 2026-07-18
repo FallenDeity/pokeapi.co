@@ -29,13 +29,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+          cache: "yarn"
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
       - name: Build with Astro
-        run: npm run build:ghpages
+        run: yarn build:ghpages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

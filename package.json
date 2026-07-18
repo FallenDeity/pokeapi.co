@@ -17,7 +17,7 @@
     "dev": "astro dev --host",
     "start": "astro dev",
     "build": "astro build --site https://pokeapi.co/",
-    "build:ghpages": "astro build --site https://pokeapi.github.io --base pokeapi.co/",
+    "build:ghpages": "astro build --site https://fallendeity.github.io --base pokeapi.co/",
     "preview": "astro preview --host",
     "astro": "astro"
   },
