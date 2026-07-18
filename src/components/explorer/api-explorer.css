@@ -1,20 +1,6 @@
 @layer starlight, arbol, koki;
 
 @layer koki {
-  .koki-codeblock-wrapper,
-  .koki-codeblock-wrapper *,
-  .koki-view-tabs > *,
-  .koki-code-area-wrapper,
-  .koki-code-area-wrapper *,
-  .koki-code-area,
-  .koki-code-area *,
-  .explorer-request-bar,
-  .explorer-request-bar *,
-  .explorer-meta-row,
-  .explorer-meta-row * {
-    margin-top: 0 !important;
-  }
-
   .api-explorer-root pre {
     border: none !important;
     background: none !important;
@@ -36,94 +22,6 @@
     --arbol-code-misc: #f59e0b;
   }
 
-  .explorer-request-bar {
-    display: flex;
-    height: 48px;
-    align-items: stretch;
-    border: 1.5px solid var(--sl-color-gray-5);
-    border-radius: 10px;
-    overflow: visible;
-    transition:
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
-    position: relative;
-  }
-
-  .explorer-request-bar:focus-within {
-    border-color: var(--sl-color-accent);
-    box-shadow:
-      0 0 0 3px rgba(59, 130, 246, 0.18),
-      0 2px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .explorer-base-url {
-    display: flex;
-    align-items: center;
-    padding: 0 10px 0 14px;
-    font-family: var(--__sl-font-mono);
-    font-size: 0.76rem;
-    font-weight: 600;
-    color: var(--sl-color-accent-high);
-    background: var(--sl-color-gray-6);
-    border-right: 1.5px solid var(--sl-color-gray-5);
-    white-space: nowrap;
-    user-select: none;
-    letter-spacing: 0.01em;
-    flex-shrink: 0;
-    border-radius: 8px 0 0 8px;
-  }
-
-  .explorer-base-url-full {
-    display: inline;
-  }
-  .explorer-base-url-short {
-    display: none;
-  }
-
-  @media (max-width: 600px) {
-    .explorer-base-url-full {
-      display: none;
-    }
-    .explorer-base-url-short {
-      display: inline;
-    }
-    .explorer-base-url {
-      padding: 0 8px 0 10px;
-    }
-  }
-
-  .explorer-select-wrap {
-    position: relative;
-    display: flex;
-    align-items: stretch;
-    flex-shrink: 0;
-    border-right: 1.5px solid var(--sl-color-gray-5);
-  }
-
-  .explorer-select-trigger {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 28px 0 12px;
-    font-family: var(--__sl-font-mono);
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--sl-color-white);
-    background: var(--sl-color-black);
-    border: none;
-    outline: none;
-    cursor: pointer;
-    min-width: 140px;
-    max-width: 240px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: background 0.15s ease;
-    text-align: left;
-    position: relative;
-  }
-
   .explorer-select-trigger::after {
     content: "";
     position: absolute;
@@ -140,10 +38,6 @@
       border-top-color 0.2s ease;
   }
 
-  .explorer-select-trigger:hover {
-    background: var(--sl-color-gray-6);
-  }
-
   .explorer-select-trigger[aria-expanded="true"]::after {
     transform: rotate(180deg);
     border-top-color: var(--sl-color-accent);
@@ -151,20 +45,6 @@
 
   .explorer-dropdown-panel {
     display: none;
-    position: fixed;
-    z-index: 99999;
-    min-width: 240px;
-    max-height: 360px;
-    overflow-y: auto;
-    background: var(--sl-color-gray-6);
-    border: 1.5px solid var(--sl-color-gray-5);
-    border-radius: 8px;
-    box-shadow:
-      0 12px 40px rgba(0, 0, 0, 0.45),
-      0 4px 12px rgba(0, 0, 0, 0.3);
-    padding: 4px 0;
-    scrollbar-width: thin;
-    scrollbar-color: var(--sl-color-gray-5) transparent;
   }
 
   .explorer-select-wrap.open .explorer-dropdown-panel {
@@ -172,245 +52,6 @@
   }
   .explorer-select-wrap.open .explorer-select-trigger {
     background: var(--sl-color-gray-6);
-  }
-
-  .dropdown-group-label {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    padding: 8px 12px 3px !important;
-    font-size: 0.68rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.08em !important;
-    text-transform: uppercase !important;
-    color: var(--sl-color-gray-3) !important;
-    user-select: none !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  .dropdown-group-icon {
-    width: 16px !important;
-    height: 16px !important;
-    object-fit: contain !important;
-    flex-shrink: 0 !important;
-  }
-  .dropdown-group-label:not(:first-child) {
-    margin-top: 4px !important;
-    border-top: 1px solid var(--sl-color-gray-5);
-    padding-top: 10px;
-  }
-
-  .dropdown-option {
-    display: block;
-    padding: 5px 14px;
-    font-family: var(--__sl-font-mono);
-    font-size: 0.8rem;
-    color: var(--sl-color-gray-1);
-    background: transparent;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    border-radius: 4px;
-    margin: 0 4px;
-    width: calc(100% - 8px);
-    transition:
-      background 0.12s ease,
-      color 0.12s ease;
-  }
-
-  .dropdown-option:hover,
-  .dropdown-option:focus {
-    background: var(--sl-color-gray-5);
-    color: var(--sl-color-white);
-    outline: none;
-  }
-
-  .dropdown-option.selected {
-    color: var(--sl-color-accent-high);
-    background: color-mix(in srgb, var(--sl-color-accent-low) 60%, transparent);
-    font-weight: 600;
-  }
-
-  .explorer-divider {
-    display: flex;
-    align-items: center;
-    padding: 0 5px;
-    color: var(--sl-color-gray-4);
-    font-family: var(--__sl-font-mono);
-    font-size: 1rem;
-    font-weight: 300;
-    user-select: none;
-    background: var(--sl-color-black);
-    flex-shrink: 0;
-  }
-
-  .explorer-param-input {
-    flex: 1;
-    padding: 11px 12px;
-    font-family: var(--__sl-font-mono);
-    font-size: 0.85rem;
-    color: var(--sl-color-white);
-    background: var(--sl-color-black);
-    border: none;
-    outline: none;
-    min-width: 60px;
-  }
-  .explorer-param-input::placeholder {
-    color: var(--sl-color-gray-3);
-    opacity: 1;
-  }
-
-  .explorer-send-btn {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 0 20px;
-    background: var(--sl-color-accent);
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.85rem;
-    border: none;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.18s ease;
-    letter-spacing: 0.02em;
-    flex-shrink: 0;
-    border-radius: 0 8px 8px 0;
-  }
-  .explorer-send-btn:hover {
-    background: color-mix(in srgb, var(--sl-color-accent) 75%, #fff 25%);
-  }
-  .explorer-send-btn:active {
-    transform: scale(0.98);
-  }
-  .explorer-send-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  .explorer-send-btn svg {
-    width: 13px;
-    height: 13px;
-    flex-shrink: 0;
-  }
-
-  .explorer-meta-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.78rem;
-    color: var(--sl-color-gray-3);
-    flex-wrap: wrap;
-    padding-top: 8px;
-  }
-  .explorer-meta-row a {
-    color: var(--sl-color-accent-high);
-    text-decoration: none;
-    font-family: var(--__sl-font-mono);
-    font-size: 0.76rem;
-    transition: color 0.15s;
-  }
-  .explorer-meta-row a:hover {
-    color: var(--sl-color-accent);
-    text-decoration: underline;
-  }
-
-  .koki-codeblock-wrapper {
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1.5px solid var(--sl-color-gray-5);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  .koki-view-tabs {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    padding: 8px 12px !important;
-    background: var(--sl-color-gray-6) !important;
-    border-bottom: 1px solid var(--sl-color-gray-5) !important;
-    height: 48px !important;
-    box-sizing: border-box !important;
-  }
-
-  .koki-tab-group {
-    display: inline-flex !important;
-    align-items: center !important;
-    background: var(--sl-color-black) !important;
-    padding: 3px !important;
-    border-radius: 8px !important;
-    border: 1.5px solid var(--sl-color-gray-5) !important;
-  }
-
-  .koki-tab-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    padding: 3px 12px !important;
-    font-size: 0.74rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.03em !important;
-    border-radius: 6px !important;
-    border: none !important;
-    background: transparent !important;
-    color: var(--sl-color-gray-3) !important;
-    cursor: pointer !important;
-    height: 24px !important;
-    transition:
-      color 0.15s,
-      background 0.15s !important;
-    white-space: nowrap !important;
-    line-height: 1 !important;
-  }
-  .koki-tab-btn svg {
-    width: 13px !important;
-    height: 13px !important;
-    flex-shrink: 0 !important;
-  }
-  .koki-tab-btn:hover {
-    color: var(--sl-color-white) !important;
-  }
-  .koki-tab-btn.active {
-    color: var(--sl-color-white) !important;
-    background: var(--sl-color-gray-5) !important;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15) !important;
-  }
-
-  .koki-copy-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin-left: auto !important;
-    padding: 0 !important;
-    width: 30px !important;
-    height: 30px !important;
-    color: var(--sl-color-gray-3) !important;
-    background: transparent !important;
-    border: 1.5px solid var(--sl-color-gray-5) !important;
-    border-radius: 6px !important;
-    cursor: pointer !important;
-    transition:
-      color 0.15s,
-      background 0.15s,
-      border-color 0.15s !important;
-    flex-shrink: 0 !important;
-  }
-  .koki-copy-btn:hover {
-    color: var(--sl-color-white) !important;
-    border-color: var(--sl-color-accent) !important;
-    background: var(--sl-color-gray-5) !important;
-  }
-  .koki-copy-btn.copied {
-    color: #34d399 !important;
-    border-color: #34d399 !important;
-  }
-  [data-theme="light"] .koki-copy-btn.copied {
-    color: #15803d !important;
-    border-color: #15803d !important;
-  }
-  .koki-copy-btn svg {
-    width: 14px !important;
-    height: 14px !important;
-    flex-shrink: 0 !important;
   }
 
   .explorer-direct-link:hover + .explorer-out-link-icon {
@@ -426,21 +67,6 @@
     --sl-color-asides-text-accent: #8c6200 !important;
     --sl-color-asides-border: #ffcb05 !important;
     background-color: color-mix(in srgb, #ffcb05 8%, var(--sl-color-black)) !important;
-  }
-
-  .explorer-endpoint-label {
-    display: flex !important;
-    align-items: center !important;
-    background: var(--sl-color-gray-6) !important;
-    border-right: 1.5px solid var(--sl-color-gray-5) !important;
-    padding: 0 16px !important;
-    height: 100% !important;
-    font-family: var(--__sl-font-mono) !important;
-    font-size: 0.82rem !important;
-    font-weight: 600 !important;
-    color: var(--sl-color-accent-high) !important;
-    user-select: none !important;
-    box-sizing: border-box !important;
   }
 
   .panel-raw,
@@ -619,6 +245,11 @@
   }
   :root[data-theme="light"] .json-punct {
     color: #6b7280;
+  }
+
+  [data-theme="light"] .koki-copy-btn.copied {
+    color: #15803d !important;
+    border-color: #15803d !important;
   }
 
   .koki-tree-content {

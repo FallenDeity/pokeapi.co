@@ -177,19 +177,29 @@ import "./api-explorer.css";
 
     <div class="py-3"></div>
 
-    <div class="explorer-request-bar" role="group" aria-label="API request builder">
-      <span class="explorer-base-url" aria-label="Base URL">
-        <span class="explorer-base-url-full">https://pokeapi.co/api/v2/</span>
-        <span class="explorer-base-url-short">/v2/</span>
+    <div
+      class="explorer-request-bar flex h-[48px] items-stretch border-[1.5px] border-[var(--sl-color-gray-5)] rounded-[10px] overflow-visible transition-[border-color,box-shadow] duration-200 ease-out shadow-[0_2px_10px_rgba(0,0,0,0.18)] relative focus-within:border-[var(--sl-color-accent)] focus-within:ring-[3px] focus-within:ring-[rgba(59,130,246,0.18)] focus-within:shadow-[0_2px_12px_rgba(0,0,0,0.2)]"
+      role="group"
+      aria-label="API request builder"
+    >
+      <span
+        class="explorer-base-url flex items-center pl-3.5 pr-2.5 font-mono text-[0.76rem] font-semibold text-[var(--sl-color-accent-high)] bg-[var(--sl-color-gray-6)] border-r-[1.5px] border-[var(--sl-color-gray-5)] whitespace-nowrap select-none tracking-wide shrink-0 rounded-l-[8px] max-[600px]:pl-2.5 max-[600px]:pr-2"
+        aria-label="Base URL"
+      >
+        <span class="explorer-base-url-full inline max-[600px]:hidden">https://pokeapi.co/api/v2/</span>
+        <span class="explorer-base-url-short hidden max-[600px]:inline">/v2/</span>
       </span>
 
       {
         endpoint ? (
-          <span class="explorer-endpoint-label">{endpoint}</span>
+          <span class="explorer-endpoint-label flex items-center bg-[var(--sl-color-gray-6)] border-r-[1.5px] border-[var(--sl-color-gray-5)] px-4 h-full font-mono text-[0.82rem] font-semibold text-[var(--sl-color-accent-high)] select-none box-border">
+            {endpoint}
+          </span>
         ) : (
-          <div class="explorer-select-wrap">
+          /* Custom dropdown — the panel will be positioned via JS using fixed positioning */
+          <div class="explorer-select-wrap relative flex items-stretch shrink-0 border-r-[1.5px] border-[var(--sl-color-gray-5)]">
             <button
-              class="explorer-select-trigger"
+              class="explorer-select-trigger flex items-center gap-1.5 pl-3 pr-7 font-mono text-[0.82rem] font-medium text-[var(--sl-color-white)] bg-[var(--sl-color-black)] border-none outline-none cursor-pointer min-w-[140px] max-w-[240px] whitespace-nowrap overflow-hidden text-ellipsis transition-colors duration-150 ease-in-out text-left relative"
               aria-haspopup="listbox"
               aria-expanded="false"
               aria-label="Select endpoint"
@@ -197,20 +207,24 @@ import "./api-explorer.css";
             >
               <span class="explorer-select-label">pokemon</span>
             </button>
-            <div class="explorer-dropdown-panel" role="listbox" aria-label="API Endpoints">
+            <div
+              class="explorer-dropdown-panel fixed z-[99999] min-w-[240px] max-h-[360px] overflow-y-auto bg-[var(--sl-color-gray-6)] border-[1.5px] border-[var(--sl-color-gray-5)] rounded-lg shadow-[0_12px_40px_rgba(0,0,0,0.45),0_4px_12px_rgba(0,0,0,0.3)] py-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-[var(--sl-color-gray-5)]"
+              role="listbox"
+              aria-label="API Endpoints"
+            >
               {endpoints.map(({group, icon, options}) => (
                 <>
-                  <span class="dropdown-group-label">
+                  <span class="dropdown-group-label inline-flex items-center gap-[6px] pt-2 px-3 pb-[3px] text-[0.68rem] font-bold tracking-[0.08em] uppercase text-[var(--sl-color-gray-3)] select-none w-full box-border border-t border-[var(--sl-color-gray-5)] first:border-none first:pt-2">
                     <img
                       src={endpointImages[`../../assets/endpoint-categories/${icon}`]?.default.src}
                       alt=""
-                      class="dropdown-group-icon"
+                      class="dropdown-group-icon w-4 h-4 object-contain shrink-0"
                     />
                     {group}
                   </span>
                   {options.map(opt => (
                     <button
-                      class={`dropdown-option${opt === "pokemon" ? " selected" : ""}`}
+                      class={`dropdown-option${opt === "pokemon" ? " selected" : ""} block py-1.25 px-3.5 font-mono text-[0.8rem] text-[var(--sl-color-gray-1)] bg-transparent border-none text-left cursor-pointer rounded-sm my-0 mx-1 w-[calc(100%-8px)] transition-all duration-120 ease hover:bg-[var(--sl-color-gray-5)] hover:text-[var(--sl-color-white)] focus:bg-[var(--sl-color-gray-5)] focus:text-[var(--sl-color-white)] focus:outline-none [&.selected]:text-[var(--sl-color-accent-high)] [&.selected]:bg-[color-mix(in_srgb,var(--sl-color-accent-low)_60%,transparent)] [&.selected]:font-semibold`}
                       role="option"
                       aria-selected={opt === "pokemon" ? "true" : "false"}
                       data-value={opt}
@@ -226,10 +240,13 @@ import "./api-explorer.css";
         )
       }
 
-      <span class="explorer-divider" aria-hidden="true">/</span>
+      <span
+        class="explorer-divider flex items-center px-1.25 text-[var(--sl-color-gray-4)] font-mono text-base font-light select-none bg-[var(--sl-color-black)] shrink-0"
+        aria-hidden="true">/</span
+      >
 
       <input
-        class="explorer-param-input"
+        class="explorer-param-input flex-1 py-[11px] px-3 font-mono text-[0.85rem] text-[var(--sl-color-white)] bg-[var(--sl-color-black)] border-none outline-none min-w-[60px] placeholder:text-[var(--sl-color-gray-3)] placeholder:opacity-100"
         type="text"
         placeholder="name or id"
         value={defaultParam}
@@ -238,7 +255,11 @@ import "./api-explorer.css";
         spellcheck="false"
       />
 
-      <button class="explorer-send-btn" type="button" aria-label="Send API request">
+      <button
+        class="explorer-send-btn flex items-center gap-[7px] px-5 bg-[var(--sl-color-accent)] text-white font-semibold text-[0.85rem] border-none cursor-pointer whitespace-nowrap transition-colors duration-180 ease-in-out tracking-wide shrink-0 rounded-r-[8px] hover:bg-[color-mix(in_srgb,var(--sl-color-accent)_75%,#fff_25%)] active:scale-98 disabled:opacity-50 disabled:cursor-not-allowed"
+        type="button"
+        aria-label="Send API request"
+      >
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -246,6 +267,7 @@ import "./api-explorer.css";
           stroke-width="2.2"
           stroke-linecap="round"
           stroke-linejoin="round"
+          class="w-[13px] h-[13px] shrink-0"
           aria-hidden="true"
         >
           <line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -254,10 +276,12 @@ import "./api-explorer.css";
       </button>
     </div>
 
-    <div class="explorer-meta-row ml-1">
+    <div
+      class="explorer-meta-row flex items-center gap-2 text-[0.78rem] text-[var(--sl-color-gray-3)] flex-wrap pt-2 ml-1"
+    >
       <span>Direct link:</span>
       <a
-        class="explorer-direct-link"
+        class="explorer-direct-link text-[var(--sl-color-accent-high)] no-underline font-mono text-[0.76rem] transition-colors duration-150 ease-in-out hover:text-[var(--sl-color-accent)] hover:underline"
         target="_blank"
         rel="noopener"
         href={`https://pokeapi.co/api/v2/${endpoint || "pokemon"}/${defaultParam}`}
@@ -283,10 +307,23 @@ import "./api-explorer.css";
 
     <div class="py-3"></div>
 
-    <div class="koki-codeblock-wrapper">
-      <div class="koki-view-tabs" role="tablist" aria-label="Response view">
-        <div class="koki-tab-group">
-          <button class="koki-tab-btn active tab-raw" role="tab" aria-selected="true" type="button">
+    <div
+      class="koki-codeblock-wrapper rounded-[10px] overflow-hidden border-[1.5px] border-[var(--sl-color-gray-5)] shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+    >
+      <div
+        class="koki-view-tabs flex flex-row items-center px-3 bg-[var(--sl-color-gray-6)] border-b border-[var(--sl-color-gray-5)] h-12 box-border"
+        role="tablist"
+        aria-label="Response view"
+      >
+        <div
+          class="koki-tab-group inline-flex items-center bg-[var(--sl-color-black)] p-[3px] rounded-lg border-[1.5px] border-[var(--sl-color-gray-5)]"
+        >
+          <button
+            class="koki-tab-btn active tab-raw inline-flex items-center gap-1.5 px-3 py-0.75 text-[0.74rem] font-semibold tracking-wide rounded-md border-none bg-transparent text-[var(--sl-color-gray-3)] cursor-pointer h-6 transition-all duration-150 ease-in-out whitespace-nowrap leading-none hover:text-[var(--sl-color-white)] [&.active]:text-[var(--sl-color-white)] [&.active]:bg-[var(--sl-color-gray-5)] [&.active]:shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
+            role="tab"
+            aria-selected="true"
+            type="button"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -297,14 +334,19 @@ import "./api-explorer.css";
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="tab-icon"
+              class="tab-icon w-[13px] h-[13px] shrink-0"
               aria-hidden="true"
               ><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"></path><path
                 d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"></path></svg
             >
             Raw
           </button>
-          <button class="koki-tab-btn tab-tree" role="tab" aria-selected="false" type="button">
+          <button
+            class="koki-tab-btn tab-tree inline-flex items-center gap-1.5 px-3 py-0.75 text-[0.74rem] font-semibold tracking-wide rounded-md border-none bg-transparent text-[var(--sl-color-gray-3)] cursor-pointer h-6 transition-all duration-150 ease-in-out whitespace-nowrap leading-none hover:text-[var(--sl-color-white)] [&.active]:text-[var(--sl-color-white)] [&.active]:bg-[var(--sl-color-gray-5)] [&.active]:shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
+            role="tab"
+            aria-selected="false"
+            type="button"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -315,7 +357,7 @@ import "./api-explorer.css";
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="tab-icon"
+              class="tab-icon w-[13px] h-[13px] shrink-0"
               aria-hidden="true"
               ><path d="M8 5h13"></path><path d="M13 12h8"></path><path d="M13 19h8"></path><path
                 d="M3 10a2 2 0 0 0 2 2h3"></path><path d="M3 5v12a2 2 0 0 0 2 2h3"></path></svg
@@ -323,17 +365,20 @@ import "./api-explorer.css";
             Tree
           </button>
         </div>
-        <button class="koki-copy-btn" aria-label="Copy JSON to clipboard" type="button">
+        <button
+          class="koki-copy-btn inline-flex items-center justify-center ml-auto p-0 w-[30px] h-[30px] text-[var(--sl-color-gray-3)] bg-transparent border-[1.5px] border-[var(--sl-color-gray-5)] rounded-md cursor-pointer transition-all duration-150 ease-in-out hover:text-[var(--sl-color-white)] hover:border-[var(--sl-color-accent)] hover:bg-[var(--sl-color-gray-5)] [&.copied]:text-[#34d399] [&.copied]:border-[#34d399] shrink-0"
+          aria-label="Copy JSON to clipboard"
+          type="button"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
+            class="w-[14px] h-[14px] shrink-0"
             aria-hidden="true"
             ><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path
               d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg
