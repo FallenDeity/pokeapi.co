@@ -15,17 +15,20 @@ commands:
             echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
             echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - run:
-          name: Use Node LTS
+          name: Use Node 22
           command: |
-            nvm install 'lts/*'
-            nvm use 'lts/*'
-            nvm alias default 'lts/*'
+            nvm install 22
+            nvm use 22
+            nvm alias default 22
+      - run:
+          name: Enable Corepack
+          command: corepack enable
       - run:
           name: Install exact dependencies
-          command: npm ci
+          command: yarn install --frozen-lockfile
       - run:
           name: Build the website
-          command: npm run build
+          command: yarn build
 
 jobs:
   build-and-test:
