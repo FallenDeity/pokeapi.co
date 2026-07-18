@@ -19,7 +19,9 @@
     "build": "astro build --site https://pokeapi.co/",
     "build:ghpages": "astro build --site https://fallendeity.github.io --base pokeapi.co/",
     "preview": "astro preview --host",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write \"{src,.}/**/*.{astro,js,mjs,css,json}\"",
+    "format:check": "prettier --check \"{src,.}/**/*.{astro,js,mjs,css,json}\""
   },
   "dependencies": {
     "@astrojs/starlight": "^0.41.3",
@@ -31,5 +33,9 @@
     "starlight-openapi": "^0.26.0",
     "tailwindcss": "^4.0.3",
     "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.5",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

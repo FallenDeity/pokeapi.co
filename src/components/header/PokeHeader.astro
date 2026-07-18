@@ -1,14 +1,11 @@
 ---
-import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro'
-import Search from '@astrojs/starlight/components/Search.astro'
-import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro'
-import ThemeToggle from './ThemeToggle.astro'
-import SocialIcons from './SocialIcons.astro'
+import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
+import Search from "@astrojs/starlight/components/Search.astro";
+import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+import SocialIcons from "./SocialIcons.astro";
 
-import PokeNav from './PokeNav.astro'
-
-
-
+import PokeNav from "./PokeNav.astro";
 ---
 
 <div class="header sl-flex">
@@ -16,7 +13,6 @@ import PokeNav from './PokeNav.astro'
     <SiteTitle />
   </div>
   <div class="sl-flex print:hidden">
-    
     <Search />
   </div>
   <div class="sl-hidden md:sl-flex print:hidden right-group">
@@ -40,9 +36,8 @@ import PokeNav from './PokeNav.astro'
   }
 
   .title-wrapper {
-    
     overflow: clip;
-    
+
     padding: 0.25rem;
     margin: -0.25rem;
     min-width: 0;
@@ -56,7 +51,7 @@ import PokeNav from './PokeNav.astro'
 
   .social-icons::after,
   .poke-navigation::after {
-    content: '';
+    content: "";
     height: 2rem;
     border-inline-end: 1px solid var(--sl-color-gray-5);
   }
@@ -74,28 +69,33 @@ import PokeNav from './PokeNav.astro'
       --__sidebar-width: max(0rem, var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x));
       --__main-column-fr: calc(
         (
-          100% + var(--__sidebar-pad, 0rem) - var(--__toc-width, var(--sl-sidebar-width))
-            - 2 * var(--__toc-width, var(--sl-nav-pad-x))
-            - var(--sl-content-inline-start, 0rem)
-            - var(--sl-content-width)
-        )
-          / 2
+            100% + var(--__sidebar-pad, 0rem) - var(--__toc-width, var(--sl-sidebar-width)) - 2 *
+              var(--__toc-width, var(--sl-nav-pad-x)) - var(--sl-content-inline-start, 0rem) - var(--sl-content-width)
+          ) /
+          2
       );
       display: grid;
-      grid-template-columns: 
-        minmax(
-        calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))),
-        auto
-      )  1fr  auto;
+      grid-template-columns:
+        minmax(calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))), auto)
+        1fr auto;
       align-content: center;
     }
   }
 </style>
 
-
 <button id="back-to-top" class="back-to-top" aria-label="Back to top" type="button">
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="m18 15-6-6-6 6"/>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="m18 15-6-6-6 6"></path>
   </svg>
 </button>
 
@@ -106,7 +106,7 @@ import PokeNav from './PokeNav.astro'
     right: 2rem;
     width: 44px;
     height: 44px;
-    border-radius: 8px; 
+    border-radius: 8px;
     background-color: var(--sl-color-gray-6);
     border: 1px solid var(--sl-color-gray-5);
     color: var(--sl-color-white);
@@ -118,7 +118,7 @@ import PokeNav from './PokeNav.astro'
     visibility: hidden;
     transform: translateY(10px);
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 99999 !important; 
+    z-index: 99999 !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   }
 
@@ -142,20 +142,20 @@ import PokeNav from './PokeNav.astro'
 </style>
 
 <script>
-  const btn = document.getElementById('back-to-top');
+  const btn = document.getElementById("back-to-top");
   if (btn) {
-    window.addEventListener('scroll', () => {
+    window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {
-        btn.classList.add('visible');
+        btn.classList.add("visible");
       } else {
-        btn.classList.remove('visible');
+        btn.classList.remove("visible");
       }
     });
 
-    btn.addEventListener('click', () => {
+    btn.addEventListener("click", () => {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     });
   }

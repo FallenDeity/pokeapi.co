@@ -79,6 +79,11 @@
   dependencies:
     "@astrojs/compiler-binding" "0.3.1"
 
+"@astrojs/compiler@^2.9.1":
+  version "2.13.1"
+  resolved "https://registry.yarnpkg.com/@astrojs/compiler/-/compiler-2.13.1.tgz#d3cf26ed98e19d3d100cdbeb661ce7b856719ca7"
+  integrity sha512-f3FN83d2G/v32ipNClRKgYv30onQlMZX1vCeZMjPsMMPl1mDpmbl0+N5BYo4S/ofzqJyS5hvwacEo0CCVDn/Qg==
+
 "@astrojs/internal-helpers@0.10.1":
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/@astrojs/internal-helpers/-/internal-helpers-0.10.1.tgz#3f96b64cf73d39199b1a70909de488a005c50776"
@@ -3403,6 +3408,20 @@ postcss@^8.4.38, postcss@^8.5.16:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
+prettier-plugin-astro@^0.14.1:
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-astro/-/prettier-plugin-astro-0.14.1.tgz#50bff8a659f2a6a4ff3b1d7ea73f2de93c95b213"
+  integrity sha512-RiBETaaP9veVstE4vUwSIcdATj6dKmXljouXc/DDNwBSPTp8FRkLGDSGFClKsAFeeg+13SB0Z1JZvbD76bigJw==
+  dependencies:
+    "@astrojs/compiler" "^2.9.1"
+    prettier "^3.0.0"
+    sass-formatter "^0.7.6"
+
+prettier@^3.0.0, prettier@^3.9.5:
+  version "3.9.5"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.9.5.tgz#4fec97736e33b9d0b620b48914fe93b530e835ad"
+  integrity sha512-/FVl766LpUfB5vXgCYOYa0MeV/441Ia99AeICQIQFTY/Nw0roZwULcXpku5i1/m5kt/baz+s4Zogspd839HSMg==
+
 prismjs@^1.30.0:
   version "1.30.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.30.0.tgz#d9709969d9d4e16403f6f348c63553b19f0975a9"
@@ -3694,6 +3713,18 @@ rolldown@~1.1.4:
     "@rolldown/binding-win32-arm64-msvc" "1.1.5"
     "@rolldown/binding-win32-x64-msvc" "1.1.5"
 
+s.color@0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/s.color/-/s.color-0.0.15.tgz#6b32cd22d8dba95703a5122ddede2020a1560186"
+  integrity sha512-AUNrbEUHeKY8XsYr/DYpl+qk5+aM+DChopnWOPEzn8YKzOhv4l2zH6LzZms3tOZP3wwdOyc0RmTciyi46HLIuA==
+
+sass-formatter@^0.7.6:
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/sass-formatter/-/sass-formatter-0.7.9.tgz#cf77e02e98f81daabd91b185192144d29fc04ca5"
+  integrity sha512-CWZ8XiSim+fJVG0cFLStwDvft1VI7uvXdCNJYXhDvowiv+DsbD1nXLiQ4zrE5UBvj5DWZJ93cwN0NX5PMsr1Pw==
+  dependencies:
+    suf-log "^2.5.3"
+
 satteri@^0.9.1:
   version "0.9.5"
   resolved "https://registry.yarnpkg.com/satteri/-/satteri-0.9.5.tgz#27c87ebf7608bb161f4cb5108b961c8438c188b7"
@@ -3884,6 +3915,13 @@ style-to-object@1.0.14:
   integrity sha512-LIN7rULI0jBscWQYaSswptyderlarFkjQ+t79nzty8tcIAceVomEVlLzH5VP4Cmsv6MtKhs7qaAiwlcp+Mgaxw==
   dependencies:
     inline-style-parser "0.2.7"
+
+suf-log@^2.5.3:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/suf-log/-/suf-log-2.5.3.tgz#0919a7fceea532a99b578c97814c4e335b2d64d1"
+  integrity sha512-KvC8OPjzdNOe+xQ4XWJV2whQA0aM1kGVczMQ8+dStAO6KfEB140JEVQ9dE76ONZ0/Ylf67ni4tILPJB41U0eow==
+  dependencies:
+    s.color "0.0.15"
 
 supports-color@^7.1.0:
   version "7.2.0"

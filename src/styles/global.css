@@ -5,29 +5,29 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 :root {
-  --pokemon-blue-low:    #1e40af;
-  --pokemon-blue:        #3b82f6;
-  --pokemon-blue-high:   #bfdbfe;
+  --pokemon-blue-low: #1e40af;
+  --pokemon-blue: #3b82f6;
+  --pokemon-blue-high: #bfdbfe;
 
-  --pokemon-yellow-low:  #fef9c3;
-  --pokemon-yellow:      #eab308;
+  --pokemon-yellow-low: #fef9c3;
+  --pokemon-yellow: #eab308;
   --pokemon-yellow-high: #ca8a04;
 
-  --sl-color-accent-low:  var(--pokemon-blue-low);
-  --sl-color-accent:      var(--pokemon-blue);
+  --sl-color-accent-low: var(--pokemon-blue-low);
+  --sl-color-accent: var(--pokemon-blue);
   --sl-color-accent-high: var(--pokemon-blue-high);
 
-  --sl-color-white:  #ffffff;
+  --sl-color-white: #ffffff;
   --sl-color-gray-1: #cbd5e1;
   --sl-color-gray-2: #94a3b8;
   --sl-color-gray-3: #64748b;
   --sl-color-gray-4: #334155;
   --sl-color-gray-5: #1e293b;
   --sl-color-gray-6: #0f172a;
-  --sl-color-black:  #0b0f19;
+  --sl-color-black: #0b0f19;
 
-  --sl-color-bg-sidebar:    color-mix(in srgb, var(--sl-color-gray-6) 40%, transparent);
-  --sl-color-hairline:      color-mix(in srgb, var(--sl-color-gray-4) 30%, transparent);
+  --sl-color-bg-sidebar: color-mix(in srgb, var(--sl-color-gray-6) 40%, transparent);
+  --sl-color-hairline: color-mix(in srgb, var(--sl-color-gray-4) 30%, transparent);
   --sl-color-hairline-shade: var(--sl-color-hairline);
 
   --sl-color-hero-tagline-highlight: var(--pokemon-yellow);
@@ -36,14 +36,14 @@
 }
 
 :root[data-theme="light"] {
-  --pokemon-yellow:      #ca8a04;
+  --pokemon-yellow: #ca8a04;
   --pokemon-yellow-high: #a16207;
 
-  --sl-color-accent-low:  var(--pokemon-yellow-low);
-  --sl-color-accent:      var(--pokemon-yellow);
+  --sl-color-accent-low: var(--pokemon-yellow-low);
+  --sl-color-accent: var(--pokemon-yellow);
   --sl-color-accent-high: var(--pokemon-yellow-high);
 
-  --sl-color-white:  #0f172a;
+  --sl-color-white: #0f172a;
   --sl-color-gray-1: #1e293b;
   --sl-color-gray-2: #334155;
   --sl-color-gray-3: #64748b;
@@ -51,24 +51,27 @@
   --sl-color-gray-5: #cbd5e1;
   --sl-color-gray-6: #f1f5f9;
   --sl-color-gray-7: #f8fafc;
-  --sl-color-black:  #ffffff;
+  --sl-color-black: #ffffff;
 
   --sl-color-bg-sidebar: color-mix(in srgb, var(--sl-color-gray-6) 20%, transparent);
 
   --sl-color-hero-tagline-highlight: var(--pokemon-blue);
 }
 
-header a, header a:hover, header a:focus,
-nav a, nav a:hover {
+header a,
+header a:hover,
+header a:focus,
+nav a,
+nav a:hover {
   text-decoration: none !important;
 }
 
 .hero {
-    display: grid;
-    grid-template-columns: 100%;
-    align-items: center;
-    gap: 1rem;
-    padding-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 100%;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
 }
 
 .hero > img {
@@ -101,16 +104,16 @@ nav a, nav a:hover {
 }
 
 .hero .hero-html.sl-flex {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .hero .hero-html img {
-    margin: 0 auto !important;
-    display: block !important;
-    max-width: 100% !important;
-    height: auto !important;
+  margin: 0 auto !important;
+  display: block !important;
+  max-width: 100% !important;
+  height: auto !important;
 }
 
 .not-content pre,
@@ -238,7 +241,6 @@ nav a, nav a:hover {
   display: none !important;
 }
 
-
 .sl-openapi-operation-description-button {
   display: none !important;
 }
@@ -253,8 +255,6 @@ nav a, nav a:hover {
 .sl-heading-wrapper + .sl-heading-wrapper {
   margin-top: 0.5rem !important;
 }
-
-
 
 .sl-openapi-section-pre-panel {
   display: none !important;
@@ -711,17 +711,20 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1'/%3E%3Cpath d='M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1'/%3E%3C/svg%3E") !important;
 }
 
-.type-badge--array, .type-badge--list {
+.type-badge--array,
+.type-badge--list {
   background-color: rgba(99, 102, 241, 0.08) !important;
   color: #818cf8 !important;
   border-color: rgba(99, 102, 241, 0.2) !important;
 }
-:root[data-theme="light"] .type-badge--array, :root[data-theme="light"] .type-badge--list {
+:root[data-theme="light"] .type-badge--array,
+:root[data-theme="light"] .type-badge--list {
   background-color: rgba(79, 70, 229, 0.08) !important;
   color: #4f46e5 !important;
   border-color: rgba(79, 70, 229, 0.15) !important;
 }
-.type-badge-icon--array, .type-badge-icon--list {
+.type-badge-icon--array,
+.type-badge-icon--list {
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='M16 3h3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-3'/%3E%3Cpath d='M8 21H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h3'/%3E%3C/svg%3E") !important;
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='M16 3h3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-3'/%3E%3Cpath d='M8 21H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h3'/%3E%3C/svg%3E") !important;
 }
@@ -803,7 +806,9 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   min-width: 110px !important;
   gap: 0.4rem !important;
   outline: none !important;
-  transition: border-color 0.15s ease, background-color 0.15s ease !important;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease !important;
 }
 
 :root[data-theme="dark"] .custom-select-trigger {
@@ -863,7 +868,9 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   border-radius: 4px !important;
   cursor: pointer !important;
   outline: none !important;
-  transition: background-color 0.1s ease, color 0.1s ease !important;
+  transition:
+    background-color 0.1s ease,
+    color 0.1s ease !important;
 }
 
 .custom-select-item:hover {
@@ -1042,7 +1049,9 @@ sl-openapi-snippet-picker label.sl-openapi-snippet-picker {
   color: var(--sl-color-accent) !important;
   text-decoration: none !important;
   border-bottom: 1.5px solid transparent !important;
-  transition: color 0.15s ease, border-color 0.15s ease !important;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease !important;
   padding-bottom: 1px !important;
   font-weight: 500 !important;
 }
@@ -1142,18 +1151,21 @@ starlight-toc ul ul {
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
-  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-              opacity 0.2s ease, 
-              visibility 0.2s ease;
+  transition:
+    max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease,
+    visibility 0.2s ease;
 }
 starlight-toc li:has(a[aria-current="true"]) > ul {
-  max-height: 500px; 
+  max-height: 500px;
   opacity: 1;
   visibility: visible;
 }
 
 main {
-  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out !important;
+  transition:
+    opacity 0.2s ease-in-out,
+    transform 0.2s ease-in-out !important;
 }
 main.page-transition-fade {
   opacity: 0 !important;
@@ -1161,18 +1173,20 @@ main.page-transition-fade {
 }
 
 button[data-open-modal] {
-  transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition:
+    border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 button[data-open-modal] svg,
 button[data-open-modal] span,
 button[data-open-modal] kbd {
-  transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition:
+    border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 button[data-open-modal]:hover {
@@ -1191,7 +1205,9 @@ button[data-open-modal]:hover kbd {
 }
 
 #starlight__search .pagefind-ui__search-input {
-  transition: border-color 0.22s ease, box-shadow 0.22s ease !important;
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease !important;
 }
 
 #starlight__search .pagefind-ui__search-input:focus {
@@ -1204,8 +1220,9 @@ button[data-open-modal]:hover kbd {
 #starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)),
 #starlight__search .pagefind-ui__result-nested {
   outline: 1px solid transparent !important;
-  transition: outline-color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
-              background-color 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition:
+    outline-color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 #starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):hover,
@@ -1221,10 +1238,11 @@ button[data-open-modal]:hover kbd {
 }
 
 #starlight__search .pagefind-ui__button {
-  transition: background-color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition:
+    background-color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 #starlight__search .pagefind-ui__button:hover {
@@ -1238,4 +1256,3 @@ button[data-open-modal]:hover kbd {
   border-color: var(--sl-color-accent) !important;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-accent) 25%, transparent) !important;
 }
-

@@ -7,7 +7,9 @@
     padding: 1.5rem !important;
     text-decoration: none !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
   }
 
   .sl-markdown-content .sl-link-card a,
@@ -20,8 +22,10 @@
   .sl-link-card:hover {
     transform: translateY(-4px) !important;
     border-color: var(--sl-color-accent) !important;
-    background: rgba(59, 130, 246, 0.08) !important; 
-    box-shadow: 0 12px 24px -10px rgba(59, 130, 246, 0.4), 0 0 0 1px var(--sl-color-accent) !important;
+    background: rgba(59, 130, 246, 0.08) !important;
+    box-shadow:
+      0 12px 24px -10px rgba(59, 130, 246, 0.4),
+      0 0 0 1px var(--sl-color-accent) !important;
   }
 
   .sl-link-card .title {
@@ -93,7 +97,9 @@
     margin-inline-start: -2.4rem !important;
   }
 
-  .starlight-aside, .aside, [class*="starlight-aside"] {
+  .starlight-aside,
+  .aside,
+  [class*="starlight-aside"] {
     border-radius: 8px !important;
     border: 2px solid color-mix(in srgb, var(--aside-color) 40%, transparent) !important;
     padding: 0 !important;
@@ -110,7 +116,9 @@
     margin: 0.5rem 0 !important;
   }
 
-  .starlight-aside__title, .aside__title, [class*="aside__title"] {
+  .starlight-aside__title,
+  .aside__title,
+  [class*="aside__title"] {
     color: var(--sl-color-white) !important;
     background-color: color-mix(in srgb, var(--aside-color) 5%, transparent) !important;
     border: none !important;
@@ -125,7 +133,9 @@
     text-transform: capitalize !important;
   }
 
-  .starlight-aside__title svg, .aside__title svg, [class*="aside__title"] svg {
+  .starlight-aside__title svg,
+  .aside__title svg,
+  [class*="aside__title"] svg {
     color: var(--aside-color) !important;
     background: transparent !important;
     border-radius: 0 !important;
@@ -140,7 +150,9 @@
     margin: 0 !important;
   }
 
-  .starlight-aside__content, .aside__content, [class*="aside__content"] {
+  .starlight-aside__content,
+  .aside__content,
+  [class*="aside__content"] {
     padding: 0.8rem 1rem !important;
     font-size: 0.875rem !important;
     line-height: 1.6 !important;
@@ -149,32 +161,42 @@
     border: none !important;
   }
 
-  .starlight-aside__content > *, .aside__content > *, [class*="aside__content"] > * {
+  .starlight-aside__content > *,
+  .aside__content > *,
+  [class*="aside__content"] > * {
     margin-block: 0.4rem !important;
   }
 
-  .starlight-aside__content > :first-child, .aside__content > :first-child, [class*="aside__content"] > :first-child {
+  .starlight-aside__content > :first-child,
+  .aside__content > :first-child,
+  [class*="aside__content"] > :first-child {
     margin-top: 0 !important;
   }
 
-  .starlight-aside__content > :last-child, .aside__content > :last-child, [class*="aside__content"] > :last-child {
+  .starlight-aside__content > :last-child,
+  .aside__content > :last-child,
+  [class*="aside__content"] > :last-child {
     margin-bottom: 0 !important;
   }
 
-  .aside--note, [class*="aside--note"] {
-    --aside-color: #447feb !important; 
+  .aside--note,
+  [class*="aside--note"] {
+    --aside-color: #447feb !important;
   }
 
-  .aside--tip, [class*="aside--tip"] {
-    --aside-color: #00e676 !important; 
+  .aside--tip,
+  [class*="aside--tip"] {
+    --aside-color: #00e676 !important;
   }
 
-  .aside--caution, [class*="aside--caution"] {
-    --aside-color: #ff9100 !important; 
+  .aside--caution,
+  [class*="aside--caution"] {
+    --aside-color: #ff9100 !important;
   }
 
-  .aside--danger, [class*="aside--danger"] {
-    --aside-color: #ff5252 !important; 
+  .aside--danger,
+  [class*="aside--danger"] {
+    --aside-color: #ff5252 !important;
   }
 
   starlight-tabs [role="tablist"] {
@@ -230,13 +252,13 @@
   }
 
   kbd kbd + kbd {
-    margin-inline-start: 1.25rem !important; 
+    margin-inline-start: 1.25rem !important;
   }
 
   kbd kbd + kbd::before {
     content: "+" !important;
     position: absolute !important;
-    left: -0.85rem !important; 
+    left: -0.85rem !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     color: var(--sl-color-gray-3) !important;
@@ -305,7 +327,9 @@
 
   .sl-link-card:hover {
     background: rgba(59, 130, 246, 0.04) !important;
-    box-shadow: 0 12px 24px -10px rgba(59, 130, 246, 0.15), 0 0 0 1px var(--sl-color-accent) !important;
+    box-shadow:
+      0 12px 24px -10px rgba(59, 130, 246, 0.15),
+      0 0 0 1px var(--sl-color-accent) !important;
   }
 
   .card {
@@ -318,22 +342,22 @@
     background: rgba(255, 255, 255, 0.5) !important;
   }
 
-  .starlight-aside, 
-  .aside, 
+  .starlight-aside,
+  .aside,
   [class*="starlight-aside"] {
     background-color: color-mix(in srgb, var(--aside-color) 3.5%, transparent) !important;
     box-shadow: none !important;
   }
 
-  .starlight-aside__title, 
-  .aside__title, 
+  .starlight-aside__title,
+  .aside__title,
   [class*="aside__title"] {
     color: var(--sl-color-white) !important;
     background-color: color-mix(in srgb, var(--aside-color) 9%, transparent) !important;
   }
 
-  .starlight-aside__content, 
-  .aside__content, 
+  .starlight-aside__content,
+  .aside__content,
   [class*="aside__content"] {
     color: var(--sl-color-gray-1) !important;
     background-color: transparent !important;
