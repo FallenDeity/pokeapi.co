@@ -2,6 +2,7 @@
   const pageCache = new Map();
   let isTransitioning = false;
   let scrollCooldown = false;
+  let lastPathname = window.location.pathname;
 
   const currentPath = window.location.pathname;
   const currentMain = document.querySelector('main');
@@ -69,6 +70,7 @@
 
     if (pushState) {
       history.pushState(null, '', url);
+      lastPathname = window.location.pathname;
     }
 
     syncSidebar(url);
@@ -155,7 +157,12 @@
   }, { passive: true });
 
   window.addEventListener('popstate', () => {
-    transitionToPage(window.location.pathname, false);
+    const newPathname = window.location.pathname;
+    if (newPathname === lastPathname) {
+      return;
+    }
+    lastPathname = newPathname;
+    transitionToPage(newPathname, false);
   });
 
   if (document.readyState === 'loading') {

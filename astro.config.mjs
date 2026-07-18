@@ -33,7 +33,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'PokéAPI',
-      favicon: './src/assets/pokeapi_192_square.png',
+      favicon: '/favicon.png',
       tableOfContents: {
         maxHeadingLevel: 4,
       },
