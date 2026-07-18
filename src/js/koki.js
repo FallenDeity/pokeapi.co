@@ -1,4 +1,3 @@
-
 function kokiInit(jsonString, container, kokiTitle, openDetails) {
   if (kokiTitle   === undefined) kokiTitle   = ''
   if (openDetails === undefined) openDetails = true
@@ -111,3 +110,6 @@ function kokiGetType(value) {
   if (value === undefined) return 'undefined'
   return typeof value
 }
+
+// Attach to window so ApiExplorer script blocks can execute it
+window.kokiInit = kokiInit;

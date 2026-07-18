@@ -20,11 +20,6 @@ const graphql = baseUrl + 'graphql/'
         : <span class="nav-link nav-link--active">API v2</span>}
     </li>
     <li class="nav-item">
-      {thisUrl !== openapi
-        ? <a href={openapi} class="nav-link">OpenAPI</a>
-        : <span class="nav-link nav-link--active">OpenAPI</span>}
-    </li>
-    <li class="nav-item">
       {thisUrl !== graphql
         ? <a href={graphql} class="nav-link">GraphQL v1Beta</a>
         : <span class="nav-link nav-link--active">GraphQL v1Beta</span>}

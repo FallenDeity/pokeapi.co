@@ -1,10 +1,8 @@
 (function () {
-  
   const pageCache = new Map();
   let isTransitioning = false;
   let scrollCooldown = false;
 
-  
   const currentPath = window.location.pathname;
   const currentMain = document.querySelector('main');
   const currentToc = document.querySelector('starlight-toc');
@@ -17,7 +15,6 @@
     });
   }
 
-  
   async function prefetch(url) {
     if (pageCache.has(url)) return;
     try {
@@ -38,12 +35,10 @@
     }
   }
 
-  
   async function transitionToPage(url, pushState = true) {
     if (isTransitioning) return;
     isTransitioning = true;
 
-    
     let pageData = pageCache.get(url);
     if (!pageData) {
       await prefetch(url);
@@ -51,7 +46,6 @@
     }
 
     if (!pageData || !pageData.mainElement) {
-      
       window.location.href = url;
       return;
     }
@@ -62,49 +56,33 @@
       return;
     }
 
-    
     currentMainEl.classList.add('page-transition-fade');
     await new Promise(resolve => setTimeout(resolve, 200));
 
-    
     currentMainEl.innerHTML = pageData.mainElement.innerHTML;
-    
     for (const attr of pageData.mainElement.attributes) {
       currentMainEl.setAttribute(attr.name, attr.value);
     }
 
-    
     window.scrollTo({ top: 0, behavior: 'instant' });
-
-    
     document.title = pageData.title;
 
-    
     if (pushState) {
       history.pushState(null, '', url);
     }
 
-    
     syncSidebar(url);
-
-    
     syncToc(url);
-
-    
     reinitializeScripts(currentMainEl);
 
-    
     currentMainEl.classList.remove('page-transition-fade');
-
     isTransitioning = false;
 
-    
     scrollCooldown = true;
     setTimeout(() => {
       scrollCooldown = false;
     }, 1200);
 
-    
     prefetchNextPrev();
   }
 
@@ -130,7 +108,6 @@
   }
 
   function reinitializeScripts(container) {
-    
     container.querySelectorAll('script').forEach(oldScript => {
       const newScript = document.createElement('script');
       for (const attr of oldScript.attributes) {
@@ -155,14 +132,10 @@
     const clientHeight = document.documentElement.clientHeight;
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-    
-    
     const isScrollable = scrollHeight > clientHeight + 150;
     if (!isScrollable) return;
 
-    
     const reachedBottom = scrollTop + clientHeight >= scrollHeight - 50;
-
     if (reachedBottom) {
       const nextLink = document.querySelector('main .pagination-links a[rel="next"]');
       if (nextLink) {
@@ -172,7 +145,6 @@
     }
   }
 
-  
   let scrollTimeout;
   window.addEventListener('scroll', () => {
     if (scrollTimeout) return;
@@ -182,12 +154,10 @@
     }, 100);
   }, { passive: true });
 
-  
   window.addEventListener('popstate', () => {
     transitionToPage(window.location.pathname, false);
   });
 
-  
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', prefetchNextPrev);
   } else {

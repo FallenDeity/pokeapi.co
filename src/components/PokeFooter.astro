@@ -1,8 +1,8 @@
 ---
 import Pagination from '@astrojs/starlight/components/Pagination.astro'
+import brandLogo from '../assets/pokeapi_192_square.png'
 
 const currentYear = new Date().getFullYear()
-
 
 const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
 ---
@@ -27,7 +27,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
       
       <div class="footer-brand">
         <div class="brand-logo">
-          <img src="/pokeapi_192_square.png" alt="PokéAPI" width="40" height="40" class="brand-img" />
+          <img src={brandLogo.src} alt="PokéAPI" width="40" height="40" class="brand-img" />
           <span class="brand-name">PokéAPI</span>
         </div>
         <p class="brand-tagline">
@@ -948,6 +948,10 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
 
   await Promise.all([fetchStatus(), renderLatency()]);
 })();
+</script>
+
+<script>
+  import '../js/continuous-scroll.js';
 </script>
 
 

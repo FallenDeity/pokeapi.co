@@ -46,10 +46,15 @@ const endpoints = [
   { group: 'Moves', icon: 'moves.png', options: ['move', 'move-ailment', 'move-battle-style', 'move-category', 'move-damage-class', 'move-learn-method', 'move-target'] },
   { group: 'Pokémon', icon: 'pokemon.png', options: ['ability', 'characteristic', 'egg-group', 'gender', 'growth-rate', 'nature', 'pokeathlon-stat', 'pokemon', 'pokemon-color', 'pokemon-form', 'pokemon-habitat', 'pokemon-shape', 'pokemon-species', 'stat', 'type'] },
 ]
+
+const endpointImages = import.meta.glob<{ default: ImageMetadata }>('../assets/endpoint-categories/*.png', { eager: true });
+
+import '../styles/koki.css';
 ---
 
-<link rel="stylesheet" href="/styles/koki.css">
-<script is:inline src="/js/koki.js"></script>
+<script>
+  import '../js/koki.js';
+</script>
 
 <style is:inline>
 @layer starlight, arbol, koki;
@@ -707,7 +712,7 @@ const endpoints = [
             {endpoints.map(({ group, icon, options }) => (
               <>
                 <span class="dropdown-group-label">
-                  <img src={`/assets/endpoint-categories/${icon}`} alt="" class="dropdown-group-icon" />
+                  <img src={endpointImages[`../assets/endpoint-categories/${icon}`]?.default.src} alt="" class="dropdown-group-icon" />
                   {group}
                 </span>
                 {options.map(opt => (

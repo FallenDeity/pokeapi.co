@@ -38,12 +38,6 @@ export default defineConfig({
         maxHeadingLevel: 4,
       },
       routeMiddleware: './src/routeData.ts',
-      head: [
-        {
-          tag: 'script',
-          attrs: { src: '/js/continuous-scroll.js', defer: true },
-        },
-      ],
       components: {
         Footer: './src/components/PokeFooter.astro',
         Header: './src/components/PokeHeader.astro',
@@ -52,7 +46,6 @@ export default defineConfig({
       },
       customCss: [
         './src/styles/global.css',
-        './src/styles/guides.css',
       ],
       logo: {
         src: './src/assets/pokeapi_256.png',
