@@ -697,12 +697,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
 (async () => {
   const API    = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json';
   const PROBE  = 'https://pokeapi.co/api/v2/';
-  const shieldsRow  = document.getElementById('footer-shields-row');
-  const globalDot   = document.getElementById('footer-global-dot');
-  const latencyImg  = document.getElementById('footer-latency-img');
-  if (!shieldsRow) return;
 
-  
   const shieldColor = (s) => {
     if (!s) return 'lightgrey';
     if (s === 'operational') return 'brightgreen';
@@ -718,7 +713,6 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     return '';
   };
 
-  
   const latencyColor = (ms) => {
     if (ms <  80)  return 'brightgreen';
     if (ms < 200)  return 'green';
@@ -726,10 +720,8 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     return 'red';
   };
 
-  
   const measureLatency = async () => {
     try {
-      
       await fetch(PROBE, { cache: 'no-store', mode: 'cors' });
       const t0 = performance.now();
       await fetch(PROBE, { cache: 'no-store', mode: 'cors' });
@@ -739,8 +731,8 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     }
   };
 
-  
   const renderLatency = async () => {
+    const latencyImg = document.getElementById('footer-latency-img');
     if (!latencyImg) return;
     const ms = await measureLatency();
     if (ms === null) {
@@ -755,30 +747,36 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     }
   };
 
-  
   const fetchStatus = async () => {
+    const shieldsRow = document.getElementById('footer-shields-row');
+    const globalDot = document.getElementById('footer-global-dot');
+    if (!shieldsRow) return;
+
     try {
       const res  = await fetch(API, { cache: 'no-store' });
       if (!res.ok) throw new Error('fetch failed');
       const data = await res.json();
 
-      
       if (globalDot && data.status) {
         const cls = globalDotClass(data.status.indicator);
-        if (cls) globalDot.classList.add(cls);
+        if (cls) {
+          globalDot.classList.remove('dot-operational', 'dot-degraded', 'dot-outage');
+          globalDot.classList.add(cls);
+        }
       }
 
-      
       const masterImg = shieldsRow.querySelector('.master-shield .shield-img');
       if (masterImg && data.status) {
         const color = shieldColor(data.status.indicator === 'none' ? 'operational' : data.status.indicator);
         masterImg.src = `https://img.shields.io/badge/dynamic/json?style=flat&color=${color}&label=status&query=%24.status.description&url=https%3A%2F%2Fzlfyqp3hlvly.statuspage.io%2Fapi%2Fv2%2Fsummary.json`;
       }
-
     } catch (_) {  }
   };
 
-  
+  const initFooterStatus = async () => {
+    await Promise.all([fetchStatus(), renderLatency()]);
+  };
+
   const themeOpenAPIBadges = () => {
     const types = document.querySelectorAll('.sl-openapi-type');
     const validTypes = ['integer', 'string', 'boolean', 'object', 'array'];
@@ -811,7 +809,6 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
       }
     });
 
-    
     document.querySelectorAll('sl-openapi-snippet-picker').forEach(picker => {
       if (picker.dataset.customized) return;
       picker.dataset.customized = "true";
@@ -924,7 +921,6 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
       picker.appendChild(wrapper);
     });
 
-    
     document.querySelectorAll('.sl-openapi-keys').forEach(keysContainer => {
       if (keysContainer.closest('.sl-openapi-key-description')) return;
       if (keysContainer.querySelector('.sl-openapi-key-header')) return;
@@ -939,14 +935,14 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     });
   };
 
-  
   themeOpenAPIBadges();
   new MutationObserver(themeOpenAPIBadges).observe(document.body, {
     childList: true,
     subtree: true
   });
 
-  await Promise.all([fetchStatus(), renderLatency()]);
+  await initFooterStatus();
+  document.addEventListener('astro:after-swap', initFooterStatus);
 })();
 </script>
 

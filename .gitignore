@@ -48,3 +48,6 @@ yarn-error.log
 
 tmp
 artifacts
+
+# Generated OpenAPI schema
+public/openapi.yml

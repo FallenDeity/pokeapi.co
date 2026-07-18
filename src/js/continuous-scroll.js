@@ -121,6 +121,8 @@
     syncToc(url);
     reinitializeScripts(currentMainEl);
 
+    document.dispatchEvent(new Event('astro:after-swap'));
+
     currentMainEl.classList.remove('page-transition-fade');
     isTransitioning = false;
 
