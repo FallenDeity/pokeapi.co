@@ -11,7 +11,7 @@ interface Props {
 
 const { endpoint, exampleRequest, exampleResponse } = Astro.props;
 
-// Parse default parameter from exampleRequest
+
 let defaultParam = 'ditto';
 if (exampleRequest) {
   const prefix = `/v2/${endpoint}/`;
@@ -56,11 +56,7 @@ const endpoints = [
 
 @layer koki {
 
-/*
- * TARGETED RESET: Kill Starlight's .sl-markdown-content adjacent
- * sibling margin rule on specific elements inside our widget.
- * (The rule is: :not(inline elems) + :not(inline elems) { margin-top: ... })
- */
+
   .koki-codeblock-wrapper,
   .koki-codeblock-wrapper *,
   .koki-view-tabs > *,
@@ -75,7 +71,7 @@ const endpoints = [
     margin-top: 0 !important;
   }
 
-  /* Kill Starlight's pre border that bleeds into our code area */
+  
   .api-explorer-root pre {
     border: none !important;
     background: none !important;
@@ -83,7 +79,7 @@ const endpoints = [
     margin: 0 !important;
   }
 
-  /* Tree variables */
+  
   .koki-tree-content {
     --arbol-bg-color: transparent;
     --arbol-text-color: var(--sl-color-white);
@@ -132,7 +128,7 @@ const endpoints = [
     border-radius: 8px 0 0 8px;
   }
 
-  /* Show full URL on wide screens, short on mobile */
+  
   .explorer-base-url-full  { display: inline; }
   .explorer-base-url-short { display: none; }
 
@@ -142,7 +138,7 @@ const endpoints = [
     .explorer-base-url { padding: 0 8px 0 10px; }
   }
 
-/* ── Custom dropdown ───────────────────────────────────── */
+
   .explorer-select-wrap {
     position: relative;
     display: flex;
@@ -194,7 +190,7 @@ const endpoints = [
     border-top-color: var(--sl-color-accent);
   }
 
-  /* Dropdown panel — positioned from the OUTER bar, not the inner */
+  
   .explorer-dropdown-panel {
     display: none;
     position: fixed;
@@ -269,7 +265,7 @@ const endpoints = [
     font-weight: 600;
   }
 
-/* ── Divider & param input ─────────────────────────────── */
+
   .explorer-divider {
     display: flex;
     align-items: center;
@@ -299,7 +295,7 @@ const endpoints = [
     opacity: 1;
   }
 
-/* ── Send button ───────────────────────────────────────── */
+
   .explorer-send-btn {
     display: flex;
     align-items: center;
@@ -322,7 +318,7 @@ const endpoints = [
   .explorer-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
   .explorer-send-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
 
-/* ── Direct link row ───────────────────────────────────── */
+
   .explorer-meta-row {
     display: flex;
     align-items: center;
@@ -344,9 +340,7 @@ const endpoints = [
     text-decoration: underline;
   }
 
-/* ═══════════════════════════════════════════════════════
-   CODEBLOCK WRAPPER
-   ═══════════════════════════════════════════════════════ */
+
   .koki-codeblock-wrapper {
     border-radius: 10px;
     overflow: hidden;
@@ -354,7 +348,7 @@ const endpoints = [
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   }
 
-  /* Tab bar — flat flex, no starlight gaps */
+  
   .koki-view-tabs {
     display: flex !important;
     flex-direction: row !important;
@@ -429,11 +423,11 @@ const endpoints = [
     background: var(--sl-color-gray-5) !important;
   }
   .koki-copy-btn.copied {
-    color: #34d399 !important; /* Soft, premium mint green in dark theme */
+    color: #34d399 !important; 
     border-color: #34d399 !important;
   }
   [data-theme="light"] .koki-copy-btn.copied {
-    color: #15803d !important; /* Muted rich green in light theme */
+    color: #15803d !important; 
     border-color: #15803d !important;
   }
   .koki-copy-btn svg {
@@ -442,12 +436,12 @@ const endpoints = [
     flex-shrink: 0 !important;
   }
 
-  /* Direct link hover micro-interaction */
+  
   .explorer-direct-link:hover + .explorer-out-link-icon {
     color: var(--sl-color-white) !important;
   }
 
-  /* Aside purple-to-accent override styling (targeting Starlight elements directly) */
+  
   .api-explorer-root .starlight-aside {
     --sl-color-asides-text-accent: #ffcb05 !important;
     --sl-color-asides-border: #ffcb05 !important;
@@ -459,14 +453,14 @@ const endpoints = [
     background-color: color-mix(in srgb, #ffcb05 8%, var(--sl-color-black)) !important;
   }
 
-  /* Specific endpoint label styled like a trigger */
+  
   .explorer-endpoint-label {
     display: flex !important;
     align-items: center !important;
     background: var(--sl-color-gray-6) !important;
     border-right: 1.5px solid var(--sl-color-gray-5) !important;
     padding: 0 16px !important;
-    height: 100% !important; /* full height */
+    height: 100% !important; 
     font-family: var(--__sl-font-mono) !important;
     font-size: 0.82rem !important;
     font-weight: 600 !important;
@@ -475,18 +469,14 @@ const endpoints = [
     box-sizing: border-box !important;
   }
 
-  /* Panel wrappers — zero gap */
+  
   .panel-raw, .panel-tree {
     display: block;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-/* ═══════════════════════════════════════════════════════
-   SHARED: code-area base + gutter
-   Use wrapper for scroll limits. Gutter stretches fully.
-   Gutter gets a distinct VS Code-style background color.
-   ═══════════════════════════════════════════════════════ */
+
   .koki-code-area-wrapper {
     --code-bg: var(--sl-color-black);
     height: 560px;
@@ -507,7 +497,7 @@ const endpoints = [
     padding: 0 !important;
   }
 
-  /* The gutter column */
+  
   .koki-code-area .koki-gutter {
     flex: 0 0 58px;
     padding: 12px 0;
@@ -529,7 +519,7 @@ const endpoints = [
     line-height: 1.65;
   }
 
-  /* Collapsible raw styles */
+  
   .raw-fold {
     display: block;
     margin: 0 !important;
@@ -550,7 +540,7 @@ const endpoints = [
     display: none;
   }
 
-  /* Arrow sits to the left of the opening bracket, top-aligned */
+  
   .raw-fold-summary::before {
     content: '▼';
     position: absolute;
@@ -603,7 +593,7 @@ const endpoints = [
     padding: 0 !important;
   }
 
-  /* Code content & descendants MUST share exact monospace specs to align with gutter */
+  
   .koki-raw-content,
   .koki-raw-content * {
     font-family: var(--__sl-font-mono) !important;
@@ -624,7 +614,7 @@ const endpoints = [
     border: none !important;
   }
 
-  /* JSON Syntax colours — dark mode */
+  
   .json-key    { color: #f59e0b; }
   .json-string { color: #86efac; }
   .json-number { color: #c084fc; }
@@ -632,7 +622,7 @@ const endpoints = [
   .json-null   { color: #f87171; }
   .json-punct  { color: var(--sl-color-gray-3); }
 
-  /* JSON Syntax colours — light mode: deeper, more contrast */
+  
   :root[data-theme="light"] .json-key    { color: #92400e; }
   :root[data-theme="light"] .json-string { color: #15803d; }
   :root[data-theme="light"] .json-number { color: #7c3aed; }
@@ -640,9 +630,7 @@ const endpoints = [
   :root[data-theme="light"] .json-null   { color: #dc2626; }
   :root[data-theme="light"] .json-punct  { color: #6b7280; }
 
-/* ═══════════════════════════════════════════════════════
-   TREE VIEW
-   ═══════════════════════════════════════════════════════ */
+
   .koki-tree-content {
     flex: 1;
     min-width: 0;
@@ -672,7 +660,7 @@ const endpoints = [
     font-size: 0.9rem;
   }
 
-} /* end @layer koki */
+} 
 </style>
 
 <section class="-mt-8 pb-12 koki-api-explorer-widget" id={instanceId} data-instance-id={instanceId} data-endpoint={endpoint || 'pokemon'} data-param={defaultParam}>
@@ -694,7 +682,7 @@ const endpoints = [
 
     <div class="py-3" />
 
-    <!-- ── Request Bar ── -->
+    
     <div class="explorer-request-bar" role="group" aria-label="API request builder">
       <span class="explorer-base-url" aria-label="Base URL">
         <span class="explorer-base-url-full">https://pokeapi.co/api/v2/</span>
@@ -769,9 +757,9 @@ const endpoints = [
 
     <div class="py-3" />
 
-    <!-- ── Response Codeblock ── -->
+    
     <div class="koki-codeblock-wrapper">
-      <!-- Tab + copy bar -->
+      
       <div class="koki-view-tabs" role="tablist" aria-label="Response view">
         <div class="koki-tab-group">
           <button class="koki-tab-btn active tab-raw" role="tab" aria-selected="true" type="button">
@@ -788,7 +776,7 @@ const endpoints = [
         </button>
       </div>
 
-      <!-- Raw JSON panel -->
+      
       <div class="panel-raw" role="tabpanel">
         <div class="koki-code-area-wrapper">
           <div class="koki-code-area koki-raw-view">
@@ -798,7 +786,7 @@ const endpoints = [
         </div>
       </div>
 
-      <!-- JSON Tree panel -->
+      
       <div class="panel-tree" role="tabpanel" style="display:none">
         <div class="koki-code-area-wrapper">
           <div class="koki-code-area koki-tree-view">
@@ -813,7 +801,7 @@ const endpoints = [
   </div>
 </section>
 
-<!-- Hidden SSR initial json data -->
+
 <div class="koki-initial-json" style="display:none" aria-hidden="true">{JSON.stringify(exampleResponse || ditto)}</div>
 
 <script is:inline>
@@ -918,7 +906,7 @@ const endpoints = [
     while (parent && parent !== root) {
       if (parent.tagName.toLowerCase() === 'details' && !parent.open) {
         if (el.tagName.toLowerCase() === 'summary' && el.parentElement === parent) {
-          // Ignore
+          
         } else {
           return true;
         }
@@ -949,7 +937,7 @@ const endpoints = [
     var currentJsonStr = null
     var selectedEndpoint = widget.dataset.endpoint
 
-    /* Dropdown initialization */
+    
     function initDropdown() {
       if (!selectWrap || !selectTrigger || !dropdownPanel) return
 
@@ -1011,7 +999,7 @@ const endpoints = [
       })
     }
 
-    /* URL building */
+    
     function getRequestUrl() {
       var param = paramInput.value.trim().replace(/&amp;/g, '&')
       if (param.startsWith('?')) return BASE_URL + selectedEndpoint + param
@@ -1019,7 +1007,7 @@ const endpoints = [
       return BASE_URL + selectedEndpoint + '/'
     }
 
-    /* Rendering */
+    
     function renderRaw(jsonStr) {
       try {
         var parsed = JSON.parse(jsonStr)
@@ -1173,7 +1161,7 @@ const endpoints = [
       })
     }
 
-    // Setup events
+    
     initDropdown()
     initCopy()
     initHints()
@@ -1183,14 +1171,14 @@ const endpoints = [
     paramInput.addEventListener('keypress', function (e) { if (e.key === 'Enter') sendRequest() })
     sendBtn.addEventListener('click', sendRequest)
 
-    // Load initial JSON from hidden element
+    
     var initialJsonEl = widget.nextElementSibling;
     if (initialJsonEl && initialJsonEl.classList.contains('koki-initial-json')) {
       try { applyJsonData(JSON.parse(initialJsonEl.textContent)) }
       catch (e) { console.warn('initial json parse error', e) }
     }
 
-    // Attach local gutter update helper for details toggle
+    
     widget.addEventListener('toggle', function (e) {
       if (rawContent && rawContent.contains(e.target)) {
         setTimeout(updateRawGutter, 15)

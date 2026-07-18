@@ -3,7 +3,7 @@ import Pagination from '@astrojs/starlight/components/Pagination.astro'
 
 const currentYear = new Date().getFullYear()
 
-// Status API endpoint
+
 const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
 ---
 
@@ -12,7 +12,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
 </nav>
 
 <footer class="poke-footer">
-  <!-- Animated background mesh -->
+  
   <div class="footer-bg" aria-hidden="true">
     <div class="bg-blob bg-blob-1"></div>
     <div class="bg-blob bg-blob-2"></div>
@@ -21,10 +21,10 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
 
   <div class="footer-content">
 
-    <!-- Top section: brand + nav columns -->
+    
     <div class="footer-top">
 
-      <!-- Brand column -->
+      
       <div class="footer-brand">
         <div class="brand-logo">
           <img src="/pokeapi_192_square.png" alt="PokéAPI" width="40" height="40" class="brand-img" />
@@ -56,7 +56,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
         </div>
       </div>
 
-      <!-- Navigation columns -->
+      
       <div class="footer-nav-group">
         <div class="footer-nav-col">
           <h3 class="nav-col-title">Documentation</h3>
@@ -91,7 +91,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
 
     </div>
 
-    <!-- Status badges section -->
+    
     <div class="footer-status">
       <div class="status-header">
         <span class="status-header-dot" id="footer-global-dot" aria-hidden="true"></span>
@@ -102,9 +102,9 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
         </a>
       </div>
 
-      <!-- Shields.io badges row — master + per-component (JS-injected) -->
+      
       <div class="shields-row" id="footer-shields-row">
-        <!-- Master overall-status badge (always shown) -->
+        
         <a
           href="https://pokeapi.statuspage.io/"
           target="_blank"
@@ -121,7 +121,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
             decoding="async"
           />
         </a>
-        <!-- Live latency badge (measured client-side, injected by JS) -->
+        
         <a
           href="https://pokeapi.co/api/v2/"
           target="_blank"
@@ -143,10 +143,10 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
       </div>
     </div>
 
-    <!-- Divider -->
+    
     <div class="footer-divider" aria-hidden="true"></div>
 
-    <!-- Bottom bar -->
+    
     <div class="footer-bottom">
       <p class="footer-copy">
         &copy; {currentYear} Created by <a href="https://github.com/phalt" target="_blank" rel="noopener"><strong>Paul Hallett</strong></a> and <a href="https://github.com/PokeAPI/pokeapi/graphs/contributors" target="_blank" rel="noopener">PokéAPI contributors</a> around the world.
@@ -164,7 +164,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     padding: 3rem 0 1rem;
   }
 
-  /* ─── Footer Shell ─────────────────────────────────────────── */
+  
   .poke-footer {
     position: relative;
     overflow: hidden;
@@ -179,7 +179,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     margin-top: 0;
   }
 
-  /* Animated background blobs */
+  
   .footer-bg {
     position: absolute;
     inset: 0;
@@ -223,7 +223,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     66%       { transform: translateY(10px) scale(0.97); }
   }
 
-  /* ─── Content ──────────────────────────────────────────────── */
+  
   .footer-content {
     position: relative;
     z-index: 1;
@@ -238,7 +238,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     }
   }
 
-  /* ─── Top Section ──────────────────────────────────────────── */
+  
   .footer-top {
     display: grid;
     grid-template-columns: 1.4fr 2fr;
@@ -260,7 +260,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     }
   }
 
-  /* Brand */
+  
   .footer-brand {
     display: flex;
     flex-direction: column;
@@ -299,7 +299,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     color: var(--sl-color-gray-1);
   }
 
-  /* Social pills */
+  
   .social-row {
     display: flex;
     gap: 0.625rem;
@@ -344,7 +344,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     box-shadow: 0 4px 12px rgba(224,30,90,0.2);
   }
 
-  /* Nav columns */
+  
   .footer-nav-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -392,7 +392,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     text-decoration: none !important;
   }
 
-  /* ─── Status Section ───────────────────────────────────────── */
+  
   .footer-status {
     background: color-mix(in srgb, var(--sl-color-gray-6) 60%, transparent);
     border: 1px solid var(--sl-color-gray-5);
@@ -448,7 +448,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     text-decoration: none !important;
   }
 
-  /* ─── Shields.io row ──────────────────────────────────────── */
+  
   .shields-row {
     display: flex;
     flex-wrap: wrap;
@@ -489,7 +489,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     gap: 0.6rem;
   }
 
-  /* Skeleton loader */
+  
   .status-badge.skeleton {
     width: 140px;
     height: 34px;
@@ -509,7 +509,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     100% { background-position: -200% 0; }
   }
 
-  /* Live badges */
+  
   .status-badge {
     display: inline-flex;
     align-items: center;
@@ -584,7 +584,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     white-space: nowrap;
   }
 
-  /* ─── Tech Stack ───────────────────────────────────────────── */
+  
   .footer-tech {
     display: flex;
     align-items: center;
@@ -624,7 +624,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     color: var(--sl-color-gray-1);
   }
 
-  /* ─── Divider ──────────────────────────────────────────────── */
+  
   .footer-divider {
     height: 1px;
     background: linear-gradient(90deg,
@@ -636,7 +636,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     margin-bottom: 1.5rem;
   }
 
-  /* ─── Bottom Bar ───────────────────────────────────────────── */
+  
   .footer-bottom {
     display: flex;
     flex-direction: column;
@@ -664,7 +664,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
   }
 
 
-  /* Light-mode overrides */
+  
   :global([data-theme="light"]) .footer-status {
     background: color-mix(in srgb, var(--sl-color-gray-6) 80%, transparent);
     border-color: var(--sl-color-gray-5);
@@ -702,7 +702,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
   const latencyImg  = document.getElementById('footer-latency-img');
   if (!shieldsRow) return;
 
-  // ── Helpers ─────────────────────────────────────────────────
+  
   const shieldColor = (s) => {
     if (!s) return 'lightgrey';
     if (s === 'operational') return 'brightgreen';
@@ -718,7 +718,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     return '';
   };
 
-  // Latency color tier for shields.io
+  
   const latencyColor = (ms) => {
     if (ms <  80)  return 'brightgreen';
     if (ms < 200)  return 'green';
@@ -726,10 +726,10 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     return 'red';
   };
 
-  // ── Measure live latency ─────────────────────────────────────
+  
   const measureLatency = async () => {
     try {
-      // Warm-up first (DNS/TCP), then measure on warm connection
+      
       await fetch(PROBE, { cache: 'no-store', mode: 'cors' });
       const t0 = performance.now();
       await fetch(PROBE, { cache: 'no-store', mode: 'cors' });
@@ -739,7 +739,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     }
   };
 
-  // ── Render latency badge ─────────────────────────────────────
+  
   const renderLatency = async () => {
     if (!latencyImg) return;
     const ms = await measureLatency();
@@ -755,30 +755,30 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     }
   };
 
-  // ── Status API ───────────────────────────────────────────────
+  
   const fetchStatus = async () => {
     try {
       const res  = await fetch(API, { cache: 'no-store' });
       if (!res.ok) throw new Error('fetch failed');
       const data = await res.json();
 
-      // Pulse-color the global dot
+      
       if (globalDot && data.status) {
         const cls = globalDotClass(data.status.indicator);
         if (cls) globalDot.classList.add(cls);
       }
 
-      // Update master badge color based on real status
+      
       const masterImg = shieldsRow.querySelector('.master-shield .shield-img');
       if (masterImg && data.status) {
         const color = shieldColor(data.status.indicator === 'none' ? 'operational' : data.status.indicator);
         masterImg.src = `https://img.shields.io/badge/dynamic/json?style=flat&color=${color}&label=status&query=%24.status.description&url=https%3A%2F%2Fzlfyqp3hlvly.statuspage.io%2Fapi%2Fv2%2Fsummary.json`;
       }
 
-    } catch (_) { /* silent fail */ }
+    } catch (_) {  }
   };
 
-  // ── OpenAPI Badge Theming & Layout Cleanups ─────────────────
+  
   const themeOpenAPIBadges = () => {
     const types = document.querySelectorAll('.sl-openapi-type');
     const validTypes = ['integer', 'string', 'boolean', 'object', 'array'];
@@ -811,7 +811,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
       }
     });
 
-    // ── Custom Snippet Selector Dropdown ────────────────────────
+    
     document.querySelectorAll('sl-openapi-snippet-picker').forEach(picker => {
       if (picker.dataset.customized) return;
       picker.dataset.customized = "true";
@@ -924,7 +924,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
       picker.appendChild(wrapper);
     });
 
-    // ── Table/Grid Header Insertion ─────────────────────────────
+    
     document.querySelectorAll('.sl-openapi-keys').forEach(keysContainer => {
       if (keysContainer.closest('.sl-openapi-key-description')) return;
       if (keysContainer.querySelector('.sl-openapi-key-header')) return;
@@ -939,7 +939,7 @@ const STATUS_API = 'https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json'
     });
   };
 
-  // Run both in parallel and start badge theme engine
+  
   themeOpenAPIBadges();
   new MutationObserver(themeOpenAPIBadges).observe(document.body, {
     childList: true,

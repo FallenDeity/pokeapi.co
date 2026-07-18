@@ -1,10 +1,4 @@
-/**
- * kokiInit — renders a JSON tree into `container`.
- * @param {string}  jsonString   JSON string to render
- * @param {Element} container    Target DOM element (will be cleared)
- * @param {string}  [kokiTitle]  Optional header ('' = no header)
- * @param {boolean} [openDetails] Open shallow nodes by default
- */
+
 function kokiInit(jsonString, container, kokiTitle, openDetails) {
   if (kokiTitle   === undefined) kokiTitle   = ''
   if (openDetails === undefined) openDetails = true
@@ -20,7 +14,7 @@ function kokiInit(jsonString, container, kokiTitle, openDetails) {
   container.classList.add('arbol-root')
   container.innerHTML = ''
 
-  // Optional title header
+  
   if (kokiTitle) {
     var header = document.createElement('div')
     header.className = 'koki-tree-header'
@@ -50,7 +44,7 @@ function kokiArbol(data, keyName, parentArr, openDetails, level) {
     var length   = isArray ? data.length : Object.keys(data).length
     var entries  = isArray ? data.entries() : Object.entries(data)
 
-    // Auto-close deep or large nodes
+    
     var nodeOpen = (level === 0 && openDetails) ||
                    (openDetails && level < 2 && length < 17)
 

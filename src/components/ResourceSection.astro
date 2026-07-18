@@ -22,7 +22,7 @@ const validTypes = [
         <span class="font-light opacity-80"> (Endpoint)</span>
       </h3>
 
-      <!-- <p>{marked.parse(obj.description)}</p> -->
+      
       {obj.description && <p set:html={marked.parse(obj.description)}></p>}
 
       <div>

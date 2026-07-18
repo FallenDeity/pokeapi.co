@@ -1,6 +1,6 @@
-/* Shadcn & Next.js inspired styles for PokéAPI Doc Components */
 
-/* Link Card Overrides */
+
+
 .sl-link-card {
   position: relative !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -12,7 +12,7 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
 }
 
-/* Bulletproof text decoration strip for link card contents */
+
 :root .sl-markdown-content .sl-link-card a,
 :root .sl-markdown-content a.sl-link-card {
   text-decoration: none !important;
@@ -28,7 +28,7 @@
 .sl-link-card:hover {
   transform: translateY(-4px) !important;
   border-color: var(--sl-color-accent) !important;
-  background: rgba(59, 130, 246, 0.08) !important; /* Beautiful subtle accent blue background on hover */
+  background: rgba(59, 130, 246, 0.08) !important; 
   box-shadow: 0 12px 24px -10px rgba(59, 130, 246, 0.4), 0 0 0 1px var(--sl-color-accent) !important;
 }
 
@@ -44,7 +44,7 @@
   transition: color 0.2s ease !important;
 }
 
-/* Ensure title color does not change on hover */
+
 .sl-link-card:hover .title,
 .sl-markdown-content a.sl-link-card:hover .title {
   color: var(--sl-color-white) !important;
@@ -67,12 +67,12 @@
   margin-top: 0.5rem !important;
 }
 
-/* Card Grid Layout Adjustments */
+
 .card-grid {
   gap: 1.5rem !important;
 }
 
-/* Info Cards (non-link) Overrides */
+
 .card {
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   background: rgba(15, 23, 42, 0.15) !important;
@@ -95,7 +95,7 @@
   background: rgba(255, 255, 255, 0.5) !important;
 }
 
-/* Steps Component Overrides */
+
 .sl-steps {
   border-inline-start: 1px solid rgba(59, 130, 246, 0.15) !important;
   padding-inline-start: 1.5rem !important;
@@ -210,24 +210,24 @@
   border: none !important;
 }
 
-/* Color Variables - exact MkDocs Material admonition palette */
+
 .aside--note, [class*="aside--note"] {
-  --aside-color: #447feb !important; /* MkDocs note blue */
+  --aside-color: #447feb !important; 
 }
 
 .aside--tip, [class*="aside--tip"] {
-  --aside-color: #00e676 !important; /* MkDocs tip/success green */
+  --aside-color: #00e676 !important; 
 }
 
 .aside--caution, [class*="aside--caution"] {
-  --aside-color: #ff9100 !important; /* MkDocs warning orange */
+  --aside-color: #ff9100 !important; 
 }
 
 .aside--danger, [class*="aside--danger"] {
-  --aside-color: #ff5252 !important; /* MkDocs failure red */
+  --aside-color: #ff5252 !important; 
 }
 
-/* Tab Control Overrides */
+
 starlight-tabs [role="tablist"] {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
   margin-bottom: 1rem !important;
@@ -259,7 +259,7 @@ starlight-tabs [role="tab"][aria-selected="true"] {
   border: none !important;
 }
 
-/* Keyboard Shortcut Styling */
+
 kbd {
   background-color: rgba(255, 255, 255, 0.08) !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
@@ -276,7 +276,7 @@ kbd {
   color: var(--sl-color-white) !important;
 }
 
-/* Nested kbd styling (e.g. Starlight search shortcut) */
+
 kbd:has(kbd) {
   background: transparent !important;
   border: none !important;
@@ -303,13 +303,13 @@ kbd kbd {
 }
 
 kbd kbd + kbd {
-  margin-inline-start: 1.25rem !important; /* Create gap for the "+" */
+  margin-inline-start: 1.25rem !important; 
 }
 
 kbd kbd + kbd::before {
   content: "+" !important;
   position: absolute !important;
-  left: -0.85rem !important; /* Position in the center of the gap */
+  left: -0.85rem !important; 
   top: 50% !important;
   transform: translateY(-50%) !important;
   color: var(--sl-color-gray-3) !important;
@@ -322,7 +322,7 @@ kbd kbd + kbd::before {
   color: var(--sl-color-gray-4) !important;
 }
 
-/* Custom Badges (themed like OpenAPI Type Badges) */
+
 .sl-badge {
   display: inline-flex !important;
   align-items: center !important;
@@ -338,7 +338,7 @@ kbd kbd + kbd::before {
   margin-right: 0.25rem !important;
 }
 
-/* Default / Accent badge */
+
 .sl-badge.default {
   background-color: rgba(99, 102, 241, 0.08) !important;
   color: #818cf8 !important;
@@ -350,7 +350,7 @@ kbd kbd + kbd::before {
   border-color: rgba(79, 70, 229, 0.15) !important;
 }
 
-/* Note badge (Blue) */
+
 .sl-badge.note {
   background-color: rgba(59, 130, 246, 0.08) !important;
   color: #60a5fa !important;
@@ -362,7 +362,7 @@ kbd kbd + kbd::before {
   border-color: rgba(37, 99, 235, 0.15) !important;
 }
 
-/* Success badge (Green) */
+
 .sl-badge.success {
   background-color: rgba(16, 185, 129, 0.08) !important;
   color: #34d399 !important;
@@ -374,7 +374,7 @@ kbd kbd + kbd::before {
   border-color: rgba(5, 150, 105, 0.15) !important;
 }
 
-/* Caution badge (Orange) */
+
 .sl-badge.caution {
   background-color: rgba(245, 158, 11, 0.08) !important;
   color: #fbbf24 !important;
@@ -386,7 +386,7 @@ kbd kbd + kbd::before {
   border-color: rgba(217, 119, 6, 0.15) !important;
 }
 
-/* Danger badge (Red) */
+
 .sl-badge.danger {
   background-color: rgba(244, 63, 94, 0.08) !important;
   color: #fb7185 !important;
@@ -398,7 +398,7 @@ kbd kbd + kbd::before {
   border-color: rgba(225, 29, 72, 0.15) !important;
 }
 
-/* Tip badge (Purple) */
+
 .sl-badge.tip {
   background-color: rgba(139, 92, 246, 0.08) !important;
   color: #a78bfa !important;

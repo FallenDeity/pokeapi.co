@@ -7,10 +7,8 @@ import SocialIcons from './SocialIcons.astro'
 
 import PokeNav from './PokeNav.astro'
 
-/**
- * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
- */
-// const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro'
+
+
 ---
 
 <div class="header sl-flex">
@@ -18,7 +16,7 @@ import PokeNav from './PokeNav.astro'
     <SiteTitle />
   </div>
   <div class="sl-flex print:hidden">
-    <!-- {shouldRenderSearch && <Search />} -->
+    
     <Search />
   </div>
   <div class="sl-hidden md:sl-flex print:hidden right-group">
@@ -42,9 +40,9 @@ import PokeNav from './PokeNav.astro'
   }
 
   .title-wrapper {
-    /* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
+    
     overflow: clip;
-    /* Avoid clipping focus ring around link inside title wrapper. */
+    
     padding: 0.25rem;
     margin: -0.25rem;
     min-width: 0;
@@ -84,17 +82,17 @@ import PokeNav from './PokeNav.astro'
           / 2
       );
       display: grid;
-      grid-template-columns: /* 1 (site title): runs up until the main content column's left edge or the width of the title, whichever is the largest  */
+      grid-template-columns: 
         minmax(
         calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))),
         auto
-      ) /* 2 (search box): all free space that is available. */ 1fr /* 3 (right items): use the space that these need. */ auto;
+      )  1fr  auto;
       align-content: center;
     }
   }
 </style>
 
-<!-- Back to Top Button -->
+
 <button id="back-to-top" class="back-to-top" aria-label="Back to top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="m18 15-6-6-6 6"/>
@@ -108,7 +106,7 @@ import PokeNav from './PokeNav.astro'
     right: 2rem;
     width: 44px;
     height: 44px;
-    border-radius: 8px; /* Matching our modern button styles */
+    border-radius: 8px; 
     background-color: var(--sl-color-gray-6);
     border: 1px solid var(--sl-color-gray-5);
     color: var(--sl-color-white);
@@ -120,7 +118,7 @@ import PokeNav from './PokeNav.astro'
     visibility: hidden;
     transform: translateY(10px);
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 99999 !important; /* Raised above everything including sidebars */
+    z-index: 99999 !important; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   }
 

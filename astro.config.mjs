@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
 import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi'
 import tailwindcss from '@tailwindcss/vite'
-import { parse, stringify } from 'yaml'
+import { stringify } from 'yaml'
 import { bundle } from '@readme/openapi-parser'
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -110,19 +110,9 @@ export default defineConfig({
         },
         {
           label: 'How-To Guides',
+          collapsed: true,
           items: [
-            {
-              label: 'Introduction',
-              link: 'how-tos',
-            },
-            {
-              label: 'Writing Guides',
-              link: 'how-tos/writing-guides',
-            },
-            {
-              label: 'Pokedex Promise v2',
-              link: 'how-tos/pokedex-promise-v2',
-            },
+            { autogenerate: { directory: 'how-tos' } }
           ],
         },
       ],

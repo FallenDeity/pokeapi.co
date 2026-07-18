@@ -8,7 +8,7 @@ export default {
       name: 'force-terminal-frames',
       hooks: {
         preprocessMetadata: ({ codeBlock }) => {
-          // Force JSON examples (used on OpenAPI pages) to render using terminal frames
+          
           if (codeBlock.language === 'json') {
             codeBlock.props.frame = 'terminal';
           }

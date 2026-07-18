@@ -1,10 +1,10 @@
 ---
-// Custom SocialIcons override — renders GitHub and Slack with their real brand colors.
-// Following the Starlight component override pattern:
-// https://starlight.astro.build/guides/overriding-components/
+
+
+
 ---
 
-<!-- GitHub — uses currentColor so it renders correctly in all contexts including the mobile menu drawer -->
+
 <a href="https://github.com/pokeapi/pokeapi" rel="me" target="_blank" class="sl-flex icon-link github-link" aria-label="GitHub">
   <span class="sr-only">GitHub</span>
   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg">
@@ -17,7 +17,7 @@
   </svg>
 </a>
 
-<!-- Slack — full 4-color pinwheel logo -->
+
 <a href="https://pokeapi.slack.com/" rel="me" target="_blank" class="sl-flex icon-link" aria-label="Slack">
   <span class="sr-only">Slack</span>
   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 127 127" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +34,7 @@
 
 <style>
   .icon-link {
-    /* Match Starlight's default social icon link sizing */
+    
     margin: -0.5em;
     padding: 0.5em;
     color: var(--sl-color-text-accent);
@@ -48,7 +48,7 @@
     transform: translateY(-1px);
   }
 
-  /* GitHub: silver-white in dark mode, near-black in light mode */
+  
   .github-link {
     color: #c9d1d9;
   }

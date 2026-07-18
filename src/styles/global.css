@@ -1131,12 +1131,12 @@ starlight-toc ul ul {
               visibility 0.2s ease;
 }
 starlight-toc li:has(a[aria-current="true"]) > ul {
-  max-height: 500px; /* Safe limit for heading lists */
+  max-height: 500px; 
   opacity: 1;
   visibility: visible;
 }
 
-/* --- Page Transition Animation --- */
+
 main {
   transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out !important;
 }

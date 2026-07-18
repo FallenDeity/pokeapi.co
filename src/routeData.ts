@@ -30,17 +30,14 @@ const tocMapping: Record<string, any[]> = {
 export const onRequest = defineRouteMiddleware((context) => {
   const { starlightRoute } = context.locals;
 
-  // Only apply to the API page (v2)
   if (starlightRoute.id === 'v2/index' || starlightRoute.id === 'v2') {
     if (starlightRoute.toc && starlightRoute.toc.items) {
       starlightRoute.toc.items = starlightRoute.toc.items.map((item) => {
-        // Debug slug mapping if needed: console.log('TOC Slug:', item.slug);
         const endpoints = tocMapping[item.slug];
 
         if (endpoints) {
           const children = endpoints.map((endpoint) => ({
             depth: 3,
-            // The id of the heading in ResourceSection.astro is exactly endpoint.name
             slug: endpoint.name,
             text: endpoint.name,
             children: [],
