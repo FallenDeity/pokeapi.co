@@ -1,6 +1,12 @@
-<div class="scroll-next-indicator" id="scroll-next-indicator" style="display: none;">
-  <div class="scroll-next-content">
-    <div class="scroll-indicator-arrow">
+<div
+  class="scroll-next-indicator hidden items-center justify-center bg-transparent py-8 px-2 pb-[5.5rem] box-border"
+  id="scroll-next-indicator"
+  style="display: none;"
+>
+  <div class="flex flex-col items-center justify-center gap-2.5">
+    <div
+      class="flex items-center justify-center w-8 h-8 rounded-full bg-[color-mix(in_srgb,var(--sl-color-gray-6)_40%,transparent)] border-2 border-[var(--sl-color-accent)] text-[var(--sl-color-accent)] shadow-[0_0_6px_color-mix(in_srgb,var(--sl-color-accent)_20%,transparent)] animate-[indicator-bounce_2s_infinite_ease-in-out]"
+    >
       <svg
         width="16"
         height="16"
@@ -10,12 +16,17 @@
         stroke-width="2.5"
         stroke-linecap="round"
         stroke-linejoin="round"
+        aria-hidden="true"
       >
         <path d="M12 5v14M19 12l-7 7-7-7"></path>
       </svg>
     </div>
-    <div class="scroll-indicator-badge">
-      <span class="scroll-indicator-text">Keep scrolling to load the next guide</span>
+    <div
+      class="inline-flex items-center justify-center bg-[color-mix(in_srgb,var(--sl-color-gray-6)_65%,transparent)] backdrop-blur-md border border-[var(--sl-color-gray-5)] py-2 px-[0.95rem] rounded-full shadow-[var(--sl-shadow-md)] mt-1.5"
+    >
+      <span class="text-[0.78rem] text-[var(--sl-color-gray-3)] font-sans font-medium leading-[1.1]"
+        >Keep scrolling to load the next guide</span
+      >
     </div>
   </div>
 </div>
