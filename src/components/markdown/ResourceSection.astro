@@ -99,7 +99,7 @@ function isPrimitive(t: FieldType): t is PrimitiveType {
                       <code>{field.name}</code>
                     </strong>
                   </td>
-                  <td class="text-xs sm:text-sm">{field.description}</td>
+                  <td class="text-xs sm:text-sm" set:html={marked.parseInline(field.description)} />
                   <td class="text-xs sm:text-sm">
                     {typeof field.type === "string" ? (
                       isPrimitive(field.type) ? (
