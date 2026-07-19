@@ -15,11 +15,11 @@ commands:
             echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
             echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
       - run:
-          name: Use Node 22
+          name: Use Node LTS
           command: |
-            nvm install 22
-            nvm use 22
-            nvm alias default 22
+            nvm install lts
+            nvm use lts
+            nvm alias default lts
       - run:
           name: Enable Corepack
           command: corepack enable

@@ -8,18 +8,20 @@ import SocialIcons from "./SocialIcons.astro";
 import PokeNav from "./PokeNav.astro";
 ---
 
-<div class="header sl-flex">
-  <div class="title-wrapper sl-flex">
+<div
+  class="header flex h-full items-center justify-between gap-(--sl-nav-gap) min-[50rem]:grid min-[50rem]:grid-cols-[minmax(calc(var(--__sidebar-width)+max(0rem,var(--__main-column-fr)-var(--sl-nav-gap))),auto)_1fr_auto] min-[50rem]:content-center"
+>
+  <div class="-m-1 flex min-w-0 overflow-clip p-1">
     <SiteTitle />
   </div>
-  <div class="sl-flex print:hidden">
+  <div class="flex print:hidden">
     <Search />
   </div>
-  <div class="sl-hidden md:sl-flex right-group print:hidden">
-    <div class="sl-flex poke-navigation">
+  <div class="hidden items-center gap-4 md:flex print:hidden">
+    <div class="flex items-center gap-4 after:h-8 after:border-r after:border-(--sl-color-gray-5) after:content-['']">
       <PokeNav />
     </div>
-    <div class="sl-flex social-icons">
+    <div class="flex items-center gap-4 after:h-8 after:border-r after:border-(--sl-color-gray-5) after:content-['']">
       <SocialIcons />
     </div>
     <ThemeToggle />
@@ -28,34 +30,6 @@ import PokeNav from "./PokeNav.astro";
 </div>
 
 <style>
-  .header {
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--sl-nav-gap);
-    height: 100%;
-  }
-
-  .title-wrapper {
-    margin: -0.25rem;
-
-    padding: 0.25rem;
-    min-width: 0;
-    overflow: clip;
-  }
-
-  .right-group,
-  .social-icons {
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .social-icons::after,
-  .poke-navigation::after {
-    border-inline-end: 1px solid var(--sl-color-gray-5);
-    height: 2rem;
-    content: "";
-  }
-
   @media (min-width: 50rem) {
     :global(:root[data-has-sidebar]) {
       --__sidebar-pad: calc(2 * var(--sl-nav-pad-x));
@@ -74,11 +48,6 @@ import PokeNav from "./PokeNav.astro";
           ) /
           2
       );
-      display: grid;
-      grid-template-columns:
-        minmax(calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))), auto)
-        1fr auto;
-      align-content: center;
     }
   }
 </style>

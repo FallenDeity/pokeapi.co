@@ -14,35 +14,50 @@ try {
   const schemaFile = readFileSync(schemaPath, "utf-8");
   const schema = parse(schemaFile);
 
-  if (schema && schema.paths) {
+  if (schema) {
     const tags = new Set<string>();
+
+    const tagDescriptions: Record<string, string> = {};
+    if (schema.tags && Array.isArray(schema.tags)) {
+      for (const tagObj of schema.tags) {
+        if (tagObj && tagObj.name && tagObj.description) {
+          let tagDesc = tagObj.description;
+          if (tagObj.externalDocs && tagObj.externalDocs.description) {
+            tagDesc += " " + tagObj.externalDocs.description;
+          }
+          tagDescriptions[tagObj.name.toLowerCase()] = tagDesc;
+        }
+      }
+    }
 
     pages["v2/openapi"] = {
       data: {
         title: "OpenAPI Specifications",
-        description: "Full developer API schemas and interactive endpoint specifications for PokéAPI.",
+        description: schema.info?.description || "Full developer API schemas and interactive endpoint specifications for PokéAPI.",
       },
     };
 
-    for (const [pathKey, pathItem] of Object.entries(schema.paths)) {
-      if (pathItem && typeof pathItem === "object") {
-        for (const [method, operation] of Object.entries(pathItem)) {
-          if (operation && typeof operation === "object" && "operationId" in operation) {
-            const op = operation as any;
-            const operationId = op.operationId;
+    if (schema.paths) {
+      for (const [pathKey, pathItem] of Object.entries(schema.paths)) {
+        if (pathItem && typeof pathItem === "object") {
+          for (const [method, operation] of Object.entries(pathItem)) {
+            if (operation && typeof operation === "object" && "operationId" in operation) {
+              const op = operation as any;
+              const operationId = op.operationId;
 
-            const cleanTitle = (op.summary || operationId).replace(/_/g, " ").replace(/\//g, " ");
+              const cleanTitle = (op.summary || operationId).replace(/_/g, " ").replace(/\//g, " ");
 
-            pages[`v2/openapi/operations/${operationId}`] = {
-              data: {
-                title: cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1),
-                description: op.description || `API reference documentation for the ${operationId} endpoint.`,
-              },
-            };
+              pages[`v2/openapi/operations/${operationId}`] = {
+                data: {
+                  title: cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1),
+                  description: op.description || `API reference documentation for the ${operationId} endpoint.`,
+                },
+              };
 
-            if (op.tags && Array.isArray(op.tags)) {
-              for (const tag of op.tags) {
-                tags.add(tag);
+              if (op.tags && Array.isArray(op.tags)) {
+                for (const tag of op.tags) {
+                  tags.add(tag);
+                }
               }
             }
           }
@@ -55,7 +70,7 @@ try {
       pages[`v2/openapi/operations/tags/${cleanTag}`] = {
         data: {
           title: `${tag.charAt(0).toUpperCase() + tag.slice(1)} Endpoints`,
-          description: `API reference lists for all endpoints tagged under ${tag}.`,
+          description: tagDescriptions[cleanTag] || `API reference lists for all endpoints tagged under ${tag}.`,
         },
       };
     }
