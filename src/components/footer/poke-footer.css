@@ -35,62 +35,62 @@
 @keyframes pulse-dot {
   0%,
   100% {
-    opacity: 1;
     transform: scale(1);
+    opacity: 1;
   }
   50% {
-    opacity: 0.5;
     transform: scale(0.8);
+    opacity: 0.5;
   }
 }
 
 .footer-bg {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .bg-blob {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
   opacity: 0.06;
+  filter: blur(80px);
   animation: blobFloat 12s ease-in-out infinite;
+  border-radius: 50%;
 }
 
 .bg-blob-1 {
-  width: 400px;
-  height: 400px;
-  background: var(--sl-color-accent);
   top: -120px;
   left: -80px;
   animation-delay: 0s;
+  background: var(--sl-color-accent);
+  width: 400px;
+  height: 400px;
 }
 
 .bg-blob-2 {
+  right: 10%;
+  bottom: -100px;
+  animation-delay: -4s;
+  background: var(--pokemon-yellow);
   width: 350px;
   height: 350px;
-  background: var(--pokemon-yellow);
-  bottom: -100px;
-  right: 10%;
-  animation-delay: -4s;
 }
 
 .bg-blob-3 {
-  width: 280px;
-  height: 280px;
-  background: #a855f7;
   top: 40%;
   left: 50%;
   transform: translateX(-50%);
   animation-delay: -8s;
+  background: #a855f7;
+  width: 280px;
+  height: 280px;
 }
 
 .github-pill {
+  border-color: #444;
   background: #24292e;
   color: #c9d1d9;
-  border-color: #444;
 }
 
 .github-pill:hover {
@@ -98,9 +98,9 @@
 }
 
 .slack-pill {
+  border-color: #4a1942;
   background: #1a1a2e;
   color: #e2e2e2;
-  border-color: #4a1942;
 }
 
 .slack-pill:hover {
@@ -108,16 +108,16 @@
 }
 
 .status-header-dot.dot-operational {
-  background: #22c55e;
   box-shadow: 0 0 6px #22c55e80;
+  background: #22c55e;
 }
 .status-header-dot.dot-degraded {
-  background: #f59e0b;
   box-shadow: 0 0 6px #f59e0b80;
+  background: #f59e0b;
 }
 .status-header-dot.dot-outage {
-  background: #ef4444;
   box-shadow: 0 0 6px #ef444480;
+  background: #ef4444;
 }
 
 .status-badges {
@@ -127,8 +127,8 @@
 }
 
 .status-badge.skeleton {
-  width: 140px;
-  height: 34px;
+  animation: shimmer 1.5s infinite;
+  border: none;
   border-radius: 8px;
   background: linear-gradient(
     90deg,
@@ -137,24 +137,24 @@
     var(--sl-color-gray-5) 75%
   );
   background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border: none;
+  width: 140px;
+  height: 34px;
 }
 
 .status-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.375rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-weight: 500;
-  border: 1px solid;
-  text-decoration: none !important;
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease;
   cursor: default;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 0.375rem 0.75rem;
+  font-weight: 500;
+  font-size: 0.78rem;
+  text-decoration: none !important;
 }
 
 .status-badge:not(.skeleton):hover {
@@ -162,35 +162,35 @@
 }
 
 .status-badge--operational {
-  background: color-mix(in srgb, #22c55e 8%, transparent);
   border-color: color-mix(in srgb, #22c55e 25%, transparent);
+  background: color-mix(in srgb, #22c55e 8%, transparent);
   color: #4ade80;
 }
 
 .status-badge--degraded {
-  background: color-mix(in srgb, #f59e0b 8%, transparent);
   border-color: color-mix(in srgb, #f59e0b 25%, transparent);
+  background: color-mix(in srgb, #f59e0b 8%, transparent);
   color: #fbbf24;
 }
 
 .status-badge--outage {
-  background: color-mix(in srgb, #ef4444 8%, transparent);
   border-color: color-mix(in srgb, #ef4444 25%, transparent);
+  background: color-mix(in srgb, #ef4444 8%, transparent);
   color: #f87171;
 }
 
 .status-badge--unknown {
-  background: color-mix(in srgb, var(--sl-color-gray-3) 8%, transparent);
   border-color: var(--sl-color-gray-4);
+  background: color-mix(in srgb, var(--sl-color-gray-3) 8%, transparent);
   color: var(--sl-color-gray-2);
 }
 
 .badge-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
   flex-shrink: 0;
   animation: pulse-dot 2.5s ease-in-out infinite;
+  border-radius: 50%;
+  width: 7px;
+  height: 7px;
 }
 
 .status-badge--operational .badge-dot {
@@ -200,43 +200,43 @@
   background: #f59e0b;
 }
 .status-badge--outage .badge-dot {
-  background: #ef4444;
   animation: none;
+  background: #ef4444;
 }
 .status-badge--unknown .badge-dot {
-  background: var(--sl-color-gray-3);
   animation: none;
+  background: var(--sl-color-gray-3);
 }
 
 .badge-name {
-  white-space: nowrap;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .badge-type {
-  font-size: 0.67rem;
   opacity: 0.6;
   font-weight: 400;
+  font-size: 0.67rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 [data-theme="light"] .footer-status {
-  background: color-mix(in srgb, var(--sl-color-gray-6) 80%, transparent);
   border-color: var(--sl-color-gray-5);
+  background: color-mix(in srgb, var(--sl-color-gray-6) 80%, transparent);
 }
 
 [data-theme="light"] .github-pill {
+  border-color: #d0d7de;
   background: #f6f8fa;
   color: #24292e;
-  border-color: #d0d7de;
 }
 
 [data-theme="light"] .slack-pill {
+  border-color: #e4e0e0;
   background: #fafafa;
   color: #1d1c1d;
-  border-color: #e4e0e0;
 }
 
 [data-theme="light"] .bg-blob {

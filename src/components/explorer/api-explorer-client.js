@@ -42,7 +42,22 @@
       if (keys.length === 0) {
         var emptyStr = isArray ? "[]" : "{}";
         state.line++;
-        return '<span class="json-punct" data-line="' + state.line + '">' + emptyStr + "</span>" + commaHtml;
+        var prefix = "";
+        if (key) {
+          prefix = '<span class="json-key">"' + escStringVal(key) + '"</span><span class="json-punct">:</span> ';
+        }
+        return (
+          '<div class="raw-line" data-line="' +
+          state.line +
+          '">' +
+          indent +
+          prefix +
+          '<span class="json-punct">' +
+          emptyStr +
+          "</span>" +
+          commaHtml +
+          "</div>"
+        );
       }
 
       var openChar = isArray ? "[" : "{";

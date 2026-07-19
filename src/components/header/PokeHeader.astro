@@ -29,31 +29,31 @@ import PokeNav from "./PokeNav.astro";
 
 <style>
   .header {
-    gap: var(--sl-nav-gap);
     justify-content: space-between;
     align-items: center;
+    gap: var(--sl-nav-gap);
     height: 100%;
   }
 
   .title-wrapper {
-    overflow: clip;
+    margin: -0.25rem;
 
     padding: 0.25rem;
-    margin: -0.25rem;
     min-width: 0;
+    overflow: clip;
   }
 
   .right-group,
   .social-icons {
-    gap: 1rem;
     align-items: center;
+    gap: 1rem;
   }
 
   .social-icons::after,
   .poke-navigation::after {
-    content: "";
-    height: 2rem;
     border-inline-end: 1px solid var(--sl-color-gray-5);
+    height: 2rem;
+    content: "";
   }
 
   @media (min-width: 50rem) {
@@ -83,7 +83,12 @@ import PokeNav from "./PokeNav.astro";
   }
 </style>
 
-<button id="back-to-top" class="back-to-top" aria-label="Back to top" type="button">
+<button
+  id="back-to-top"
+  class="back-to-top invisible fixed right-8 bottom-8 z-99999 flex h-11 w-11 translate-y-2.5 cursor-pointer items-center justify-center rounded-lg border border-(--sl-color-gray-5) bg-(--sl-color-gray-6) text-(--sl-color-white) opacity-0 shadow-[0_4px_12px_rgba(0,0,0,0.25)] transition-all duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:border-(--sl-color-accent) hover:bg-(--sl-color-gray-5) hover:text-(--sl-color-accent-high) hover:shadow-[0_6px_16px_rgba(59,130,246,0.25)] active:translate-y-0 [&.visible]:visible [&.visible]:translate-y-0 [&.visible]:opacity-100"
+  aria-label="Back to top"
+  type="button"
+>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="20"
@@ -98,48 +103,6 @@ import PokeNav from "./PokeNav.astro";
     <path d="m18 15-6-6-6 6"></path>
   </svg>
 </button>
-
-<style is:global>
-  .back-to-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 44px;
-    height: 44px;
-    border-radius: 8px;
-    background-color: var(--sl-color-gray-6);
-    border: 1px solid var(--sl-color-gray-5);
-    color: var(--sl-color-white);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 99999 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  }
-
-  .back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .back-to-top:hover {
-    background-color: var(--sl-color-gray-5);
-    border-color: var(--sl-color-accent);
-    color: var(--sl-color-accent-high);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.25);
-  }
-
-  .back-to-top:active {
-    transform: translateY(0);
-  }
-</style>
 
 <script>
   const btn = document.getElementById("back-to-top");

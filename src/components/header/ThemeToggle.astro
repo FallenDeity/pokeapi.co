@@ -2,9 +2,12 @@
 
 ---
 
-<div class="theme-toggle-wrapper" title="Toggle theme">
-  <label class="theme-slider-label" aria-label="Toggle dark/light theme">
-    <span class="theme-icon sun-icon" aria-hidden="true">
+<div class="flex items-center" title="Toggle theme">
+  <label class="flex cursor-pointer items-center gap-1.75 select-none" aria-label="Toggle dark/light theme">
+    <span
+      class="sun-icon flex h-4.5 w-4.5 scale-85 items-center justify-center text-(--sl-color-gray-3) opacity-45 transition-all duration-300 ease-in-out [:root[data-theme=light]_&]:scale-105 [:root[data-theme=light]_&]:text-[#f59e0b] [:root[data-theme=light]_&]:opacity-100"
+      aria-hidden="true"
+    >
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
         <circle cx="12" cy="12" r="4"></circle>
         <path
@@ -16,11 +19,21 @@
       </svg>
     </span>
 
-    <button class="theme-slider-track" role="switch" aria-checked="true" aria-label="Toggle dark/light mode">
-      <span class="theme-slider-thumb"></span>
+    <button
+      class="theme-slider-track relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-[1.5px] border-[rgba(59,130,246,0.35)] bg-linear-to-br from-[#1a1f2e] to-[#252840] p-0 shadow-[inset_0_1px_3px_rgba(0,0,0,0.5),0_0_10px_rgba(59,130,246,0.12)] transition-[background,border-color,box-shadow] duration-300 ease-in-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--sl-color-accent) [:root[data-theme=light]_&]:border-[#f59e0b] [:root[data-theme=light]_&]:bg-linear-to-br [:root[data-theme=light]_&]:from-[#fde68a] [:root[data-theme=light]_&]:to-[#fbbf24] [:root[data-theme=light]_&]:shadow-[inset_0_1px_3px_rgba(0,0,0,0.1),0_0_10px_rgba(251,191,36,0.3)]"
+      role="switch"
+      aria-checked="true"
+      aria-label="Toggle dark/light mode"
+    >
+      <span
+        class="theme-slider-thumb pointer-events-none absolute top-0.5 left-0.5 h-4.5 w-4.5 translate-x-5 rounded-full bg-linear-to-br from-[#60a5fa] to-[#2563eb] shadow-[0_1px_6px_rgba(37,99,235,0.55)] transition-[transform,background,box-shadow] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] [:root[data-theme=light]_&]:translate-x-0 [:root[data-theme=light]_&]:from-[#fff7ed] [:root[data-theme=light]_&]:to-[#fef3c7] [:root[data-theme=light]_&]:shadow-[0_1px_6px_rgba(245,158,11,0.5)]"
+      ></span>
     </button>
 
-    <span class="theme-icon moon-icon" aria-hidden="true">
+    <span
+      class="moon-icon flex h-4.5 w-4.5 scale-105 items-center justify-center text-(--sl-color-accent) opacity-100 transition-all duration-300 ease-in-out [:root[data-theme=light]_&]:scale-85 [:root[data-theme=light]_&]:text-(--sl-color-gray-3) [:root[data-theme=light]_&]:opacity-40"
+      aria-hidden="true"
+    >
       <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
@@ -29,116 +42,9 @@
 </div>
 
 <style>
-  .theme-toggle-wrapper {
-    display: flex;
-    align-items: center;
-  }
-
-  .theme-slider-label {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .theme-slider-track {
-    position: relative;
-    display: inline-flex;
-    width: 44px;
-    height: 24px;
-    border-radius: 999px;
-    border: 1.5px solid var(--sl-color-gray-4);
-    cursor: pointer;
-    padding: 0;
-
-    background: linear-gradient(135deg, #1a1f2e 0%, #252840 100%);
-    border-color: rgba(59, 130, 246, 0.35);
-    box-shadow:
-      inset 0 1px 3px rgba(0, 0, 0, 0.5),
-      0 0 10px rgba(59, 130, 246, 0.12);
-    transition:
-      background 0.3s ease,
-      border-color 0.3s ease,
-      box-shadow 0.3s ease;
-    flex-shrink: 0;
-  }
-
-  :root[data-theme="light"] .theme-slider-track {
-    background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%);
-    border-color: #f59e0b;
-    box-shadow:
-      inset 0 1px 3px rgba(0, 0, 0, 0.1),
-      0 0 10px rgba(251, 191, 36, 0.3);
-  }
-
-  .theme-slider-thumb {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    pointer-events: none;
-
-    background: linear-gradient(135deg, #60a5fa, #2563eb);
-    box-shadow: 0 1px 6px rgba(37, 99, 235, 0.55);
-
-    transform: translateX(20px);
-    transition:
-      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-      background 0.3s ease,
-      box-shadow 0.3s ease;
-  }
-
-  :root[data-theme="light"] .theme-slider-thumb {
-    transform: translateX(0px);
-    background: linear-gradient(135deg, #fff7ed, #fef3c7);
-    box-shadow: 0 1px 6px rgba(245, 158, 11, 0.5);
-  }
-
   .theme-slider-track.no-transition,
   .theme-slider-track.no-transition .theme-slider-thumb {
     transition: none !important;
-  }
-
-  .theme-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    transition:
-      color 0.3s ease,
-      opacity 0.3s ease,
-      transform 0.3s ease;
-  }
-
-  :root:not([data-theme="light"]) .sun-icon {
-    color: var(--sl-color-gray-3);
-    opacity: 0.45;
-    transform: scale(0.85);
-  }
-  :root:not([data-theme="light"]) .moon-icon {
-    color: var(--sl-color-accent);
-    opacity: 1;
-    transform: scale(1.05);
-  }
-
-  :root[data-theme="light"] .sun-icon {
-    color: #f59e0b;
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  :root[data-theme="light"] .moon-icon {
-    color: var(--sl-color-gray-3);
-    opacity: 0.4;
-    transform: scale(0.85);
-  }
-
-  .theme-slider-track:focus-visible {
-    outline: 2px solid var(--sl-color-accent);
-    outline-offset: 2px;
   }
 </style>
 

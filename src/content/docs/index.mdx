@@ -30,17 +30,18 @@ import { Card, CardGrid } from '@astrojs/starlight/components'
 
 <ApiExplorer />
 
-<CardGrid>
+<div style={{ marginTop: '3rem' }}>
+  <CardGrid>
+    <Card title="What is this?" icon="puzzle">
+      This is a full **RESTful API** linked to an extensive database detailing everything about the Pokémon main game series.
+      <br/>
+      We've covered everything from Pokémon to Berry Flavors.
+    </Card>
 
-<Card title="What is this?" icon="puzzle">
-    This is a full **RESTful API** linked to an extensive database detailing everything about the Pokémon main game series.
-    <br/>
-    We've covered everything from Pokémon to Berry Flavors.
-  </Card>
-
-<Card title="Where do I start?" icon="rocket">
-    We have awesome [documentation](./v2/) on how to use this API. It takes minutes to get started.
-    <br/>
-    This API will always be publicly available and will never require any extensive setup process to consume.
-  </Card>
-</CardGrid>
+    <Card title="Where do I start?" icon="rocket">
+      We have awesome [documentation](./v2/) on how to use this API. It takes minutes to get started.
+      <br/>
+      This API will always be publicly available and will never require any extensive setup process to consume.
+    </Card>
+  </CardGrid>
+</div>

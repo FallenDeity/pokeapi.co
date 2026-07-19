@@ -1,11 +1,19 @@
 @layer starlight, arbol, koki;
 
 @layer koki {
+  .api-explorer-root :is(.font-mono, pre, code, input, button) {
+    font-family: var(--__sl-font-mono) !important;
+  }
+
+  .explorer-base-url {
+    letter-spacing: 0.01em !important;
+  }
+
   .api-explorer-root pre {
+    margin: 0 !important;
     border: none !important;
     background: none !important;
     padding: 0 !important;
-    margin: 0 !important;
   }
 
   .koki-tree-content {
@@ -23,19 +31,19 @@
   }
 
   .explorer-select-trigger::after {
-    content: "";
     position: absolute;
-    right: 10px;
     top: 50%;
+    right: 10px;
     translate: 0 -50%;
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 5px solid var(--sl-color-gray-3);
     transition:
       transform 0.2s ease,
       border-top-color 0.2s ease;
+    border-top: 5px solid var(--sl-color-gray-3);
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    width: 0;
+    height: 0;
+    content: "";
   }
 
   .explorer-select-trigger[aria-expanded="true"]::after {
@@ -78,11 +86,11 @@
 
   .koki-code-area-wrapper {
     --code-bg: var(--sl-color-black);
+    margin: 0 !important;
+    background: var(--code-bg);
+    padding: 0 !important;
     height: 560px;
     overflow: auto;
-    background: var(--code-bg);
-    margin: 0 !important;
-    padding: 0 !important;
   }
 
   .koki-code-area {
@@ -90,31 +98,31 @@
     --gutter-border: var(--sl-color-gray-5);
     display: flex;
     align-items: stretch;
-    min-height: 100%;
-    min-width: max-content;
     margin: 0 !important;
     padding: 0 !important;
+    min-width: max-content;
+    min-height: 100%;
   }
 
   .koki-code-area .koki-gutter {
-    flex: 0 0 58px;
-    padding: 12px 0;
-    text-align: right;
-    background: var(--gutter-bg);
-    border-right: 1px solid var(--gutter-border);
-    user-select: none;
     position: sticky;
     left: 0;
+    flex: 0 0 58px;
     z-index: 2;
+    border-right: 1px solid var(--gutter-border);
+    background: var(--gutter-bg);
+    padding: 12px 0;
+    user-select: none;
+    text-align: right;
   }
 
   .koki-line-number {
     display: block;
     padding: 0 10px;
     color: var(--sl-color-gray-4);
-    font-family: var(--__sl-font-mono);
     font-size: 0.82rem;
     line-height: 1.65;
+    font-family: var(--__sl-font-mono);
   }
 
   .raw-fold {
@@ -124,13 +132,13 @@
   }
 
   .raw-fold-summary {
-    position: relative;
     display: block;
+    position: relative;
     cursor: pointer;
-    list-style: none;
-    user-select: none;
     margin: 0 !important;
     padding: 0 !important;
+    list-style: none;
+    user-select: none;
   }
 
   .raw-fold-summary::-webkit-details-marker {
@@ -138,16 +146,16 @@
   }
 
   .raw-fold-summary::before {
-    content: "▼";
     position: absolute;
-    left: calc(var(--indent-level) * 4ch - 2.2ch);
-    width: 1.2ch;
-    text-align: center;
     top: 0;
-    font-size: 0.55rem;
+    left: calc(var(--indent-level) * 4ch - 2.2ch);
     opacity: 0.35;
     transition: transform 0.1s ease;
+    width: 1.2ch;
+    content: "▼";
+    font-size: 0.55rem;
     line-height: 1.65;
+    text-align: center;
   }
 
   details:not([open]) > .raw-fold-summary::before {
@@ -156,13 +164,13 @@
 
   .raw-fold-placeholder {
     display: none;
-    background: var(--sl-color-gray-5);
-    color: var(--sl-color-gray-2);
-    font-size: 0.72rem;
-    padding: 0 4px;
-    border-radius: 3px;
     margin: 0 2px;
+    border-radius: 3px;
+    background: var(--sl-color-gray-5);
+    padding: 0 4px;
+    color: var(--sl-color-gray-2);
     font-weight: 500;
+    font-size: 0.72rem;
   }
 
   details:not([open]) > .raw-fold-summary .raw-fold-placeholder {
@@ -177,36 +185,36 @@
 
   .raw-line {
     display: block;
-    white-space: pre;
     margin: 0 !important;
     padding: 0 !important;
+    white-space: pre;
   }
 
   .raw-line-end {
     display: block;
-    white-space: pre;
     margin: 0 !important;
     padding: 0 !important;
+    white-space: pre;
   }
 
   .koki-raw-content,
   .koki-raw-content * {
-    font-family: var(--__sl-font-mono) !important;
+    box-sizing: border-box !important;
     font-size: 0.82rem !important;
     line-height: 1.65 !important;
-    box-sizing: border-box !important;
+    font-family: var(--__sl-font-mono) !important;
   }
 
   .koki-raw-content {
     flex: 1;
-    padding: 12px 20px !important;
     margin: 0 !important;
-    overflow: visible;
-    white-space: pre;
-    color: var(--sl-color-gray-1) !important;
-    tab-size: 2;
-    background: none !important;
     border: none !important;
+    background: none !important;
+    padding: 12px 20px !important;
+    overflow: visible;
+    color: var(--sl-color-gray-1) !important;
+    white-space: pre;
+    tab-size: 2;
   }
 
   .json-key {
@@ -248,25 +256,25 @@
   }
 
   [data-theme="light"] .koki-copy-btn.copied {
-    color: #15803d !important;
     border-color: #15803d !important;
+    color: #15803d !important;
   }
 
   .koki-tree-content {
     flex: 1;
-    min-width: 0;
     padding: 12px 8px 12px 12px;
-    font-family: var(--__sl-font-mono);
+    min-width: 0;
     font-size: 0.82rem;
     line-height: 1.65;
+    font-family: var(--__sl-font-mono);
   }
 
   .koki-tree-content .arbol-root {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
     margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
     padding: 0 !important;
     font-size: 0.82rem;
     line-height: 1.65;
@@ -278,8 +286,8 @@
 
   .koki-state-msg {
     padding: 40px 24px;
-    text-align: center;
     color: var(--sl-color-gray-3);
     font-size: 0.9rem;
+    text-align: center;
   }
 }

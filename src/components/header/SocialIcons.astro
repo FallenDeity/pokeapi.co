@@ -6,7 +6,7 @@
   href="https://github.com/pokeapi/pokeapi"
   rel="me"
   target="_blank"
-  class="sl-flex icon-link github-link"
+  class="m-[-0.5em] flex items-center justify-center p-[0.5em] text-[#c9d1d9] transition-all duration-180 ease-in-out hover:-translate-y-px hover:opacity-75 [:root[data-theme=light]_&]:text-[#24292e]"
   aria-label="GitHub"
 >
   <span class="sr-only">GitHub</span>
@@ -20,7 +20,13 @@
   </svg>
 </a>
 
-<a href="https://pokeapi.slack.com/" rel="me" target="_blank" class="sl-flex icon-link" aria-label="Slack">
+<a
+  href="https://pokeapi.slack.com/"
+  rel="me"
+  target="_blank"
+  class="m-[-0.5em] flex items-center justify-center p-[0.5em] text-(--sl-color-text-accent) transition-all duration-180 ease-in-out hover:-translate-y-px hover:opacity-75"
+  aria-label="Slack"
+>
   <span class="sr-only">Slack</span>
   <svg aria-hidden="true" width="16" height="16" viewBox="0 0 127 127" xmlns="http://www.w3.org/2000/svg">
     <path d="M27.2 80c0 7.3-5.9 13.2-13.2 13.2C6.7 93.2.8 87.3.8 80c0-7.3 5.9-13.2 13.2-13.2h13.2V80z" fill="#E01E5A"
@@ -48,29 +54,3 @@
       fill="#ECB22E"></path>
   </svg>
 </a>
-
-<style>
-  .icon-link {
-    margin: -0.5em;
-    padding: 0.5em;
-    color: var(--sl-color-text-accent);
-    transition:
-      opacity 0.18s ease,
-      transform 0.18s ease;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .icon-link:hover {
-    opacity: 0.75;
-    transform: translateY(-1px);
-  }
-
-  .github-link {
-    color: #c9d1d9;
-  }
-
-  :global([data-theme="light"]) .github-link {
-    color: #24292e;
-  }
-</style>

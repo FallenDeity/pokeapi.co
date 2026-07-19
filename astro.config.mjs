@@ -25,10 +25,13 @@ async function processOpenAPISchema(schemaUrl) {
   return "./public/openapi.yml";
 }
 
+console.log("SITE_URL:", process.env.SITE_URL);
+console.log("BASE_URL:", process.env.BASE_URL);
+
 export default defineConfig({
-  site: "https://pokeapi.co",
-  base: "",
-  // trailingSlash: 'always',
+  site: process.env.SITE_URL || "https://pokeapi.co",
+  base: process.env.BASE_URL || "/",
+  trailingSlash: "always",
   integrations: [
     starlight({
       title: "PokéAPI",

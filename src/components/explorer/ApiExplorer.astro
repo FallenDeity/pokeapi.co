@@ -1,4 +1,5 @@
 ---
+import crypto from "node:crypto";
 import ditto from "../../data/ditto.json";
 
 import {Aside} from "@astrojs/starlight/components";
@@ -31,7 +32,7 @@ if (exampleRequest) {
   defaultParam = "1";
 }
 
-const instanceId = "explorer-" + Math.random().toString(36).substring(2, 9);
+const instanceId = "explorer-" + crypto.randomUUID();
 
 const endpoints = [
   {
@@ -117,7 +118,7 @@ import "./api-explorer.css";
 <script src="./koki.js"></script>
 
 <section
-  class="koki-api-explorer-widget -mt-8 pb-12"
+  class="koki-api-explorer-widget -mt-8"
   id={instanceId}
   data-instance-id={instanceId}
   data-endpoint={endpoint || "pokemon"}
@@ -183,7 +184,7 @@ import "./api-explorer.css";
       aria-label="API request builder"
     >
       <span
-        class="explorer-base-url flex shrink-0 items-center rounded-l-lg border-r-[1.5px] border-(--sl-color-gray-5) bg-(--sl-color-gray-6) pr-2.5 pl-3.5 font-mono text-[0.76rem] font-semibold tracking-wide whitespace-nowrap text-(--sl-color-accent-high) select-none max-[600px]:pr-2 max-[600px]:pl-2.5"
+        class="explorer-base-url flex shrink-0 items-center rounded-l-lg border-r-[1.5px] border-(--sl-color-gray-5) bg-(--sl-color-gray-6) pr-2.5 pl-3.5 font-mono text-[0.76rem] font-semibold whitespace-nowrap text-(--sl-color-accent-high) select-none max-[600px]:pr-2 max-[600px]:pl-2.5"
         aria-label="Base URL"
       >
         <span class="explorer-base-url-full inline max-[600px]:hidden">https://pokeapi.co/api/v2/</span>
@@ -196,7 +197,6 @@ import "./api-explorer.css";
             {endpoint}
           </span>
         ) : (
-          /* JS-positioned dropdown */
           <div class="explorer-select-wrap relative flex shrink-0 items-stretch border-r-[1.5px] border-(--sl-color-gray-5)">
             <button
               class="explorer-select-trigger relative flex max-w-60 min-w-35 cursor-pointer items-center gap-1.5 overflow-hidden border-none bg-(--sl-color-black) pr-7 pl-3 text-left font-mono text-[0.82rem] font-medium text-ellipsis whitespace-nowrap text-(--sl-color-white) transition-colors duration-150 ease-in-out outline-none"

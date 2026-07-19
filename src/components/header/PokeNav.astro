@@ -3,107 +3,61 @@ const baseUrl = import.meta.env.BASE_URL;
 const thisUrl = Astro.url.pathname;
 const about = baseUrl + "about/";
 const v2 = baseUrl + "v2/";
-const openapi = baseUrl + "v2/openapi/";
 const graphql = baseUrl + "graphql/";
 ---
 
-<nav class="poke-nav">
-  <ul class="nav-list">
-    <li class="nav-item">
+<nav class="flex items-center">
+  <ul class="m-0 flex list-none gap-0.5 pr-4 pl-0">
+    <li>
       {
         thisUrl !== about ? (
-          <a href={about} class="nav-link">
+          <a
+            href={about}
+            class="relative inline-block rounded-md px-2.75 py-1.25 text-sm font-medium tracking-wide whitespace-nowrap text-(--sl-color-gray-2) no-underline transition-all duration-180 ease-in-out hover:bg-(--sl-color-gray-5) hover:text-(--sl-color-white) hover:no-underline focus-visible:text-(--sl-color-white) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--sl-color-accent)"
+          >
             About
           </a>
         ) : (
-          <span class="nav-link nav-link--active">About</span>
+          <span class="pointer-events-none relative inline-block cursor-default rounded-md bg-transparent px-2.75 py-1.25 text-sm font-semibold tracking-wide whitespace-nowrap text-(--sl-color-white) no-underline select-none">
+            About
+            <span class="absolute right-2.75 bottom-0.5 left-2.75 h-0.5 rounded-[1px] bg-(--sl-color-accent)" />
+          </span>
         )
       }
     </li>
-    <li class="nav-item">
+    <li>
       {
         thisUrl !== v2 ? (
-          <a href={v2} class="nav-link">
+          <a
+            href={v2}
+            class="relative inline-block rounded-md px-2.75 py-1.25 text-sm font-medium tracking-wide whitespace-nowrap text-(--sl-color-gray-2) no-underline transition-all duration-180 ease-in-out hover:bg-(--sl-color-gray-5) hover:text-(--sl-color-white) hover:no-underline focus-visible:text-(--sl-color-white) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--sl-color-accent)"
+          >
             API v2
           </a>
         ) : (
-          <span class="nav-link nav-link--active">API v2</span>
+          <span class="pointer-events-none relative inline-block cursor-default rounded-md bg-transparent px-2.75 py-1.25 text-sm font-semibold tracking-wide whitespace-nowrap text-(--sl-color-white) no-underline select-none">
+            API v2
+            <span class="absolute right-2.75 bottom-0.5 left-2.75 h-0.5 rounded-[1px] bg-(--sl-color-accent)" />
+          </span>
         )
       }
     </li>
-    <li class="nav-item">
+    <li>
       {
         thisUrl !== graphql ? (
-          <a href={graphql} class="nav-link">
+          <a
+            href={graphql}
+            class="relative inline-block rounded-md px-2.75 py-1.25 text-sm font-medium tracking-wide whitespace-nowrap text-(--sl-color-gray-2) no-underline transition-all duration-180 ease-in-out hover:bg-(--sl-color-gray-5) hover:text-(--sl-color-white) hover:no-underline focus-visible:text-(--sl-color-white) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--sl-color-accent)"
+          >
             GraphQL v1Beta
           </a>
         ) : (
-          <span class="nav-link nav-link--active">GraphQL v1Beta</span>
+          <span class="pointer-events-none relative inline-block cursor-default rounded-md bg-transparent px-2.75 py-1.25 text-sm font-semibold tracking-wide whitespace-nowrap text-(--sl-color-white) no-underline select-none">
+            GraphQL v1Beta
+            <span class="absolute right-2.75 bottom-0.5 left-2.75 h-0.5 rounded-[1px] bg-(--sl-color-accent)" />
+          </span>
         )
       }
     </li>
   </ul>
 </nav>
-
-<style>
-  .poke-nav {
-    display: flex;
-    align-items: center;
-  }
-
-  .nav-list {
-    display: flex;
-    gap: 0.125rem;
-    list-style: none;
-    margin: 0;
-    padding: 0 1rem 0 0;
-  }
-
-  .nav-link {
-    display: inline-block;
-    padding: 0.3rem 0.7rem;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    text-decoration: none !important;
-    color: var(--sl-color-gray-2);
-    transition:
-      color 0.18s ease,
-      background 0.18s ease;
-    white-space: nowrap;
-    position: relative;
-  }
-
-  a.nav-link:hover {
-    color: var(--sl-color-white);
-    background: var(--sl-color-gray-5);
-    text-decoration: none !important;
-  }
-
-  a.nav-link:focus-visible {
-    outline: 2px solid var(--sl-color-accent);
-    outline-offset: 2px;
-    color: var(--sl-color-white);
-  }
-
-  .nav-link--active {
-    color: var(--sl-color-white);
-    background: transparent;
-    cursor: default;
-    user-select: none;
-    pointer-events: none;
-    font-weight: 600;
-  }
-
-  .nav-link--active::after {
-    content: "";
-    position: absolute;
-    bottom: 2px;
-    left: 0.7rem;
-    right: 0.7rem;
-    height: 2px;
-    border-radius: 1px;
-    background: var(--sl-color-accent);
-  }
-</style>
