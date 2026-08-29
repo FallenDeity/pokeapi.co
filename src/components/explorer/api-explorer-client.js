@@ -1,182 +1,216 @@
+import "@alenaksu/json-viewer";
+import {EditorView, lineNumbers} from "@codemirror/view";
+import {EditorState, Compartment} from "@codemirror/state";
+import {json} from "@codemirror/lang-json";
+import {foldGutter, syntaxHighlighting, bracketMatching, HighlightStyle} from "@codemirror/language";
+import {tags as t} from "@lezer/highlight";
+
 (function () {
   "use strict";
 
-  var BASE_URL = "https://pokeapi.co/api/v2/";
+  const BASE_URL = "https://pokeapi.co/api/v2/";
 
-  function esc(s) {
-    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  function isDarkTheme() {
+    return document.documentElement.dataset.theme !== "light";
   }
 
-  function escStringVal(str) {
-    return esc(str)
-      .replace(/\\/g, "\\\\")
-      .replace(/"/g, '\\"')
-      .replace(/\n/g, "\\n")
-      .replace(/\r/g, "\\r")
-      .replace(/\t/g, "\\t");
-  }
+  const themeCompartment = new Compartment();
+  const highlightCompartment = new Compartment();
 
-  function renderRawCollapsible(data, level, commaHtml, key, state) {
-    if (level === undefined) level = 0;
-    if (commaHtml === undefined) commaHtml = "";
-    if (state === undefined) state = {line: 0};
-    var indent = "    ".repeat(level);
-    var nextIndent = "    ".repeat(level + 1);
+  const pokeTheme = EditorView.theme({
+    "&": {
+      color: "var(--sl-color-gray-1)",
+      backgroundColor: "transparent",
+      fontFamily: "var(--__sl-font-mono)",
+      fontSize: "0.82rem",
+      lineHeight: "1.65",
+      height: "100%",
+    },
+    ".cm-scroller": {
+      overflow: "auto",
+      fontFamily: "var(--__sl-font-mono)",
+      height: "100%",
+    },
+    ".cm-content": {
+      padding: "12px 16px",
+      caretColor: "var(--sl-color-accent)",
+    },
+    ".cm-gutters": {
+      backgroundColor: "var(--sl-color-gray-6)",
+      color: "var(--sl-color-gray-4)",
+      borderRight: "1.5px solid var(--sl-color-gray-5)",
+      paddingRight: "2px",
+      fontFamily: "var(--__sl-font-mono)",
+      userSelect: "none",
+    },
+    ".cm-lineNumbers .cm-gutterElement": {
+      padding: "0 8px 0 12px",
+      minWidth: "32px",
+      textAlign: "right",
+      fontSize: "0.82rem",
+    },
+    ".cm-foldGutter .cm-gutterElement": {
+      padding: "0 4px",
+      cursor: "pointer",
+      color: "var(--sl-color-gray-4)",
+      transition: "color 0.15s ease",
+      fontSize: "0.75rem",
+    },
+    ".cm-foldGutter .cm-gutterElement:hover": {
+      color: "var(--sl-color-white)",
+    },
+    ".cm-foldPlaceholder": {
+      backgroundColor: "var(--sl-color-gray-5)",
+      border: "none",
+      color: "var(--sl-color-gray-2)",
+      padding: "0 6px",
+      borderRadius: "3px",
+      margin: "0 2px",
+      fontWeight: "500",
+      fontSize: "0.75rem",
+    },
+    ".cm-activeLine": {
+      backgroundColor: "rgba(255, 255, 255, 0.02)",
+    },
+    ".cm-selectionBackground, ::selection": {
+      backgroundColor: "rgba(59, 130, 246, 0.3) !important",
+    },
+  });
 
-    if (data === null) {
-      return '<span class="json-null">null</span>' + commaHtml;
-    }
-    if (typeof data === "boolean") {
-      return '<span class="json-bool">' + data + "</span>" + commaHtml;
-    }
-    if (typeof data === "number") {
-      return '<span class="json-number">' + data + "</span>" + commaHtml;
-    }
-    if (typeof data === "string") {
-      return '<span class="json-string">"' + escStringVal(data) + '"</span>' + commaHtml;
-    }
+  const pokeDarkHighlighting = HighlightStyle.define([
+    {tag: t.propertyName, color: "#f59e0b"},
+    {tag: t.string, color: "#86efac"},
+    {tag: t.number, color: "#c084fc"},
+    {tag: t.bool, color: "#60a5fa"},
+    {tag: t.null, color: "#f87171"},
+    {tag: t.punctuation, color: "var(--sl-color-gray-3)"},
+    {tag: t.bracket, color: "var(--sl-color-gray-3)"},
+  ]);
 
-    if (typeof data === "object") {
-      var isArray = Array.isArray(data);
-      var keys = Object.keys(data);
-      if (keys.length === 0) {
-        var emptyStr = isArray ? "[]" : "{}";
-        state.line++;
-        var prefix = "";
-        if (key) {
-          prefix = '<span class="json-key">"' + escStringVal(key) + '"</span><span class="json-punct">:</span> ';
-        }
-        return (
-          '<div class="raw-line" data-line="' +
-          state.line +
-          '">' +
-          indent +
-          prefix +
-          '<span class="json-punct">' +
-          emptyStr +
-          "</span>" +
-          commaHtml +
-          "</div>"
-        );
-      }
+  const pokeLightHighlighting = HighlightStyle.define([
+    {tag: t.propertyName, color: "#b45309"},
+    {tag: t.string, color: "#15803d"},
+    {tag: t.number, color: "#7c3aed"},
+    {tag: t.bool, color: "#2563eb"},
+    {tag: t.null, color: "#dc2626"},
+    {tag: t.punctuation, color: "var(--sl-color-gray-3)"},
+    {tag: t.bracket, color: "var(--sl-color-gray-3)"},
+  ]);
 
-      var openChar = isArray ? "[" : "{";
-      var closeChar = isArray ? "]" : "}";
-
-      var html = "";
-      state.line++;
-      html += '<details class="raw-fold" style="--indent-level: ' + level + ';" open>';
-
-      var prefix = indent;
-      if (key) {
-        prefix += '<span class="json-key">"' + escStringVal(key) + '"</span><span class="json-punct">:</span> ';
-      }
-
-      var placeholder = isArray ? "\u2026]" : "\u2026}";
-      html +=
-        '<summary class="raw-fold-summary" data-line="' +
-        state.line +
-        '">' +
-        prefix +
-        '<span class="json-punct">' +
-        openChar +
-        "</span>" +
-        '<span class="raw-fold-placeholder">' +
-        placeholder +
-        commaHtml +
-        "</span>" +
-        "</summary>";
-
-      html += '<div class="raw-fold-content">';
-
-      for (var i = 0; i < keys.length; i++) {
-        var childKey = keys[i];
-        var val = data[childKey];
-        var isLast = i === keys.length - 1;
-        var childComma = isLast ? "" : '<span class="json-punct">,</span>';
-
-        if (typeof val === "object" && val !== null) {
-          html += renderRawCollapsible(val, level + 1, childComma, isArray ? null : childKey, state);
-        } else {
-          state.line++;
-          html += '<div class="raw-line" data-line="' + state.line + '">';
-          html += nextIndent;
-          if (!isArray) {
-            html += '<span class="json-key">"' + escStringVal(childKey) + '"</span><span class="json-punct">:</span> ';
-          }
-          html += renderRawCollapsible(val, level + 1, childComma, undefined, state);
-          html += "</div>";
-        }
-      }
-
-      html += "</div>";
-      state.line++;
-      html +=
-        '<div class="raw-line-end" data-line="' +
-        state.line +
-        '">' +
-        indent +
-        '<span class="json-punct">' +
-        closeChar +
-        "</span>" +
-        commaHtml +
-        "</div>";
-      html += "</details>";
-      return html;
-    }
-  }
-
-  function isElementHidden(el, root) {
-    var parent = el.parentElement;
-    while (parent && parent !== root) {
-      if (parent.tagName.toLowerCase() === "details" && !parent.open) {
-        if (el.tagName.toLowerCase() === "summary" && el.parentElement === parent) {
-        } else {
-          return true;
-        }
-      }
-      parent = parent.parentElement;
-    }
-    return false;
+  function getHighlightExtension() {
+    return syntaxHighlighting(isDarkTheme() ? pokeDarkHighlighting : pokeLightHighlighting);
   }
 
   function initWidget(widget) {
-    var selectWrap = widget.querySelector(".explorer-select-wrap");
-    var selectTrigger = widget.querySelector(".explorer-select-trigger");
-    var selectLabel = widget.querySelector(".explorer-select-label");
-    var dropdownPanel = widget.querySelector(".explorer-dropdown-panel");
-    var paramInput = widget.querySelector(".explorer-param-input");
-    var sendBtn = widget.querySelector(".explorer-send-btn");
-    var directLink = widget.querySelector(".explorer-direct-link");
-    var tabRaw = widget.querySelector(".tab-raw");
-    var tabTree = widget.querySelector(".tab-tree");
-    var panelRaw = widget.querySelector(".panel-raw");
-    var panelTree = widget.querySelector(".panel-tree");
-    var copyBtn = widget.querySelector(".koki-copy-btn");
-    var rawGutter = widget.querySelector(".koki-raw-gutter");
-    var rawContent = widget.querySelector(".koki-raw-content");
-    var treeGutter = widget.querySelector(".koki-tree-gutter");
-    var treeInner = widget.querySelector(".koki-tree-inner");
+    const selectWrap = widget.querySelector(".explorer-select-wrap");
+    const selectTrigger = widget.querySelector(".explorer-select-trigger");
+    const selectLabel = widget.querySelector(".explorer-select-label");
+    const dropdownPanel = widget.querySelector(".explorer-dropdown-panel");
+    const paramInput = widget.querySelector(".explorer-param-input");
+    const sendBtn = widget.querySelector(".explorer-send-btn");
+    const directLink = widget.querySelector(".explorer-direct-link");
+    const copyBtn = widget.querySelector(".explorer-copy-btn");
+    const tabRaw = widget.querySelector(".tab-raw");
+    const tabTree = widget.querySelector(".tab-tree");
+    const panelRaw = widget.querySelector(".panel-raw");
+    const panelTree = widget.querySelector(".panel-tree");
+    const cmContainer = widget.querySelector(".explorer-codemirror-container");
+    const jsonViewer = widget.querySelector(".explorer-json-viewer");
 
-    var currentJsonStr = null;
-    var selectedEndpoint = widget.dataset.endpoint;
+    let currentJsonData = null;
+    let selectedEndpoint = widget.dataset.endpoint || "pokemon";
+
+    const initialJsonEl = widget.nextElementSibling;
+    if (initialJsonEl && initialJsonEl.classList.contains("explorer-initial-json")) {
+      try {
+        currentJsonData = JSON.parse(initialJsonEl.textContent);
+      } catch (e) {
+        console.warn("initial json parse error", e);
+      }
+    }
+
+    let cmEditor = null;
+    if (cmContainer) {
+      cmEditor = new EditorView({
+        state: EditorState.create({
+          doc: currentJsonData ? JSON.stringify(currentJsonData, null, 2) : "{}",
+          extensions: [
+            lineNumbers(),
+            foldGutter(),
+            json(),
+            bracketMatching(),
+            highlightCompartment.of(getHighlightExtension()),
+            pokeTheme,
+            EditorState.readOnly.of(true),
+            EditorView.editable.of(false),
+          ],
+        }),
+        parent: cmContainer,
+      });
+    }
+
+    if (jsonViewer && currentJsonData) {
+      jsonViewer.data = currentJsonData;
+    }
+
+    function updateTheme() {
+      if (cmEditor) {
+        cmEditor.dispatch({
+          effects: highlightCompartment.reconfigure(getHighlightExtension()),
+        });
+      }
+    }
+
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {attributes: true, attributeFilter: ["data-theme"]});
+
+    tabRaw?.addEventListener("click", () => {
+      tabRaw.classList.add("active");
+      tabRaw.setAttribute("aria-selected", "true");
+      tabTree?.classList.remove("active");
+      tabTree?.setAttribute("aria-selected", "false");
+      if (panelRaw) panelRaw.style.display = "";
+      if (panelTree) panelTree.style.display = "none";
+    });
+
+    tabTree?.addEventListener("click", () => {
+      tabTree.classList.add("active");
+      tabTree.setAttribute("aria-selected", "true");
+      tabRaw?.classList.remove("active");
+      tabRaw?.setAttribute("aria-selected", "false");
+      if (panelTree) panelTree.style.display = "";
+      if (panelRaw) panelRaw.style.display = "none";
+    });
+
+    function applyJsonData(parsed) {
+      currentJsonData = parsed;
+      if (cmEditor) {
+        const text = JSON.stringify(parsed, null, 2);
+        cmEditor.dispatch({
+          changes: {from: 0, to: cmEditor.state.doc.length, insert: text},
+        });
+      }
+      if (jsonViewer) {
+        jsonViewer.data = parsed;
+      }
+    }
 
     function initDropdown() {
       if (!selectWrap || !selectTrigger || !dropdownPanel) return;
 
       selectTrigger.addEventListener("click", function (e) {
         e.stopPropagation();
-        var nowOpen = selectWrap.classList.toggle("open");
+        const nowOpen = selectWrap.classList.toggle("open");
         selectTrigger.setAttribute("aria-expanded", String(nowOpen));
         if (nowOpen) {
           positionDropdown();
-          var sel = dropdownPanel.querySelector(".dropdown-option.selected");
+          const sel = dropdownPanel.querySelector(".dropdown-option.selected");
           if (sel) sel.focus();
         }
       });
 
       dropdownPanel.addEventListener("click", function (e) {
-        var btn = e.target.closest(".dropdown-option");
+        const btn = e.target.closest(".dropdown-option");
         if (!btn) return;
         selectEndpoint(btn.dataset.value);
         closeDropdown();
@@ -188,7 +222,7 @@
           selectTrigger.focus();
         }
         if (e.key === "Enter") {
-          var btn = e.target.closest(".dropdown-option");
+          const btn = e.target.closest(".dropdown-option");
           if (btn) {
             selectEndpoint(btn.dataset.value);
             closeDropdown();
@@ -214,7 +248,7 @@
 
     function positionDropdown() {
       if (!selectTrigger || !dropdownPanel) return;
-      var rect = selectTrigger.getBoundingClientRect();
+      const rect = selectTrigger.getBoundingClientRect();
       dropdownPanel.style.top = rect.bottom + 6 + "px";
       dropdownPanel.style.left = rect.left + "px";
       dropdownPanel.style.minWidth = Math.max(rect.width, 240) + "px";
@@ -229,133 +263,31 @@
     function selectEndpoint(value) {
       selectedEndpoint = value;
       if (selectLabel) selectLabel.textContent = value;
-      dropdownPanel.querySelectorAll(".dropdown-option").forEach(function (btn) {
-        var sel = btn.dataset.value === value;
+      dropdownPanel?.querySelectorAll(".dropdown-option").forEach(function (btn) {
+        const sel = btn.dataset.value === value;
         btn.classList.toggle("selected", sel);
         btn.setAttribute("aria-selected", String(sel));
       });
     }
 
     function getRequestUrl() {
-      var param = paramInput.value.trim().replace(/&amp;/g, "&");
+      const param = paramInput?.value.trim().replace(/&amp;/g, "&") || "";
       if (param.startsWith("?")) return BASE_URL + selectedEndpoint + param;
       if (param) return BASE_URL + selectedEndpoint + "/" + param;
       return BASE_URL + selectedEndpoint + "/";
     }
 
-    function renderRaw(jsonStr) {
-      try {
-        var parsed = JSON.parse(jsonStr);
-        var state = {line: 0};
-        rawContent.innerHTML = renderRawCollapsible(parsed, 0, "", null, state);
-      } catch (e) {
-        rawContent.innerHTML = esc(jsonStr);
-      }
-      updateRawGutter();
-    }
-
-    function updateRawGutter() {
-      if (!rawGutter || !rawContent) return;
-      var html = [];
-      var elements = rawContent.querySelectorAll("[data-line]");
-      if (elements.length === 0) {
-        var text = rawContent.textContent || "";
-        var lines = text.split("\n").length;
-        for (var i = 0; i < lines; i++) {
-          html.push('<span class="koki-line-number">' + (i + 1) + "</span>");
-        }
-      } else {
-        for (var i = 0; i < elements.length; i++) {
-          var el = elements[i];
-          if (!isElementHidden(el, rawContent)) {
-            var lineNum = el.getAttribute("data-line");
-            html.push('<span class="koki-line-number">' + lineNum + "</span>");
-          }
-        }
-      }
-      if (html.length === 0) {
-        html.push('<span class="koki-line-number">1</span>');
-      }
-      rawGutter.innerHTML = html.join("");
-    }
-
-    function renderTree(jsonStr) {
-      if (typeof window.kokiInit !== "function") return;
-      window.kokiInit(jsonStr, treeInner, "", true);
-      assignTreeLineNumbers();
-      updateTreeGutter();
-    }
-
-    function assignTreeLineNumbers() {
-      if (!treeInner) return;
-      var lineNum = 1;
-      var elements = treeInner.querySelectorAll("summary, li");
-      for (var i = 0; i < elements.length; i++) {
-        var el = elements[i];
-        var isSummary = el.tagName.toLowerCase() === "summary";
-        var isLeafLi = el.tagName.toLowerCase() === "li" && !el.querySelector("details");
-        if (isSummary || isLeafLi) {
-          el.setAttribute("data-line", lineNum++);
-        }
-      }
-    }
-
-    function updateTreeGutter() {
-      if (!treeGutter || !treeInner) return;
-      var html = [];
-      var elements = treeInner.querySelectorAll("summary, li");
-      for (var i = 0; i < elements.length; i++) {
-        var el = elements[i];
-        var isSummary = el.tagName.toLowerCase() === "summary";
-        var isLeafLi = el.tagName.toLowerCase() === "li" && !el.querySelector("details");
-        if (isSummary || isLeafLi) {
-          if (!isElementHidden(el, treeInner)) {
-            var lineNum = el.getAttribute("data-line");
-            if (lineNum) {
-              html.push('<span class="koki-line-number">' + lineNum + "</span>");
-            }
-          }
-        }
-      }
-      if (html.length === 0) {
-        html.push('<span class="koki-line-number">1</span>');
-      }
-      treeGutter.innerHTML = html.join("");
-    }
-
-    function showTab(view) {
-      var isRaw = view === "raw";
-      tabRaw.classList.toggle("active", isRaw);
-      tabTree.classList.toggle("active", !isRaw);
-      tabRaw.setAttribute("aria-selected", String(isRaw));
-      tabTree.setAttribute("aria-selected", String(!isRaw));
-      panelRaw.style.display = isRaw ? "" : "none";
-      panelTree.style.display = isRaw ? "none" : "";
-      if (isRaw) {
-        updateRawGutter();
-      } else {
-        updateTreeGutter();
-      }
-    }
-
-    function applyJsonData(parsed) {
-      currentJsonStr = JSON.stringify(parsed, null, 2);
-      renderRaw(currentJsonStr);
-      renderTree(currentJsonStr);
-    }
-
     function sendRequest() {
-      var url = getRequestUrl();
-      directLink.href = url;
-      directLink.textContent = url;
+      const url = getRequestUrl();
+      if (directLink) {
+        directLink.href = url;
+        directLink.textContent = url;
+      }
 
-      sendBtn.disabled = true;
-      sendBtn.innerHTML = '<span style="opacity:.6;font-size:1.1em">\u22EF</span>';
-
-      rawContent.innerHTML =
-        '<span style="color:var(--sl-color-gray-3);padding:32px;display:block;text-align:center">Loading\u2026</span>';
-      rawGutter.innerHTML = "";
-      treeInner.innerHTML = '<div class="koki-state-msg">Loading\u2026</div>';
+      if (sendBtn) {
+        sendBtn.disabled = true;
+        sendBtn.innerHTML = '<span style="opacity:.6;font-size:1.1em">\u22EF</span>';
+      }
 
       fetch(url)
         .then(function (res) {
@@ -371,18 +303,21 @@
           applyJsonData({error: String(err), url: url});
         })
         .finally(function () {
-          sendBtn.disabled = false;
-          sendBtn.innerHTML =
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send';
+          if (sendBtn) {
+            sendBtn.disabled = false;
+            sendBtn.innerHTML =
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send';
+          }
         });
     }
 
     function initCopy() {
       if (!copyBtn) return;
       copyBtn.addEventListener("click", function () {
-        if (!currentJsonStr) return;
+        if (!currentJsonData) return;
+        const text = JSON.stringify(currentJsonData, null, 2);
         navigator.clipboard
-          .writeText(currentJsonStr)
+          .writeText(text)
           .then(function () {
             copyBtn.classList.add("copied");
             copyBtn.innerHTML =
@@ -404,7 +339,7 @@
         link.addEventListener("click", function (e) {
           e.preventDefault();
           if (link.dataset.endpoint) selectEndpoint(link.dataset.endpoint);
-          if (link.dataset.param !== undefined) paramInput.value = link.dataset.param;
+          if (link.dataset.param !== undefined && paramInput) paramInput.value = link.dataset.param;
           sendRequest();
         });
       });
@@ -414,44 +349,16 @@
     initCopy();
     initHints();
 
-    tabRaw.addEventListener("click", function () {
-      showTab("raw");
-    });
-    tabTree.addEventListener("click", function () {
-      showTab("tree");
-    });
-    paramInput.addEventListener("keypress", function (e) {
+    paramInput?.addEventListener("keypress", function (e) {
       if (e.key === "Enter") sendRequest();
     });
-    sendBtn.addEventListener("click", sendRequest);
-
-    var initialJsonEl = widget.nextElementSibling;
-    if (initialJsonEl && initialJsonEl.classList.contains("koki-initial-json")) {
-      try {
-        applyJsonData(JSON.parse(initialJsonEl.textContent));
-      } catch (e) {
-        console.warn("initial json parse error", e);
-      }
-    }
-
-    widget.addEventListener(
-      "toggle",
-      function (e) {
-        if (rawContent && rawContent.contains(e.target)) {
-          setTimeout(updateRawGutter, 15);
-        }
-        if (treeInner && treeInner.contains(e.target)) {
-          setTimeout(updateTreeGutter, 15);
-        }
-      },
-      true
-    );
+    sendBtn?.addEventListener("click", sendRequest);
   }
 
   function main() {
-    document.querySelectorAll(".koki-api-explorer-widget").forEach(function (widget) {
-      if (widget.dataset.kokiInitialized === "true") return;
-      widget.dataset.kokiInitialized = "true";
+    document.querySelectorAll(".api-explorer-widget").forEach(function (widget) {
+      if (widget.dataset.explorerInitialized === "true") return;
+      widget.dataset.explorerInitialized = "true";
       initWidget(widget);
     });
   }

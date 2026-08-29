@@ -46,9 +46,7 @@ And that's just scratching the surface! To see all the different types of data w
 
 ### The API is missing stuff!
 
-We know! Feel free to contribute to open issues on [GitHub](https://github.com/PokeAPI/pokeapi/).
-
-Have ideas for new features? We're on Slack! Sign up [right here](https://join.slack.com/t/pokeapi/shared_invite/zt-1l4vpwa8k-muQmMrFfv7TIFGrVWzjzcw)</a> then visit our [slack team](https://pokeapi.slack.com).
+We know! Feel free to contribute to open issues and discussions on [GitHub](https://github.com/PokeAPI/pokeapi/).
 
 ### So who built this?
 

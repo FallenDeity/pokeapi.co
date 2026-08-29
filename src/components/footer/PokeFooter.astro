@@ -2,8 +2,6 @@
 import Pagination from "@astrojs/starlight/components/Pagination.astro";
 import FooterBrand from "./FooterBrand.astro";
 import FooterNav from "./FooterNav.astro";
-import FooterStatus from "./FooterStatus.astro";
-import ScrollNextIndicator from "./ScrollNextIndicator.astro";
 
 const currentYear = new Date().getFullYear();
 
@@ -28,8 +26,6 @@ import "./poke-footer.css";
       <FooterBrand />
       <FooterNav />
     </div>
-
-    <FooterStatus />
 
     <div
       class="mb-6 h-px bg-[linear-gradient(90deg,transparent,var(--sl-color-gray-5)_20%,var(--sl-color-gray-5)_80%,transparent)]"
@@ -58,12 +54,4 @@ import "./poke-footer.css";
   </div>
 </footer>
 
-<ScrollNextIndicator />
-
-<script src="./footer-status.js"></script>
-
 <script src="./starlight-openapi-custom.js"></script>
-
-<script>
-  import "./continuous-scroll.js";
-</script>

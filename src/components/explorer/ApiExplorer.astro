@@ -37,43 +37,35 @@ const instanceId = "explorer-" + crypto.randomUUID();
 const endpoints = [
   {
     group: "Berries",
-    icon: "berries.png",
     options: ["berry", "berry-firmness", "berry-flavor"],
   },
   {
     group: "Contests",
-    icon: "contests.png",
     options: ["contest-type", "contest-effect", "super-contest-effect"],
   },
   {
     group: "Encounters",
-    icon: "encounters.png",
     options: ["encounter-method", "encounter-condition", "encounter-condition-value"],
   },
   {
     group: "Evolution",
-    icon: "evolution.png",
     options: ["evolution-chain", "evolution-trigger"],
   },
   {
     group: "Games",
-    icon: "games.png",
     options: ["generation", "pokedex", "version", "version-group"],
   },
   {
     group: "Items",
-    icon: "items.png",
     options: ["item", "item-attribute", "item-category", "item-fling-effect", "item-pocket"],
   },
   {
     group: "Locations",
-    icon: "locations.png",
     options: ["location", "location-area", "pal-park-area", "region"],
   },
-  {group: "Machines", icon: "machines.png", options: ["machine"]},
+  {group: "Machines", options: ["machine"]},
   {
     group: "Moves",
-    icon: "moves.png",
     options: [
       "move",
       "move-ailment",
@@ -86,7 +78,6 @@ const endpoints = [
   },
   {
     group: "Pokémon",
-    icon: "pokemon.png",
     options: [
       "ability",
       "characteristic",
@@ -107,18 +98,11 @@ const endpoints = [
   },
 ];
 
-const endpointImages = import.meta.glob<{default: ImageMetadata}>("../../assets/endpoint-categories/*.png", {
-  eager: true,
-});
-
-import "./koki.css";
 import "./api-explorer.css";
 ---
 
-<script src="./koki.js"></script>
-
 <section
-  class="koki-api-explorer-widget -mt-8"
+  class="api-explorer-widget -mt-8"
   id={instanceId}
   data-instance-id={instanceId}
   data-endpoint={endpoint || "pokemon"}
@@ -212,14 +196,9 @@ import "./api-explorer.css";
               role="listbox"
               aria-label="API Endpoints"
             >
-              {endpoints.map(({group, icon, options}) => (
+              {endpoints.map(({group, options}) => (
                 <>
                   <span class="dropdown-group-label box-border inline-flex w-full items-center gap-1.5 border-t border-(--sl-color-gray-5) px-3 pt-2 pb-0.75 text-[0.68rem] font-bold tracking-[0.08em] text-(--sl-color-gray-3) uppercase select-none first:border-none first:pt-2">
-                    <img
-                      src={endpointImages[`../../assets/endpoint-categories/${icon}`]?.default.src}
-                      alt=""
-                      class="dropdown-group-icon h-4 w-4 shrink-0 object-contain"
-                    />
                     {group}
                   </span>
                   {options.map((opt) => (
@@ -306,18 +285,18 @@ import "./api-explorer.css";
     <div class="py-3"></div>
 
     <div
-      class="koki-codeblock-wrapper overflow-hidden rounded-[10px] border-[1.5px] border-(--sl-color-gray-5) shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+      class="explorer-codeblock-wrapper overflow-hidden rounded-[10px] border-[1.5px] border-(--sl-color-gray-5) shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
     >
       <div
-        class="koki-view-tabs box-border flex h-12 flex-row items-center border-b border-(--sl-color-gray-5) bg-(--sl-color-gray-6) px-3"
+        class="explorer-view-tabs box-border flex h-12 flex-row items-center border-b border-(--sl-color-gray-5) bg-(--sl-color-gray-6) px-3"
         role="tablist"
         aria-label="Response view"
       >
         <div
-          class="koki-tab-group inline-flex items-center rounded-lg border-[1.5px] border-(--sl-color-gray-5) bg-(--sl-color-black) p-0.75"
+          class="explorer-tab-group inline-flex items-center rounded-lg border-[1.5px] border-(--sl-color-gray-5) bg-(--sl-color-black) p-0.75"
         >
           <button
-            class="koki-tab-btn active tab-raw inline-flex h-6 cursor-pointer items-center gap-1.5 rounded-md border-none bg-transparent px-3 py-0.75 text-[0.74rem] leading-none font-semibold tracking-wide whitespace-nowrap text-(--sl-color-gray-3) transition-all duration-150 ease-in-out hover:text-(--sl-color-white) [&.active]:bg-(--sl-color-gray-5) [&.active]:text-(--sl-color-white) [&.active]:shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
+            class="explorer-tab-btn active tab-raw inline-flex h-6 cursor-pointer items-center gap-1.5 rounded-md border-none bg-transparent px-3 py-0.75 text-[0.74rem] leading-none font-semibold tracking-wide whitespace-nowrap text-(--sl-color-gray-3) transition-all duration-150 ease-in-out hover:text-(--sl-color-white) [&.active]:bg-(--sl-color-gray-5) [&.active]:text-(--sl-color-white) [&.active]:shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
             role="tab"
             aria-selected="true"
             type="button"
@@ -340,7 +319,7 @@ import "./api-explorer.css";
             Raw
           </button>
           <button
-            class="koki-tab-btn tab-tree inline-flex h-6 cursor-pointer items-center gap-1.5 rounded-md border-none bg-transparent px-3 py-0.75 text-[0.74rem] leading-none font-semibold tracking-wide whitespace-nowrap text-(--sl-color-gray-3) transition-all duration-150 ease-in-out hover:text-(--sl-color-white) [&.active]:bg-(--sl-color-gray-5) [&.active]:text-(--sl-color-white) [&.active]:shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
+            class="explorer-tab-btn tab-tree inline-flex h-6 cursor-pointer items-center gap-1.5 rounded-md border-none bg-transparent px-3 py-0.75 text-[0.74rem] leading-none font-semibold tracking-wide whitespace-nowrap text-(--sl-color-gray-3) transition-all duration-150 ease-in-out hover:text-(--sl-color-white) [&.active]:bg-(--sl-color-gray-5) [&.active]:text-(--sl-color-white) [&.active]:shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
             role="tab"
             aria-selected="false"
             type="button"
@@ -363,8 +342,9 @@ import "./api-explorer.css";
             Tree
           </button>
         </div>
+
         <button
-          class="koki-copy-btn ml-auto inline-flex h-7.5 w-7.5 shrink-0 cursor-pointer items-center justify-center rounded-md border-[1.5px] border-(--sl-color-gray-5) bg-transparent p-0 text-(--sl-color-gray-3) transition-all duration-150 ease-in-out hover:border-(--sl-color-accent) hover:bg-(--sl-color-gray-5) hover:text-(--sl-color-white) [&.copied]:border-[#34d399] [&.copied]:text-[#34d399]"
+          class="explorer-copy-btn ml-auto inline-flex h-7.5 w-7.5 shrink-0 cursor-pointer items-center justify-center rounded-md border-[1.5px] border-(--sl-color-gray-5) bg-transparent p-0 text-(--sl-color-gray-3) transition-all duration-150 ease-in-out hover:border-(--sl-color-accent) hover:bg-(--sl-color-gray-5) hover:text-(--sl-color-white) [&.copied]:border-[#34d399] [&.copied]:text-[#34d399]"
           aria-label="Copy JSON to clipboard"
           type="button"
         >
@@ -384,31 +364,21 @@ import "./api-explorer.css";
         </button>
       </div>
 
-      <div class="panel-raw" role="tabpanel">
-        <div class="koki-code-area-wrapper">
-          <div class="koki-code-area koki-raw-view">
-            <div class="koki-gutter koki-raw-gutter" aria-hidden="true"></div>
-            <div class="koki-raw-content" aria-label="Raw JSON response"></div>
-          </div>
-        </div>
+      <div class="panel-raw h-[560px] overflow-hidden bg-(--sl-color-black)" role="tabpanel">
+        <div class="explorer-codemirror-container h-full w-full"></div>
       </div>
 
-      <div class="panel-tree" role="tabpanel" style="display:none">
-        <div class="koki-code-area-wrapper">
-          <div class="koki-code-area koki-tree-view">
-            <div class="koki-gutter koki-tree-gutter" aria-hidden="true"></div>
-            <div class="koki-tree-content">
-              <div class="koki-tree-inner"></div>
-            </div>
-          </div>
-        </div>
+      <div class="panel-tree h-[560px] overflow-auto bg-(--sl-color-black) p-4" role="tabpanel" style="display:none">
+        <json-viewer class="explorer-json-viewer"></json-viewer>
       </div>
     </div>
   </div>
 </section>
 
-<div class="koki-initial-json" style="display:none" aria-hidden="true">
+<div class="explorer-initial-json" style="display:none" aria-hidden="true">
   {JSON.stringify(exampleResponse || ditto)}
 </div>
 
-<script src="./api-explorer-client.js"></script>
+<script>
+  import "./api-explorer-client.js";
+</script>

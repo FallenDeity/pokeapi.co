@@ -58,11 +58,6 @@ export default defineConfig({
           label: "Github",
           href: "https://github.com/pokeapi/pokeapi",
         },
-        {
-          icon: "slack",
-          label: "Slack",
-          href: "https://pokeapi.slack.com/",
-        },
       ],
       plugins: [
         starlightOpenAPI([
