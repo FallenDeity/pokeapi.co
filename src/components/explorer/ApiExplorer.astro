@@ -2,7 +2,7 @@
 import crypto from "node:crypto";
 import ditto from "../../data/ditto.json";
 
-import {Aside} from "@astrojs/starlight/components";
+import {Aside, Icon} from "@astrojs/starlight/components";
 
 interface Props {
   endpoint?: string;
@@ -239,18 +239,7 @@ import "./api-explorer.css";
         type="button"
         aria-label="Send API request"
       >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="h-3.25 w-3.25 shrink-0"
-          aria-hidden="true"
-        >
-          <line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-        </svg>
+        <Icon name="rocket" class="h-3.25 w-3.25 shrink-0" />
         Send
       </button>
     </div>
@@ -265,21 +254,7 @@ import "./api-explorer.css";
       >
         https://pokeapi.co/api/v2/{endpoint || "pokemon"}/{defaultParam}
       </a>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="explorer-out-link-icon"
-        style="display: inline-block; vertical-align: middle; margin-left: 4px; color: var(--sl-color-accent); transition: color 0.15s;"
-        ><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><path d="m21 3-9 9"></path><path
-          d="M15 3h6v6"></path></svg
-      >
+      <Icon name="external" class="explorer-out-link-icon inline-block text-(--sl-color-accent)" size="0.85rem" />
     </div>
 
     <div class="py-3"></div>
@@ -301,21 +276,7 @@ import "./api-explorer.css";
             aria-selected="true"
             type="button"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="tab-icon h-3.25 w-3.25 shrink-0"
-              aria-hidden="true"
-              ><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"></path><path
-                d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"></path></svg
-            >
+            <Icon name="code" class="tab-icon h-3.25 w-3.25 shrink-0" />
             Raw
           </button>
           <button
@@ -324,21 +285,7 @@ import "./api-explorer.css";
             aria-selected="false"
             type="button"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="tab-icon h-3.25 w-3.25 shrink-0"
-              aria-hidden="true"
-              ><path d="M8 5h13"></path><path d="M13 12h8"></path><path d="M13 19h8"></path><path
-                d="M3 10a2 2 0 0 0 2 2h3"></path><path d="M3 5v12a2 2 0 0 0 2 2h3"></path></svg
-            >
+            <Icon name="list-format" class="tab-icon h-3.25 w-3.25 shrink-0" />
             Tree
           </button>
         </div>
@@ -348,19 +295,7 @@ import "./api-explorer.css";
           aria-label="Copy JSON to clipboard"
           type="button"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="h-3.5 w-3.5 shrink-0"
-            aria-hidden="true"
-            ><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path
-              d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg
-          >
+          <Icon name="copy" class="h-3.5 w-3.5 shrink-0" />
         </button>
       </div>
 

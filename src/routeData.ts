@@ -105,9 +105,8 @@ try {
 
 export const onRequest = defineRouteMiddleware((context) => {
   const { starlightRoute } = context.locals;
-  
-  const base = new URL(import.meta.env.BASE_URL, context.site);
-  const ogImageUrl = new URL(`og/${starlightRoute.id || "index"}.png`, base);
+
+  const ogImageUrl = "https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png";
 
   const routeId = starlightRoute.id || "";
   let calculatedCategory: PageCategoryType = PageCategory.DOCUMENTATION;

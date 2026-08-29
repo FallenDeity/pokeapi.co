@@ -25,6 +25,24 @@ async function processOpenAPISchema(schemaUrl) {
   return "./public/openapi.yml";
 }
 
+const LOGO_URL = "https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png";
+const FAVICON_URL = "https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_64_min.png";
+
+async function fetchRemoteAssets() {
+  const publicDir = resolve("./public");
+  await mkdir(publicDir, {recursive: true});
+
+  const [logoRes, faviconRes] = await Promise.all([fetch(LOGO_URL), fetch(FAVICON_URL)]);
+  if (logoRes.ok) {
+    await writeFile(resolve(publicDir, "pokeapi_256.png"), Buffer.from(await logoRes.arrayBuffer()));
+  }
+  if (faviconRes.ok) {
+    await writeFile(resolve(publicDir, "favicon.png"), Buffer.from(await faviconRes.arrayBuffer()));
+  }
+}
+
+await fetchRemoteAssets();
+
 console.log("SITE_URL:", process.env.SITE_URL);
 console.log("BASE_URL:", process.env.BASE_URL);
 
@@ -49,7 +67,7 @@ export default defineConfig({
       },
       customCss: ["./src/styles/global.css"],
       logo: {
-        src: "./src/assets/pokeapi_256.png",
+        src: "./public/pokeapi_256.png",
         replacesTitle: true,
       },
       social: [
