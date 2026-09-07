@@ -155,7 +155,7 @@ import "./api-explorer.css";
             <br />
             <br />
           </>
-          Read the <a href="./v2/openapi/">OpenAPI docs</a> for more options.
+          Read the <a href="./v2/">V2 documentation</a> to learn about all the available resources.
         </Aside>
       )
     }
@@ -227,7 +227,7 @@ import "./api-explorer.css";
       <input
         class="explorer-param-input min-w-15 flex-1 border-none bg-(--sl-color-black) px-3 py-2.75 font-mono text-[0.85rem] text-(--sl-color-white) outline-none placeholder:text-(--sl-color-gray-3) placeholder:opacity-100"
         type="text"
-        placeholder="name or id"
+        placeholder="resource's name or numerical id"
         value={defaultParam}
         aria-label="Resource name or ID"
         autocomplete="off"
@@ -276,7 +276,7 @@ import "./api-explorer.css";
             aria-selected="true"
             type="button"
           >
-            <Icon name="code" class="tab-icon h-3.25 w-3.25 shrink-0" />
+            <Icon name="seti:json" class="tab-icon h-3.25 w-3.25 shrink-0" />
             Raw
           </button>
           <button

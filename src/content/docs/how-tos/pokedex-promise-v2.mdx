@@ -24,7 +24,7 @@ Follow these steps to integrate `pokedex-promise-v2` into your Node.js applicati
 
 1. **Install the package**
    Choose your preferred package manager to add `pokedex-promise-v2` to your project:
-   
+
    <Tabs>
      <TabItem label="npm">
        ```sh title="Terminal"
@@ -45,7 +45,7 @@ Follow these steps to integrate `pokedex-promise-v2` into your Node.js applicati
 
 2. **Configure your project for ESM**
    Since version `4.0.0`, `pokedex-promise-v2` is a pure **ES Modules (ESM)** package <Badge text="Required" variant="danger" />.
-   
+
    :::caution[Important ESM Requirement]
    You must configure your project to support ES modules. Ensure your `package.json` contains:
    ```json title="package.json" ins={3}
@@ -59,7 +59,7 @@ Follow these steps to integrate `pokedex-promise-v2` into your Node.js applicati
 
 3. **Initialize the client**
    Import the package and initialize a new `Pokedex` instance.
-   
+
    ```js title="app.js"
    import Pokedex from 'pokedex-promise-v2';
    const P = new Pokedex();
@@ -67,7 +67,7 @@ Follow these steps to integrate `pokedex-promise-v2` into your Node.js applicati
 
 4. **Run your first query**
    Retrieve information for a Pokémon by name or ID.
-   
+
    ```js title="app.js" {3}
    import Pokedex from 'pokedex-promise-v2';
    const P = new Pokedex();
