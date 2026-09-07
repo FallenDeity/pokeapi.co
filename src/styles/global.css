@@ -76,7 +76,7 @@ nav a:hover {
 
 .hero > img {
   aspect-ratio: auto !important;
-  max-width: 480px;
+  max-width: 256px;
   height: auto !important;
   object-fit: contain;
 }
