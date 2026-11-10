@@ -81,6 +81,8 @@
       });
       if (labels.length !== 2 || !labels.includes("object") || !labels.includes("null")) return;
 
+      if (tabs.querySelector('[role="tabpanel"] > :not(details):not(div:has(> .sl-openapi-type))')) return;
+
       var objectPanel = tabs.querySelector('[role="tabpanel"]:not([hidden])');
       var objectDetails = objectPanel?.querySelector(":scope > details");
       if (!objectDetails) return;
@@ -124,6 +126,34 @@
       var menu = document.createElement("div");
       menu.className = "custom-select-menu";
 
+      var createOption = function (opt) {
+        var item = document.createElement("button");
+        item.className = "custom-select-item";
+        item.type = "button";
+        item.dataset.value = opt.value;
+        item.textContent = opt.text;
+
+        if (opt.selected) {
+          item.classList.add("is-active");
+        }
+
+        item.addEventListener("click", function (e) {
+          e.stopPropagation();
+          select.value = opt.value;
+          select.dispatchEvent(new Event("change", {bubbles: true}));
+
+          wrapper.querySelectorAll(".custom-select-item").forEach(function (i) {
+            i.classList.remove("is-active");
+          });
+          item.classList.add("is-active");
+          button.querySelector(".trigger-label").textContent = opt.text;
+
+          menu.classList.remove("is-open");
+        });
+
+        return item;
+      };
+
       var groups = select.querySelectorAll("optgroup");
       if (groups.length > 0) {
         groups.forEach(function (group) {
@@ -137,61 +167,13 @@
           section.appendChild(groupTitle);
 
           group.querySelectorAll("option").forEach(function (opt) {
-            var item = document.createElement("button");
-            item.className = "custom-select-item";
-            item.type = "button";
-            item.dataset.value = opt.value;
-            item.textContent = opt.text;
-
-            if (opt.selected) {
-              item.classList.add("is-active");
-            }
-
-            item.addEventListener("click", function (e) {
-              e.stopPropagation();
-              select.value = opt.value;
-              select.dispatchEvent(new Event("change", {bubbles: true}));
-
-              wrapper.querySelectorAll(".custom-select-item").forEach(function (i) {
-                i.classList.remove("is-active");
-              });
-              item.classList.add("is-active");
-              button.querySelector(".trigger-label").textContent = opt.text;
-
-              menu.classList.remove("is-open");
-            });
-
-            section.appendChild(item);
+            section.appendChild(createOption(opt));
           });
           menu.appendChild(section);
         });
       } else {
         select.querySelectorAll("option").forEach(function (opt) {
-          var item = document.createElement("button");
-          item.className = "custom-select-item";
-          item.type = "button";
-          item.dataset.value = opt.value;
-          item.textContent = opt.text;
-
-          if (opt.selected) {
-            item.classList.add("is-active");
-          }
-
-          item.addEventListener("click", function (e) {
-            e.stopPropagation();
-            select.value = opt.value;
-            select.dispatchEvent(new Event("change", {bubbles: true}));
-
-            wrapper.querySelectorAll(".custom-select-item").forEach(function (i) {
-              i.classList.remove("is-active");
-            });
-            item.classList.add("is-active");
-            button.querySelector(".trigger-label").textContent = opt.text;
-
-            menu.classList.remove("is-open");
-          });
-
-          menu.appendChild(item);
+          menu.appendChild(createOption(opt));
         });
       }
 
@@ -215,6 +197,21 @@
       picker.appendChild(wrapper);
     });
 
+    findWithin(root, ".sl-openapi-key-description").forEach(function (description) {
+      if (!description.closest(".sl-openapi-key-description .sl-openapi-keys")) return;
+      if (description.querySelector(":scope > .sl-openapi-key-meta")) return;
+      var metadata = Array.from(description.children).filter(function (child) {
+        return child.matches(".sl-openapi-markdown, .sl-openapi-tags, div:has(> .sl-openapi-type)");
+      });
+      if (metadata.length < 2 || !description.querySelector(":scope > details")) return;
+      var meta = document.createElement("div");
+      meta.className = "sl-openapi-key-meta";
+      description.insertBefore(meta, metadata[0]);
+      metadata.forEach(function (child) {
+        meta.appendChild(child);
+      });
+    });
+
     findWithin(root, ".sl-openapi-keys").forEach(function (keysContainer) {
       if (keysContainer.closest(".sl-openapi-key-description")) return;
       if (keysContainer.querySelector(".sl-openapi-key-header")) return;
@@ -223,12 +220,13 @@
       var heading = section?.querySelector(":scope > .sl-heading-wrapper > .sl-openapi-heading");
       var isParameters = /^(Path|Query|Header|Cookie) Parameters$/.test(heading?.textContent.trim() || "");
       if (isParameters) keysContainer.classList.add("sl-openapi-parameter-keys");
+      else keysContainer.classList.add("sl-openapi-response-keys");
 
       var header = document.createElement("div");
       header.className = "sl-openapi-key-header";
       header.innerHTML = isParameters
         ? '\n        <div class="sl-openapi-key-header-name">Field / Parameter</div>\n        <div class="sl-openapi-key-header-description"><span class="mobile-type-label">Type & </span>Description</div>\n        <div class="sl-openapi-key-header-type">Type</div>\n      '
-        : '\n        <div class="sl-openapi-key-header-name">Field / Parameter</div>\n        <div class="sl-openapi-key-header-description">Type & Description</div>\n      ';
+        : '\n        <div class="sl-openapi-key-header-name">Field</div>\n        <div class="sl-openapi-key-header-description">Description</div>\n        <div class="sl-openapi-key-header-type">Type</div>\n      ';
       keysContainer.prepend(header);
     });
   };

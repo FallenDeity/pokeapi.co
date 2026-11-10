@@ -639,7 +639,6 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   }
 
   .sl-openapi-key-description .sl-openapi-keys > .sl-openapi-key:has(> .sl-openapi-key-description > details[open]) {
-    display: grid !important;
     grid-template-columns: minmax(0, 1fr) !important;
     row-gap: 0.375rem;
     min-width: 0;
@@ -711,6 +710,7 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   display: inline-flex !important;
   flex-wrap: wrap !important;
   align-items: center !important;
+  gap: 0.2rem 0.4rem !important;
   margin: 0 !important;
   padding: 0 !important;
   min-height: 0 !important;
@@ -747,8 +747,7 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
 
 .sl-openapi-key-required {
   display: inline-block !important;
-  margin-top: 0.2rem !important;
-  margin-left: 0.6rem !important;
+  margin: 0 !important;
   border: 1px solid rgba(239, 68, 68, 0.15) !important;
   border-radius: 3px !important;
   background-color: rgba(239, 68, 68, 0.08) !important;
@@ -1198,6 +1197,132 @@ sl-openapi-snippet-picker svg.sl-openapi-snippet-picker-caret {
   align-items: center !important;
   vertical-align: middle !important;
   line-height: 1 !important;
+}
+
+/* Response fields keep prose readable and types aligned. Nested objects retain
+   their existing disclosure layout and expand across the whole response row. */
+.sl-openapi-response-keys > .sl-openapi-key > .sl-openapi-key-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 60rem) {
+  .sl-openapi-response-keys {
+    grid-template-columns: minmax(0, 24fr) minmax(0, 54fr) minmax(7rem, 22fr) !important;
+    column-gap: 1.25rem !important;
+  }
+
+  .sl-openapi-response-keys > .sl-openapi-key-header > .sl-openapi-key-header-type {
+    display: block;
+    grid-column: 3;
+  }
+
+  .sl-openapi-response-keys > .sl-openapi-key {
+    align-items: start;
+  }
+
+  .sl-openapi-response-keys > .sl-openapi-key > .sl-openapi-key-description {
+    display: grid !important;
+    grid-template-columns: subgrid;
+    grid-column: 2 / -1;
+    align-items: start !important;
+    gap: 0.5rem 1.25rem !important;
+    min-width: 0;
+  }
+
+  .sl-openapi-response-keys > .sl-openapi-key > .sl-openapi-key-description > * {
+    grid-column: 2;
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .sl-openapi-response-keys > .sl-openapi-key > .sl-openapi-key-description > .sl-openapi-markdown {
+    display: block !important;
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .sl-openapi-response-keys
+    > .sl-openapi-key:has(> .sl-openapi-key-description > details[open])
+    > .sl-openapi-key-description {
+    display: contents !important;
+  }
+
+  .sl-openapi-response-keys
+    > .sl-openapi-key:has(> .sl-openapi-key-description > details[open])
+    > .sl-openapi-key-description
+    > * {
+    grid-row: auto;
+    grid-column: 3;
+  }
+
+  .sl-openapi-response-keys
+    > .sl-openapi-key:has(> .sl-openapi-key-description > details[open])
+    > .sl-openapi-key-description
+    > .sl-openapi-markdown {
+    grid-column: 2;
+  }
+
+  .sl-openapi-response-keys
+    > .sl-openapi-key:has(> .sl-openapi-key-description > details[open])
+    > .sl-openapi-key-description
+    > details[open] {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 59.999rem) {
+  .sl-openapi-key-description .sl-openapi-keys > .sl-openapi-key:has(> .sl-openapi-key-description > details[open]) {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .sl-openapi-key > .sl-openapi-key-description,
+  .sl-openapi-key:has(> .sl-openapi-key-description > details[open]) > .sl-openapi-key-description {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start !important;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .sl-openapi-key > .sl-openapi-key-description > .sl-openapi-markdown {
+    flex-basis: auto !important;
+    width: 100%;
+  }
+
+  .sl-openapi-key-description > details,
+  .sl-openapi-key-description > details[open] {
+    margin-top: 0 !important;
+    width: 100% !important;
+  }
+
+  .sl-openapi-response-keys {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .sl-openapi-response-keys .sl-openapi-key {
+    row-gap: 0.25rem !important;
+  }
+
+  .sl-openapi-response-keys > .sl-openapi-key-header {
+    display: none !important;
+  }
+
+  .sl-openapi-response-keys > .sl-openapi-key {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .sl-openapi-response-keys > .sl-openapi-key > .sl-openapi-key-description {
+    display: flex !important;
+    align-items: flex-start !important;
+    width: 100%;
+    min-width: 0;
+  }
 }
 
 .sl-openapi-tag {
